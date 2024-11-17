@@ -1,8 +1,9 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
-group = 'project.com'
+group = 'project-t01g05'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -10,10 +11,18 @@ repositories {
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation(platform("org.junit:junit-bom:5.10.0"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    implementation group: "com.googlecode.lanterna", name: "lanterna", version: "3.1.1"
+}
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
 
 test {
     useJUnitPlatform()
 }
+
+mainClassName = 'project.com.Arkanoid'
