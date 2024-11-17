@@ -1,6 +1,6 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/rUa5vdmg)
 # Arkanoid (LDTST01G05)
-This guided project was developed by:
+This guided project was developed by: <br>
 -Ana Catarina Monteiro de Sousa  up202306419; <br>
 -João Rodrigo de Almeida Marques up202307389; <br>
 -Pedro Manuel Pinto Coelho       up202306714; <br>
