@@ -36,7 +36,7 @@ public class Write_Char {
             for (String line : character_draw){
 
                 for(Character i: line.toCharArray()){
-                    if(i.equals('B'))
+                    if(i.equals('B')){};
                 }
 
             }
