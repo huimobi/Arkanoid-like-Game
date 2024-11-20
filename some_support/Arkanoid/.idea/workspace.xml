@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9ddb385-3e98-4cf0-8578-f444f10422cd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ArkanoidGame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Ball.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Block.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Paddle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../FILE1" beforeDir="false" afterPath="$PROJECT_DIR$/../FILE1" afterDir="false" />
-    </list>
+    <list default="true" id="d9ddb385-3e98-4cf0-8578-f444f10422cd" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,6 +39,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -57,11 +54,13 @@
   "keyToString": {
     "Gradle.Arkanoid [:ArkanoidGame.main()].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "pedro",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/joaor/IdeaProjects/LDTS/Hero2",
+    "last_opened_file_path": "/home/pedro/Downloads/hero-solid-master",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

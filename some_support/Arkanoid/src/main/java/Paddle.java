@@ -2,7 +2,7 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 
 public class Paddle {
     private int x, y;
-    private int width = 6;
+    private int width = 7;
 
     public Paddle(int startX, int startY) {
         this.x = startX;

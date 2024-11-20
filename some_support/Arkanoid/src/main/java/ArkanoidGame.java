@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class ArkanoidGame {
     protected static final int WIDTH = 80;  // Width of the game screen
-    private static final int HEIGHT = 24; // Height of the game screen
+    private static final int HEIGHT = 25; // Height of the game screen
     private static Terminal terminal;
     private static TextGraphics graphics;
     private static Paddle paddle;
