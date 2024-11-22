@@ -36,7 +36,7 @@ class Arkanoid {
 
         DefaultTerminalFactory factory = new DefaultTerminalFactory();
 
-        Font loadedFont = font.deriveFont(Font.PLAIN, 7);
+        Font loadedFont = font.deriveFont(Font.PLAIN, 5);
         AWTTerminalFontConfiguration fontConfig = AWTTerminalFontConfiguration.newInstance(loadedFont);
         factory.setTerminalEmulatorFontConfiguration(fontConfig);
         factory.setForceAWTOverSwing(true);
