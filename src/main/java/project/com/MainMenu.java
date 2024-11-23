@@ -21,10 +21,7 @@ class MainMenu {
         options.add(new WriteText("Settings"));
         options.add(new WriteText("Info"));
         options.add(new WriteText("exit"));
-
-        this.cur_selection=options.getFirst();
-
-        screen.clear();
+        this.cur_selection=options.getFirst(); //first option as default
         draw(screen);
         while (in_menu) {
             KeyStroke key = screen.readInput();
@@ -46,7 +43,8 @@ class MainMenu {
             p_position.setY(p_position.getY()+18);
 
         }
-        options.getFirst().setForegroundColor("#ff7129");
+
+        options.getFirst().setForegroundColor("#ff7129"); //shows first option selected as default
         screen.refresh();
     }
 
@@ -56,7 +54,7 @@ class MainMenu {
         switch (key.getKeyType()) {
             case ArrowUp -> previous_option();
             case ArrowDown -> next_option();
-            case Enter -> select(); //in_menu=false;
+            case Enter -> {select() ;in_menu=false;}
             case EOF -> {screen.close(); in_menu=false;}
             }
 
