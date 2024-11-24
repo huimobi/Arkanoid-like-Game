@@ -3,7 +3,7 @@ Arkanoid is an arcade game from the 1980s, in which the player controls a Space 
 This project consists in the development of a game similar to the original Arkanoid in Java and was developed by **Catarina Sousa** (up202306419), **João Marques** (up202307389) and **Pedro Coelho** (up202306714) for LDTS 2024/25.
 ## Table of Contents
 - [Introduction](#introduction)
-- [List of Features](#list of features)
+- [List of Features](#list-of-features)
 
 ## Introduction
 The Vaus (a paddle in practice) has an horizontal movement and is the only controllable feature available to the player. The Vaus spawns at the centre of the movable line and can be set at any other position for three seconds, before lauching the ball. As it hits a surface (be it the lateral and upper limits or a brick) it deflects in various angles. The aim is to clear the block of bricks while not letting the ball cross the lower limits of the playfield.
