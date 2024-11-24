@@ -44,6 +44,10 @@ class MainMenu {
 
         }
 
+        //Arkanoid LOGO
+        PNG_draw arkanoid=new PNG_draw("Menu/arkanoid.png");
+        arkanoid.drawImage(new Position(70,36));
+
         options.getFirst().setForegroundColor("#ff7129"); //shows first option selected as default
         screen.refresh();
     }
