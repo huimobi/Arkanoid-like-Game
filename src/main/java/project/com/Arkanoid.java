@@ -18,14 +18,15 @@ import java.net.URL;
 
 
 class Arkanoid {
-    final static int width = 252; //terminal width
-    final static int height = 252;//terminal height
+    final static int width = 264; //terminal width
+    final static int height = 144   ;//terminal height
     static Screen screen; //all classes will use same screen
 
 
     //creates the screen that will be used through the game
     public Arkanoid() throws IOException, URISyntaxException, FontFormatException, NullPointerException {
-        URL resource = getClass().getClassLoader().getResource("square.ttf");
+
+        URL resource = getClass().getClassLoader().getResource("Fonts/square.ttf");
 
         File fontFile = new File(resource.toURI());
         Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
@@ -35,7 +36,7 @@ class Arkanoid {
 
         DefaultTerminalFactory factory = new DefaultTerminalFactory();
 
-        Font loadedFont = font.deriveFont(Font.PLAIN, 4);
+        Font loadedFont = font.deriveFont(Font.PLAIN, 5);
         AWTTerminalFontConfiguration fontConfig = AWTTerminalFontConfiguration.newInstance(loadedFont);
         factory.setTerminalEmulatorFontConfiguration(fontConfig);
         factory.setForceAWTOverSwing(true);
@@ -52,7 +53,7 @@ class Arkanoid {
         screen = new TerminalScreen(terminal);
         screen.setCursorPosition(null);   // we don't need a cursor
         screen.startScreen();             // screens must be started
-        screen.doResizeIfNecessary();
+        //screen.doResizeIfNecessary();
     }
 
     //starts the Main Menu
