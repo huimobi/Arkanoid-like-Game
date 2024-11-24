@@ -101,6 +101,14 @@ public class draw_Level {
         round.setForegroundColor("#ff0000");
         round_number.drawText(new Position(width-7,round_string.getY()+7));
 
+        //Highscore string display
+        WriteText Highscore= new WriteText("highscore");
+        Highscore.drawText(new Position((((width-(Highscore.getLenght()*7)+180)/2)),height/2));
+        Highscore.setForegroundColor("#00ff00");
+
+        //highscore value display
+        WriteText Highscore_value=new WriteText("9999999");
+        Highscore_value.drawText(new Position((((width-(Highscore_value.getLenght()*7)+180)/2)),height/2+14));
 
         screen.refresh();
     }
