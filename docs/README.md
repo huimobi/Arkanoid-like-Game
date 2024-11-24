@@ -20,6 +20,22 @@ The bricks might be disposed in diverse ways, according to the level (we intend 
 
 **Lives system** - The player starts the game with 3 lives, which he loses by letting a ball fall below the paddle. There is a life bar at the top right game screen.
 
+## Desired Game Controls
+`>`: Moves the paddle to the right.
+
+`<`: Moves the paddle to the left.
+
+`ESC`: Press ESC to quit or return to the main menu.
+
+`ENTER`: Press ENTER to select the desired options in the menu.
+
+## Implemented Main Menu Controls
+`^`: Go to previews option.
+
+`v`: Go to next option.
+
+`ENTER`: Press ENTER to select the desired option.
+
 ### Screenshots
 ![](https://i.imgur.com/Ff4cJPM.png)
 Main menu
