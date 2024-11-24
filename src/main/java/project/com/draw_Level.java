@@ -85,7 +85,14 @@ public class draw_Level {
         WriteText scoreNumber=new WriteText("0000000");
         Position numberScorePosition= new Position((width-(scoreNumber.getLenght()*7)+180)/2,stringScorePosition.getY()+14);
         scoreNumber.drawText(numberScorePosition);
-        
+
+        //Lives display
+        PNG_draw lives= new PNG_draw("Info_Panel/lives.png");
+        Position livesPos= new Position(width-3*14-3,3);
+        for(int i=0;i<3;i++){
+            lives.drawImage(livesPos);
+            livesPos.setX(livesPos.getX()+14);
+        }
 
         screen.refresh();
     }
