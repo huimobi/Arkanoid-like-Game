@@ -37,19 +37,26 @@ public class draw_Level {
         paddle.drawImage(new Position(60, 130));
 
         //draw all blocks and the top wall
-        PNG_draw brick = new PNG_draw("Elements/Block/block.png");
+       int blockSelector=1;
         PNG_draw top_wall = new PNG_draw("Elements/Wall/top_wall.png");
-
         Position block_p = new Position(7, 0);
-        for (int j = 0; j < 7; j++) {
+        for (int j = 0; j < 10; j++) {
             for (int i = 0; i <= 10; i++) {
                 if (j == 0) {
                     top_wall.drawImage(block_p);
                     block_p.setX(block_p.getX() + 15);
                     continue;
+                }else if(j==1){
+                    PNG_draw brick = new PNG_draw("Elements/Block/unbreackable_block.png");
+                    brick.drawImage(block_p);
+                    block_p.setX(block_p.getX() + 15);
+                    continue;
                 }
+                if(blockSelector>4) blockSelector-=4;
+                PNG_draw brick = new PNG_draw("Elements/Block/block"+String.valueOf(blockSelector)+".png");
                 brick.drawImage(block_p);
                 block_p.setX(block_p.getX() + 15);
+                blockSelector++;
             }
             block_p.setY(block_p.getY() + 8);
             block_p.setX(7);
@@ -57,7 +64,7 @@ public class draw_Level {
 
 
         //draw side menu
-        PNG_draw side_menu=new PNG_draw("Scoreboard/texture.png");
+        PNG_draw side_menu=new PNG_draw("Info_Panel/texture.png");
         Position texture=new Position(180,0);
         while(texture.getY()<height){
             while(texture.getX()<width){
