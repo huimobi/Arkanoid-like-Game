@@ -93,6 +93,14 @@ public class draw_Level {
             lives.drawImage(livesPos);
             livesPos.setX(livesPos.getX()+14);
         }
+        //Round display
+        WriteText round= new WriteText("round");
+        WriteText round_number= new WriteText("1");
+        Position round_string= new Position(width-5*7-3,height-14);
+        round.drawText(round_string);
+        round.setForegroundColor("#ff0000");
+        round_number.drawText(new Position(width-7,round_string.getY()+7));
+
 
         screen.refresh();
     }
