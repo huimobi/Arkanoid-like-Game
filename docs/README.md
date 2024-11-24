@@ -2,8 +2,12 @@
 Arkanoid is an arcade game from the 1980s, in which the player controls a Space Vessel called the Vaus, that sends a ball upwards in order to collide with the bricks above and destroy them.
 This project consists in the development of a game similar to the original Arkanoid in Java and was developed by **Catarina Sousa** (up202306419), **João Marques** (up202307389) and **Pedro Coelho** (up202306714) for LDTS 2024/25.
 ## Table of Contents
-- [Introduction](#introduction)
-- [List of Features](#list-of-features)
+1. [Introduction](#introduction)
+2. [List of Features](#list-of-features)
+3. [Controls](#controls)<br>
+   -[Desired Game Controls](#desired-game-controls)<br>
+   -[Implemented Main Menu Controls](#implemented-main-menu-controls)<br>
+4. [Screenshots](#screenshots)
 
 ## Introduction
 The Vaus (a paddle in practice) has an horizontal movement and is the only controllable feature available to the player. The Vaus spawns at the centre of the movable line and can be set at any other position for three seconds, before lauching the ball. As it hits a surface (be it the lateral and upper limits or a brick) it deflects in various angles. The aim is to clear the block of bricks while not letting the ball cross the lower limits of the playfield.
@@ -20,7 +24,8 @@ The bricks might be disposed in diverse ways, according to the level (we intend 
 
 **Lives system** - The player starts the game with 3 lives, which he loses by letting a ball fall below the paddle. There is a life bar at the top right game screen.
 
-## Desired Game Controls
+## Controls
+### Desired Game Controls
 `>`: Moves the paddle to the right.
 
 `<`: Moves the paddle to the left.
@@ -29,14 +34,14 @@ The bricks might be disposed in diverse ways, according to the level (we intend 
 
 `ENTER`: Press ENTER to select the desired options in the menu.
 
-## Implemented Main Menu Controls
+### Implemented Main Menu Controls
 `^`: Go to previews option.
 
 `v`: Go to next option.
 
 `ENTER`: Press ENTER to select the desired option.
 
-### Screenshots
+## Screenshots
 ![](https://i.imgur.com/Ff4cJPM.png)
 Main menu
 ![](https://i.imgur.com/UqaGAap.png)
