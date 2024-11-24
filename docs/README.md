@@ -1,4 +1,4 @@
-# T01G05: Arkanoid
+![image](https://github.com/user-attachments/assets/a59901a5-da29-4319-aa42-668c4535d444)# T01G05: Arkanoid
 Arkanoid is an arcade game from the 1980s, in which the player controls a Space Vessel called the Vaus, that sends a ball upwards in order to collide with the bricks above and destroy them.
 This project consists in the development of a game similar to the original Arkanoid in Java and was developed by **Catarina Sousa** (up202306419), **João Marques** (up202307389) and **Pedro Coelho** (up202306714) for LDTS 2024/25.
 ## Table of Contents
@@ -21,3 +21,7 @@ The bricks might be disposed in diverse ways, according to the level (we intend 
 **Lives system** - The player starts the game with 3 lives, which he loses by letting a ball fall below the paddle. There is a life bar at the top right game screen.
 
 ### Screenshots
+![](https://imgur.com/a/m4a27eL)
+Main menu
+![](https://imgur.com/a/HhT6HvT)
+Playfield screen
