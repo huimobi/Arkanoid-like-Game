@@ -75,6 +75,18 @@ public class draw_Level {
             texture.setY(texture.getY()+12);
         }
 
+        //Score string display
+        WriteText scoreString=new WriteText("Score");
+        Position stringScorePosition= new Position(((width-(scoreString.getLenght()*7)+180)/2),(height-7)/4);
+        scoreString.drawText(stringScorePosition);
+        scoreString.setForegroundColor("#00ff00");
+
+        //score number display
+        WriteText scoreNumber=new WriteText("0000000");
+        Position numberScorePosition= new Position((width-(scoreNumber.getLenght()*7)+180)/2,stringScorePosition.getY()+14);
+        scoreNumber.drawText(numberScorePosition);
+        
+
         screen.refresh();
     }
 }
