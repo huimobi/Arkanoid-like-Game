@@ -7,7 +7,14 @@ This project consists in the development of a game similar to the original Arkan
 3. [Controls](#controls)<br>
    -[Desired Game Controls](#desired-game-controls)<br>
    -[Implemented Main Menu Controls](#implemented-main-menu-controls)<br>
+   -[Notes about Design](#notes-about-design)<br>
+4. [Design Patterns](#design-patterns)<br>
+   - [Model-View-Controller](#model-view-controller)<br>
+   - [Game Loop Pattern](#game-loop-pattern)<br>
+   - [State Pattern](#state-pattern)<br>
+   - [Data Access Object](#data-access-object)<br>
 4. [Screenshots](#screenshots)
+5. [Credits](#credits)
 
 ## Introduction
 The Vaus (a paddle in practice) has an horizontal movement and is the only controllable feature available to the player. The Vaus spawns at the centre of the movable line and can be set at any other position for three seconds, before lauching the ball. As it hits a surface (be it the lateral and upper limits or a brick) it deflects in various angles. The aim is to clear the block of bricks while not letting the ball cross the lower limits of the playfield.
@@ -55,9 +62,37 @@ The bricks might be disposed in diverse ways, according to the level (we intend 
 
 `ENTER`: Press ENTER to select the desired option.
 
-## Notes about Design
-Until this submission we focused on the viewer part in order to develop the mockups for the game. We tried to understand how strong could Lanterna GUI be and come in a conclusion that it has a lot of potencial since it can read PNGs pixel by pixel which allows to draw more fun and good-looking elements on the Screen. This way our code is way far from the pattern we want to implement (Controller-Model-View) since its all implemented in the same classe. As example we can take the MainMenu.java class which contains the "processkey()" method that checks for user input to change menu options which should be in a MainMenuController class and the "draw()" method that places all the Main Menu visual elements which should be implemented in a MainMenuViewer class.
+### Notes about Design
+Until this submission we focused on the viewer part in order to develop the mockups for the game. <br>
+We tried to understand how strong could Lanterna GUI be. We came to the conclusion that it has a lot of potencial, since it can read PNGs pixel by pixel which allows to draw funnier and better-looking elements on the Screen. By now, our code is way far from the main pattern we want to follow (Model-View-Controller) as it's all implemented in the same classe. 
+An example of a change we can apply, is taking the "processkey()" and "draw()" methods out of the MainMenu.java class. The new classes MainMenuController and MainMenuViewer would check the user input and interchange between menu options and place all the Main Menu visual elements, respectively.
 
+## Design Patterns
+### Model-View-Controller
+To deal with the paddle movement, that is intended to be smooth and responsive to player's inputs, and with ball physics we want to implement MVC.
+With this pattern we'll separate the game logic (model), user interface (view), and player inputs (controller).<br>
+Consequences:
+Clear separation of competences, making the code modular and easier to maintain.<br>
+Facilitates testing of each component.
+
+
+### Game Loop Pattern 
+The Game Loop Pattern ensures smooth and consistent gameplay (60 FPS) across devices by controlling the update and rendering cycles. It consists of several key components: Input Handling, which captures player actions like moving the paddle; Game State Updates, which manage the positions of the ball and paddle, check for collisions, and update the score; and Rendering, which draws the game frame on the screen. Additionally, the game loop uses a fixed timestep, ensuring consistent game logic updates (e.g., 60 times per second).<br>
+Consequences:
+Ensures predictable and smooth gameplay regardless of hardware performance.<br>
+Decouples game logic updates from rendering, making animations and physics consistent.
+
+### State Pattern
+We want to manage different game states (the ones showed in the main menu), which can be difficult and error-prone when handled within a single class. To overcome this, the State Patterns helps manage different game states in a clean and efficient way, by separating each state into its own class.<br>
+Consequences:
+The game logic is cleaner because each state is handled independently in its own class.<br>
+The game logic is easier to follow and modify with clearly defined states and transitions.<br>
+New states can be added without major changes to the existing game logic.
+
+### Data Access Object
+We intend to store and retrieve high scores from a file, and to do so we need to implement the DAO Pattern, which abstracts the process. Providing methods to manage the persistance of high scores, the game logic only needs to call these methods.<br>
+Consequences:
+The game logic is decoupled from the specifics of data storage, allowing it to interact with the high scores through simple method calls.
 
 ## Screenshots
 ![](https://i.imgur.com/ekAYUPW.png)
@@ -66,5 +101,6 @@ Main menu
 Playfield screen
 
 ## Credits
-Some of the ideas implemented in this project such as the UML design, the PNG Loader class and the Map designer feature where based on the following project:<br>
+Some of the ideas implemented in this project, such as the UML design, the PNG Loader class and the Map designer features were based on the following project:<br>
 **https://github.com/Process-ing/feup-ldts**<br>
+AI Generative Tools, namely _ChatGPT_ and _Pixlr_, were used in this project to generate the background image on the Main Menu.
