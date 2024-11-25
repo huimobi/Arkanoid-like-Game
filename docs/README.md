@@ -1,6 +1,6 @@
 # T01G05: Arkanoid
 Arkanoid is an arcade game from the 1980s, in which the player controls a Space Vessel called the Vaus, that sends a ball upwards in order to collide with the bricks above and destroy them.
-This project consists in the development of a game similar to the original Arkanoid in Java and was developed by **Ana Catarina** (up202306419), **João Marques** (up202307389) and **Pedro Coelho** (up202306714) for LDTS 2024/25.
+This project consists in the development of a game similar to the original Arkanoid in Java and was developed by **Ana Sousa** (up202306419), **João Marques** (up202307389) and **Pedro Coelho** (up202306714) for LDTS 2024/25.
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [List of Features](#list-of-features)
