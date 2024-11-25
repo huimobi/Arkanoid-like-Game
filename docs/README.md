@@ -55,7 +55,7 @@ The bricks might be disposed in diverse ways, according to the level (we intend 
 
 `ENTER`: Press ENTER to select the desired option.
 
-##Notes about features
+## Notes about Design
 Until this submission we focused on the viewer part in order to develop the mockups for the game. We tried to understand how strong could Lanterna GUI be and come in a conclusion that it has a lot of potencial since it can read PNGs pixel by pixel which allows to draw more fun and good-looking elements on the Screen. This way our code is way far from the pattern we want to implement (Controller-Model-View) since its all implemented in the same classe. As example we can take the MainMenu.java class which contains the "processkey()" method that checks for user input to change menu options which should be in a MainMenuController class and the "draw()" method that places all the Main Menu visual elements which should be implemented in a MainMenuViewer class.
 
 
@@ -64,3 +64,7 @@ Until this submission we focused on the viewer part in order to develop the mock
 Main menu
 ![](https://i.imgur.com/GVFOo90.png)
 Playfield screen
+
+## Credits
+Some of the ideas implemented in this project such as the UML design, the PNG Loader class and the Map designer feature where based on the following project:<br>
+**https://github.com/Process-ing/feup-ldts**<br>
