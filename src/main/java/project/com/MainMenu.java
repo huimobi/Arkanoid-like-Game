@@ -2,10 +2,10 @@ package project.com;
 
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
+import project.com.Model.Position;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static project.com.Arkanoid.*;
 

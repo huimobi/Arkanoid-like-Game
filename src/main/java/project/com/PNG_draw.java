@@ -2,6 +2,7 @@ package project.com;
 
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import project.com.Model.Position;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

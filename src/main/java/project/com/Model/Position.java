@@ -1,4 +1,4 @@
-package project.com;
+package project.com.Model;
 
 public class Position {
     private int x;

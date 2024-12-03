@@ -1,6 +1,7 @@
 package project.com;
 
 import com.googlecode.lanterna.screen.Screen;
+import project.com.Model.Position;
 
 import java.io.IOException;
 

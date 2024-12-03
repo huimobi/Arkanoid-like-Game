@@ -1,6 +1,6 @@
 package project.com;
 
-import com.googlecode.lanterna.TextColor;
+import project.com.Model.Position;
 
 import java.io.IOException;
 import java.util.ArrayList;
