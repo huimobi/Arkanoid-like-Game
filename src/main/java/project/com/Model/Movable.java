@@ -1,4 +1,4 @@
 package project.com.Model;
 
-public class Movable {
+public abstract class Movable {
 }

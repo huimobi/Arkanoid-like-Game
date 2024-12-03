@@ -1,4 +1,4 @@
 package project.com.Model;
 
-public class Static extends Element {
+public abstract class Static extends Element {
 }
