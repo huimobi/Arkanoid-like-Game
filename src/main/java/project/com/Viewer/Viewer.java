@@ -15,8 +15,8 @@ import java.io.IOException;
             return model;
         }
 
-        public abstract void draw(GUI gui,) throws IOException;
+        public abstract void draw(GUI gui) throws IOException;
 
-        protected abstract void
+        //protected abstract void
     }
 

@@ -7,8 +7,6 @@ import com.googlecode.lanterna.screen.Screen;
 
 
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -21,8 +19,10 @@ public class LanternaGUI implements GUI {
 
     private final ScreenCreator screenCreator;
     private Screen screen;
-    //private boolean keySpam;
-    //private KeyEvent priorityKeyPressed;
+    /*
+    private boolean keySpam;
+    private KeyEvent priorityKeyPressed;
+    */
 
 
     public LanternaGUI(ScreenCreator screenCreator) throws IOException, URISyntaxException, FontFormatException {
@@ -125,7 +125,7 @@ public class LanternaGUI implements GUI {
         screen.close();
     }
 
-    /*public KeyAdapter getKeyAdapter() {
+    /* public KeyAdapter getKeyAdapter() {
         return keyAdapter;
     }*/
 }
