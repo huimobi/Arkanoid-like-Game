@@ -4,13 +4,14 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 import project.com.Model.Position;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import static project.com.Arkanoid.*;
 
 
-public class MainMenu {
+public class MainMenu extends Menu {
 
     private WriteText cur_selection; //PLAY is the option by default
     private boolean in_menu=true; //checks if the game is in the Menu (MAYBE THIS CAN BE IMPLEMENTED IN ARKANOID CLASS (?))
