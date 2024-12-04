@@ -23,7 +23,7 @@ import java.net.URL;
 public class LanternaScreenCreator implements ScreenCreator {
     private final DefaultTerminalFactory factory;
     private final TerminalSize terminalSize;
-    private final int fontSize; //ver função que escolhe a font size no timeless
+    private final int fontSize;
 
 
 
@@ -81,8 +81,8 @@ public class LanternaScreenCreator implements ScreenCreator {
 
     //gives the best fontSize for the terminal
     private int getFontSize(Rectangle terminalBounds) {
-        double maxFontWidth = terminalBounds.getWidth() / terminalSize.getColumns();
-        double maxFontHeight = terminalBounds.getHeight() / terminalSize.getRows();
-        return (int) Math.min(maxFontWidth, maxFontHeight);
+        double maxFontWidth = terminalBounds.getWidth() / terminalSize.getColumns(); //compare terminal width with nr of columns
+        double maxFontHeight = terminalBounds.getHeight() / terminalSize.getRows();    //compare terminal height with nr of rows
+        return (int) Math.min(maxFontWidth, maxFontHeight); //choose one font size that can show all game columns and rows
     }
 }

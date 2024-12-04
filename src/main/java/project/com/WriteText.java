@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WriteText{
-    private String string;
-    private int lenght;
+    private final String string;
+    private final int lenght;
     private List<WriteChar> text=new ArrayList<>();
 
 

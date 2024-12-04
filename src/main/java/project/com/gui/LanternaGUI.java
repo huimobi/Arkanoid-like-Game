@@ -21,21 +21,19 @@ public class LanternaGUI implements GUI {
 
     private final ScreenCreator screenCreator;
     private Screen screen;
-    private boolean keySpam;
-    private KeyEvent priorityKeyPressed;
-    private final KeyAdapter keyAdapter;
-    private KeyEvent keyPressed;
+    //private boolean keySpam;
+    //private KeyEvent priorityKeyPressed;
+
 
     public LanternaGUI(ScreenCreator screenCreator) throws IOException, URISyntaxException, FontFormatException {
         this.screenCreator = screenCreator;
-        this.keySpam = false;
-        this.priorityKeyPressed = null;
-        this.keyAdapter = createKeyAdapter();
-        this.keyPressed = null;
+        //this.keySpam = false;
+        //this.priorityKeyPressed = null;
+        //this.keyAdapter = createKeyAdapter();
+        //this.keyPressed = null;
     }
 
     private Screen createScreen() throws IOException, URISyntaxException, FontFormatException {
-        Screen screen = screenCreator.createScreen();
         screen.setCursorPosition(null);
         screen.startScreen();
         screen.doResizeIfNecessary();
@@ -43,7 +41,7 @@ public class LanternaGUI implements GUI {
     }
 
     //still need to understand this
-    private KeyAdapter createKeyAdapter() {
+    /*private KeyAdapter createKeyAdapter() {
         return new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -61,7 +59,7 @@ public class LanternaGUI implements GUI {
                     keyPressed = priorityKeyPressed;
             }
         };
-    }
+    }*/
 
     @Override
     public int getWidth() {
@@ -127,7 +125,7 @@ public class LanternaGUI implements GUI {
         screen.close();
     }
 
-    public KeyAdapter getKeyAdapter() {
+    /*public KeyAdapter getKeyAdapter() {
         return keyAdapter;
-    }
+    }*/
 }
