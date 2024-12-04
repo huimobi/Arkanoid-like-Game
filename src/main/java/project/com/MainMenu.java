@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import static project.com.Arkanoid.*;
 
 
-class MainMenu {
+public class MainMenu {
 
     private WriteText cur_selection; //PLAY is the option by default
     private boolean in_menu=true; //checks if the game is in the Menu (MAYBE THIS CAN BE IMPLEMENTED IN ARKANOID CLASS (?))
