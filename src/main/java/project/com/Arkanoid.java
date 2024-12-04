@@ -20,7 +20,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 
-class Arkanoid {
+public class Arkanoid {
     final static int width = 264; //terminal width
     final static int height = 144;//terminal height
     static Screen screen; //all classes will use same screen
