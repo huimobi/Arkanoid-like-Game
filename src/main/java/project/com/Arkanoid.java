@@ -38,7 +38,7 @@ class Arkanoid {
     public void run() throws IOException, InterruptedException, URISyntaxException, FontFormatException {
         MainMenu mainMenu=new MainMenu();
     }
-    
+
 
     //starts the game
     public static void main(String[] args) throws IOException, InterruptedException, URISyntaxException, FontFormatException {

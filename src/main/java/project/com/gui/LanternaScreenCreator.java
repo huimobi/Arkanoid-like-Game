@@ -23,7 +23,7 @@ import java.net.URL;
 public class LanternaScreenCreator implements ScreenCreator {
     private final DefaultTerminalFactory factory;
     private final TerminalSize terminalSize;
-    private final int fontSize=5; //ver função que escolhe a font size no timeless
+    private final int fontSize; //ver função que escolhe a font size no timeless
 
 
 
@@ -32,6 +32,7 @@ public class LanternaScreenCreator implements ScreenCreator {
         this.terminalSize = terminalSize;
         factory.setForceAWTOverSwing(true);
         factory.setInitialTerminalSize(terminalSize);
+        this.fontSize= getFontSize(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds()); //takes as input the monitor size screen
     }
 
     //return the screen with all configs
@@ -76,5 +77,12 @@ public class LanternaScreenCreator implements ScreenCreator {
     @Override
     public int getHeight() {
         return terminalSize.getColumns();
+    }
+
+    //gives the best fontSize for the terminal
+    private int getFontSize(Rectangle terminalBounds) {
+        double maxFontWidth = terminalBounds.getWidth() / terminalSize.getColumns();
+        double maxFontHeight = terminalBounds.getHeight() / terminalSize.getRows();
+        return (int) Math.min(maxFontWidth, maxFontHeight);
     }
 }
