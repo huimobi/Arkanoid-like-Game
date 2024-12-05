@@ -1,8 +1,8 @@
-package project.com;
+package project.com.Viewer;
 
 import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.graphics.TextGraphics;
 import project.com.Model.Position;
+import project.com.gui.GUI;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -12,23 +12,21 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class PNG_draw {
+public class PNGDraw {
     private final BufferedImage image;
-    private Position position=new Position(0,0);
+    private Position position;
 
-    public PNG_draw(String filepath) throws IOException {
+    public PNGDraw(String filepath) throws IOException {
         URL resource = getClass().getClassLoader().getResource(filepath);
         this.image= ImageIO.read(Objects.requireNonNull(resource));
     }
 
-    public void drawPixel(Position pixel, TextColor color){
-        TextGraphics textGraphics= Arkanoid.screen.newTextGraphics();
-        textGraphics.setBackgroundColor(color);
-        textGraphics.setCharacter(pixel.getX(),pixel.getY(),' '); //color the pixel
+    public void drawPixel(GUI gui,Position pixel, TextColor color){
+        gui.drawPixel(pixel,color); //color the pixel
     }
 
     //draws png
-    public void drawImage(Position position){
+    public void drawImage(GUI gui, Position position){
         this.position=position;
         for(int px=0;px<image.getWidth();px++){
             for(int py=0;py<image.getHeight();py++){
@@ -38,9 +36,9 @@ public class PNG_draw {
                 if(new Color(rgb,true).getAlpha()==0) continue; //checks if it is a transparent pixel
 
                 Position p=new Position(position.getX()+px, position.getY()+py);
-                if(p.getX()< Arkanoid.width && p.getY()<Arkanoid.height){
+                if(p.getX()< gui.getWidth() && p.getY()< gui.getHeight()){
                     Color color= new Color(rgb,true);
-                    drawPixel(p,new TextColor.RGB(color.getRed(),color.getGreen(),color.getBlue()));
+                    gui.drawPixel(p,new TextColor.RGB(color.getRed(),color.getGreen(),color.getBlue()));
                 }
             }
         }
@@ -62,9 +60,14 @@ public class PNG_draw {
         return white_pixels;
     }
 
-    public void changePixelColor(ArrayList<Position> positions,TextColor color){
+    public void changePixelColor(GUI gui,ArrayList<Position> positions,TextColor color){
         for(Position p: positions){
-            drawPixel(p,color); //changes foreground color
+            drawPixel(gui,p,color); //changes foreground color
         }
     }
+
+    public BufferedImage getImage() {
+        return image;
+    }
+
 }

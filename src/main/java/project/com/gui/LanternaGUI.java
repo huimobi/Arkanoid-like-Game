@@ -4,6 +4,7 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
+import project.com.Model.Position;
 
 
 import java.awt.*;
@@ -18,7 +19,7 @@ public class LanternaGUI implements GUI {
     private static final List<Integer> SPAM_KEYS = List.of(VK_LEFT, VK_RIGHT);
 
     private final ScreenCreator screenCreator;
-    private Screen screen;
+    private final Screen screen;
     /*
     private boolean keySpam;
     private KeyEvent priorityKeyPressed;
@@ -27,17 +28,19 @@ public class LanternaGUI implements GUI {
 
     public LanternaGUI(ScreenCreator screenCreator) throws IOException, URISyntaxException, FontFormatException {
         this.screenCreator = screenCreator;
+        this.screen= screenCreator.createScreen();
+        createScreen();
+
         //this.keySpam = false;
         //this.priorityKeyPressed = null;
         //this.keyAdapter = createKeyAdapter();
         //this.keyPressed = null;
     }
 
-    private Screen createScreen() throws IOException, URISyntaxException, FontFormatException {
-        screen.setCursorPosition(null);
+    private void createScreen() throws IOException, URISyntaxException, FontFormatException {
         screen.startScreen();
+        screen.setCursorPosition(null);
         screen.doResizeIfNecessary();
-        return screen;
     }
 
     //still need to understand this
@@ -62,6 +65,11 @@ public class LanternaGUI implements GUI {
     }*/
 
     @Override
+    public KeyStroke readInput() throws IOException {
+        return screen.readInput();
+    }
+
+    @Override
     public int getWidth() {
         return screenCreator.getWidth();
     }
@@ -73,10 +81,10 @@ public class LanternaGUI implements GUI {
 
 
     @Override
-    public void drawPixel(double x, double y, TextColor color) {
+    public void drawPixel(Position position, TextColor color) {
         TextGraphics tg = screen.newTextGraphics();
         tg.setBackgroundColor(color);
-        tg.setCharacter((int) x, (int) y, ' ');
+        tg.setCharacter(position.getX(), position.getY(), ' ');
     }
 
 

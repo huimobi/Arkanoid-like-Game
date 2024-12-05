@@ -70,12 +70,12 @@ public class LanternaScreenCreator implements ScreenCreator {
 
 
     @Override
-    public int getWidth() {
+    public int getHeight() {
         return terminalSize.getRows();
     }
 
     @Override
-    public int getHeight() {
+    public int getWidth() {
         return terminalSize.getColumns();
     }
 

@@ -1,14 +1,14 @@
 package project.com;
 
 import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.screen.Screen;
 import project.com.Model.Position;
+import project.com.Viewer.PNGDraw;
+import project.com.Viewer.WriteText;
+import project.com.gui.GUI;
 
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import static project.com.Arkanoid.*;
 
 
 public class MainMenu extends Menu {
@@ -16,41 +16,43 @@ public class MainMenu extends Menu {
     private WriteText cur_selection; //PLAY is the option by default
     private boolean in_menu=true; //checks if the game is in the Menu (MAYBE THIS CAN BE IMPLEMENTED IN ARKANOID CLASS (?))
     private final ArrayList<WriteText> options=new ArrayList<>();
+    private final GUI gui;
 
-    public MainMenu() throws IOException, NullPointerException {
-        options.add(new WriteText("Play"));
-        options.add(new WriteText("Settings"));
-        options.add(new WriteText("Info"));
-        options.add(new WriteText("exit"));
+    public MainMenu(GUI gui) throws IOException, NullPointerException {
+        this.gui=gui;
+        options.add(new WriteText(gui,"Play"));
+        options.add(new WriteText(gui,"Settings"));
+        options.add(new WriteText(gui,"Info"));
+        options.add(new WriteText(gui,"exit"));
         this.cur_selection=options.getFirst(); //first option as default
-        draw(screen);
+        draw();
         while (in_menu) {
-            KeyStroke key = screen.readInput();
+            KeyStroke key = gui.readInput();
             processKey(key);
         }
     }
 
     //draws the Main Menu
-    private void draw(Screen screen) throws IOException {
-        screen.clear();
-        PNG_draw background_image= new PNG_draw("Menu/background.png");
-        background_image.drawImage(new Position(0,0));
+    private void draw() throws IOException {
+        gui.clear();
+        PNGDraw background_image= new PNGDraw("Menu/background.png");
+        background_image.drawImage(this.gui,new Position(0,0));
 
 
         //print "play"
-        Position p_position= new Position((width-4*7)/2,(height+7)/2);
+        Position p_position= new Position((gui.getWidth()-4*7)/2,(gui.getHeight()+7)/2);
         for(WriteText option: options){
-            option.drawText(new Position((width-option.getLenght()*7)/2, p_position.getY()));
+            option.drawText(this.gui,new Position((gui.getWidth()-option.getLength()*7)/2, p_position.getY()));
             p_position.setY(p_position.getY()+18);
 
         }
 
         //Arkanoid LOGO
-        PNG_draw arkanoid=new PNG_draw("Menu/arkanoid.png");
-        arkanoid.drawImage(new Position(70,36));
+        PNGDraw arkanoid=new PNGDraw("Menu/arkanoid.png");
+        arkanoid.drawImage(this.gui,new Position(70,36));
 
-        options.getFirst().setForegroundColor("#ff7129"); //shows first option selected as default
-        screen.refresh();
+        options.getFirst().setForegroundColor(gui,"#ff7129"); //shows first option selected as default
+        this.gui.refresh();
     }
 
 
@@ -60,7 +62,7 @@ public class MainMenu extends Menu {
             case ArrowUp -> previous_option();
             case ArrowDown -> next_option();
             case Enter -> {select() ;in_menu=false;}
-            case EOF -> {screen.close(); in_menu=false;}
+            case EOF -> {gui.close(); in_menu=false;}
             }
 
     }
@@ -70,11 +72,11 @@ public class MainMenu extends Menu {
         int index=options.indexOf(cur_selection);
         if(index==0) return;//checks if the cur_option is the first in the menu
 
-        options.get(index).setForegroundDefault();
-        screen.refresh();
-        options.get(index-1).setForegroundColor("#ff7129");
+        options.get(index).setForegroundDefault(gui);
+        gui.refresh();
+        options.get(index-1).setForegroundColor(gui,"#ff7129");
         cur_selection=options.get(index-1);
-        screen.refresh();
+        gui.refresh();
 
     }
 
@@ -83,21 +85,22 @@ public class MainMenu extends Menu {
         int index=options.indexOf(cur_selection);
         if(index==options.size()-1) return; // checks if the cur_option is the last in the menu
 
-        options.get(index).setForegroundDefault();
-        screen.refresh();
-        options.get(index+1).setForegroundColor("#ff7129");
+        options.get(index).setForegroundDefault(gui);
+        gui.refresh();
+        options.get(index+1).setForegroundColor(gui,"#ff7129");
         cur_selection=options.get(index+1);
-        screen.refresh();
+        gui.refresh();
 
     }
 
     //select option
     private void select() throws IOException {
         switch (cur_selection.getString()){
-            case "PLAY"-> {draw_Level level = new draw_Level(); level.draw_level(screen);}//Game();
+            case "PLAY"-> {
+                new DrawLevel(gui);}//Game();
             case "SETTINGS"-> System.out.print("SETTINGS"); // Settings();
             case "INFO" -> System.out.print("INFO"); //Info();
-            case "EXIT"-> screen.close();
+            case "EXIT"-> gui.close();
         }
     }
 }
