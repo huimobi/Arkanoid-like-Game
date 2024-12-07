@@ -2,7 +2,7 @@ package project.com;
 
 import com.googlecode.lanterna.input.KeyStroke;
 import project.com.Model.Position;
-import project.com.Viewer.PNGDraw;
+import project.com.Viewer.PNGReader;
 import project.com.Viewer.WriteText;
 import project.com.gui.GUI;
 
@@ -35,8 +35,8 @@ public class MainMenu extends Menu {
     //draws the Main Menu
     private void draw() throws IOException {
         gui.clear();
-        PNGDraw background_image= new PNGDraw("Menu/background.png");
-        background_image.drawImage(this.gui,new Position(0,0));
+        PNGReader background_image= new PNGReader("Menu/background.png");
+        background_image.draw(this.gui,new Position(0,0));
 
 
         //print "play"
@@ -48,8 +48,8 @@ public class MainMenu extends Menu {
         }
 
         //Arkanoid LOGO
-        PNGDraw arkanoid=new PNGDraw("Menu/arkanoid.png");
-        arkanoid.drawImage(this.gui,new Position(70,36));
+        PNGReader arkanoid=new PNGReader("Menu/arkanoid.png");
+        arkanoid.draw(this.gui,new Position(70,36));
 
         options.getFirst().setForegroundColor(gui,"#ff7129"); //shows first option selected as default
         this.gui.refresh();

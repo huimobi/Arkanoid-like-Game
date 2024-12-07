@@ -8,6 +8,7 @@ import project.com.Model.Position;
 
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -85,6 +86,24 @@ public class LanternaGUI implements GUI {
         TextGraphics tg = screen.newTextGraphics();
         tg.setBackgroundColor(color);
         tg.setCharacter(position.getX(), position.getY(), ' ');
+    }
+
+    @Override
+    public void drawImage(BufferedImage image, Position TopLeftposition) {
+        for(int px=0;px<image.getWidth();px++){
+            for(int py=0;py<image.getHeight();py++){
+
+                int rgb=image.getRGB(px,py); //get RGB color of the pixel
+
+                if(new Color(rgb,true).getAlpha()==0) continue; //checks if it is a transparent pixel
+
+                Position p=new Position(TopLeftposition.getX()+px, TopLeftposition.getY()+py);
+                if(p.getX()< getWidth() && p.getY()< getHeight()){
+                    Color color= new Color(rgb,true);
+                    drawPixel(p,new TextColor.RGB(color.getRed(),color.getGreen(),color.getBlue()));
+                }
+            }
+        }
     }
 
 

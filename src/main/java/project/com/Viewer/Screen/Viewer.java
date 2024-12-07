@@ -1,4 +1,4 @@
-package project.com.Viewer;
+package project.com.Viewer.Screen;
 
 import project.com.gui.GUI;
 
@@ -16,7 +16,5 @@ import java.io.IOException;
         }
 
         public abstract void draw(GUI gui) throws IOException;
-
-        //protected abstract void
     }
 

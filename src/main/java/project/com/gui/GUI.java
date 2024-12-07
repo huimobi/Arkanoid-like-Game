@@ -4,6 +4,7 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import project.com.Model.Position;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public interface GUI {
@@ -14,6 +15,7 @@ public interface GUI {
     int getWidth();
     int getHeight();
     void drawPixel(Position position, TextColor color);
+    void drawImage(BufferedImage image, Position TopLeftposition);
     void clear();
     ACTION getNextAction() throws IOException;
     void refresh() throws IOException;

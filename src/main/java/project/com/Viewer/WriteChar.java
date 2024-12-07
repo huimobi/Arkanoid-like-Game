@@ -12,29 +12,29 @@ public class WriteChar {
     private final char c;
     int height = 7;
     int width = 7;
-    private final PNGDraw char_png;
+    private final PNGReader char_png;
 
 
     public WriteChar(char c1) throws IOException {
         this.c=Character.toUpperCase(c1);
-        this.char_png= new PNGDraw("Characters/" + c +".png");
+        this.char_png= new PNGReader("Characters/" + c +".png");
     }
 
     //draws char on the position
     public void draw_char(GUI gui, Position p) throws IOException {
-        char_png.drawImage(gui,p);
+        char_png.draw(gui,p);
     }
 
     //changes character foreground
     public void setForeground(GUI gui,String foreground){
         TextColor color=new TextColor.RGB(getRed(foreground),getGreen(foreground),getBlue(foreground)); //picks the color
-        ArrayList<Position> char_foreground=char_png.get_white_pixels(); //get foreground pixels from png
+        ArrayList<Position> char_foreground=char_png.getForeground(); //get foreground pixels from png
         char_png.changePixelColor(gui,char_foreground,color);
     }
 
     //set foreground white
     public void setForegroundDefault(GUI gui){
-        char_png.changePixelColor(gui,char_png.get_white_pixels(),TextColor.ANSI.WHITE_BRIGHT);
+        char_png.changePixelColor(gui,char_png.getForeground(),TextColor.ANSI.WHITE_BRIGHT);
     }
 
     private int getRed(String s){
