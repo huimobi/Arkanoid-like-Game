@@ -20,10 +20,10 @@ public class MainMenu extends Menu {
 
     public MainMenu(GUI gui) throws IOException, NullPointerException {
         this.gui=gui;
-        options.add(new WriteText(gui,"Play"));
-        options.add(new WriteText(gui,"Settings"));
-        options.add(new WriteText(gui,"Info"));
-        options.add(new WriteText(gui,"exit"));
+        options.add(new WriteText("Play"));
+        options.add(new WriteText("Settings"));
+        options.add(new WriteText("Info"));
+        options.add(new WriteText("exit"));
         this.cur_selection=options.getFirst(); //first option as default
         draw();
         while (in_menu) {
