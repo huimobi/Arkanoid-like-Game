@@ -26,7 +26,7 @@ public class BrickViewer implements ElementViewer<Bricks>{
     //depending on the character the corresponding brick will be drawn
     @Override
     public void draw(Bricks model, GUI gui) {
-        ImageReader png= brickMap.get(model.getCharacter());
-        png.draw(gui, model.getPosition());
+        ImageReader image= brickMap.get(model.getCharacter());
+        image.draw(gui,model.getPosition());
     }
 }

@@ -1,11 +1,27 @@
 package project.com.Viewer.Elements;
 
 import project.com.Model.Paddle;
+import project.com.Viewer.ImageLoader;
+import project.com.Viewer.ImageReader;
 import project.com.gui.GUI;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class PaddleViewer implements ElementViewer<Paddle>{
+    private final ImageReader defaultPaddle;
+    private final ImageReader powerUpPaddle;
+
+
+    public PaddleViewer(ImageLoader imageLoader) throws IOException {
+        this.defaultPaddle=imageLoader.get("Elements/Paddle/paddle");
+        this.powerUpPaddle=imageLoader.get("Elements/Paddle/powerUpPaddle");
+    }
     @Override
     public void draw(Paddle model, GUI gui) {
-
+        if(model.getpowerUp()) powerUpPaddle.draw(gui,model.getPosition());
+        else defaultPaddle.draw(gui,model.getPosition());
     }
 }
