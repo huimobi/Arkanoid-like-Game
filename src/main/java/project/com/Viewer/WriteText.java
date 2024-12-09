@@ -1,5 +1,6 @@
 package project.com.Viewer;
 
+import com.googlecode.lanterna.TextColor;
 import project.com.Model.Position;
 import project.com.gui.GUI;
 
@@ -13,7 +14,17 @@ public class WriteText{
     private final List<WriteChar> text=new ArrayList<>();
 
 
-    public WriteText(GUI gui,String s) throws IOException {
+    //creates strings with default foreground (white)
+    public WriteText(String s) throws IOException {
+        this.string = s.toUpperCase();
+        this.length=s.length();
+        char[] chars = s.toCharArray();
+        for (char c : chars) {
+            text.add(new WriteChar(c));
+        }
+    }
+
+    public WriteText(String s,String foreground) throws IOException {
         this.string = s.toUpperCase();
         this.length=s.length();
         char[] chars = s.toCharArray();
