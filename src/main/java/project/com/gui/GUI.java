@@ -10,7 +10,7 @@ import java.io.IOException;
 public interface GUI {
     KeyStroke readInput() throws IOException;
 
-    enum ACTION { UP, RIGHT, DOWN, LEFT, NONE, QUIT, SELECT, JUMP, DASH }
+    enum ACTION { UP, RIGHT, DOWN, LEFT, NONE, QUIT, SELECT}
 
     int getWidth();
     int getHeight();

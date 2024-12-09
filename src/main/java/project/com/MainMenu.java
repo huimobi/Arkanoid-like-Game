@@ -26,6 +26,10 @@ public class MainMenu extends Menu {
         options.add(new WriteText("exit"));
         this.cur_selection=options.getFirst(); //first option as default
         draw();
+        run();
+    }
+
+    private void run() throws IOException {
         while (in_menu) {
             KeyStroke key = gui.readInput();
             processKey(key);
@@ -35,7 +39,7 @@ public class MainMenu extends Menu {
     //draws the Main Menu
     private void draw() throws IOException {
         gui.clear();
-        PNGReader background_image= new PNGReader("Menu/background.png");
+        PNGReader background_image= new PNGReader("Menu/background");
         background_image.draw(this.gui,new Position(0,0));
 
 
@@ -48,7 +52,7 @@ public class MainMenu extends Menu {
         }
 
         //Arkanoid LOGO
-        PNGReader arkanoid=new PNGReader("Menu/arkanoid.png");
+        PNGReader arkanoid=new PNGReader("Menu/arkanoid");
         arkanoid.draw(this.gui,new Position(70,36));
 
         options.getFirst().setForegroundColor(gui,"#ff7129"); //shows first option selected as default

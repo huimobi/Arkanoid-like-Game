@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public interface ImageReader {
     public void draw(GUI gui, Position position);
-    public ArrayList<Position> getForeground();
     public void changePixelColor(GUI gui, ArrayList<Position> positions, TextColor color);
     public BufferedImage getImage();
 }
