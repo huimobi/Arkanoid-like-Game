@@ -15,6 +15,10 @@ import java.io.IOException;
             return model;
         }
 
-        public abstract void draw(GUI gui) throws IOException;
+    public ViewerProvider getViewerProvider() {
+        return viewerProvider;
     }
+
+    public abstract void draw(GUI gui) throws IOException;
+}
 
