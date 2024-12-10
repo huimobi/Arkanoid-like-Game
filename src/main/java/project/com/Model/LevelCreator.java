@@ -1,14 +1,12 @@
 package project.com.Model;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static java.lang.Character.isLetterOrDigit;
 import static java.lang.Character.isSpaceChar;
@@ -44,20 +42,20 @@ public class LevelCreator {
             return lines.size();
     }
 
-    private Bricks[][] createBricks() {
-            Bricks[][] bricks = new Bricks[lines.size()][lines.get(0).length()];
+    private Brick[][] createBricks() {
+            Brick[][] bricks = new Brick[lines.size()][lines.get(0).length()];
 
             for (int y = 0; y < lines.size() - 4; y++) {
                 String line = lines.get(y);
-                Bricks[] lineBricks= new Bricks[21];
+                Brick[] lineBricks= new Brick[11];
                 for (int x = 0; x < line.length(); x++) {
-                    if (!isLetterOrDigit(line.charAt(x)) && !isSpaceChar(line.charAt(x)) && line.charAt(x) != '*')
-                        lineBricks[x] = new Bricks(new Position(x,y), line.charAt(x));
+                    if (!isSpaceChar(line.charAt(x)))
+                        lineBricks[x] = new Brick(new Position(x,y), line.charAt(x));
                     else {
                         lineBricks[x] = null;
                     }
                 }
-                lineBricks[11] = null;
+                lineBricks[10] = null;
                 bricks[y] = lineBricks;
             }
             return bricks;

@@ -1,16 +1,15 @@
 package project.com.Viewer.Elements;
 
-import project.com.Model.Bricks;
+import project.com.Model.Brick;
 import project.com.Viewer.ImageLoader;
 import project.com.Viewer.ImageReader;
-import project.com.Viewer.PNGReader;
 import project.com.gui.GUI;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BrickViewer implements ElementViewer<Bricks>{
+public class BrickViewer implements ElementViewer<Brick>{
     private final Map<Character, ImageReader> brickMap;
 
 
@@ -25,7 +24,7 @@ public class BrickViewer implements ElementViewer<Bricks>{
 
     //depending on the character the corresponding brick will be drawn
     @Override
-    public void draw(Bricks model, GUI gui) {
+    public void draw(Brick model, GUI gui) {
         ImageReader image= brickMap.get(model.getCharacter());
         image.draw(gui,model.getPosition());
     }

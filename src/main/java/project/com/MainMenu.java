@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class MainMenu extends Menu {
 
     private WriteText cur_selection; //PLAY is the option by default
-    private boolean in_menu=true; //checks if the game is in the Menu (MAYBE THIS CAN BE IMPLEMENTED IN ARKANOID CLASS (?))
+    private boolean in_menu=true;
     private final ArrayList<WriteText> options=new ArrayList<>();
     private final GUI gui;
 

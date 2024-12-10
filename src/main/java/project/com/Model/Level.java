@@ -1,20 +1,19 @@
 package project.com.Model;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+
 public class Level{
     private final int width;
     private final int height;
     private int levelNumber;
-    private Bricks[][] bricks;
+    private Brick[][] bricks;
     private boolean levelClear;
 
 public Level(int width, int height, int levelNumber) {
     this.width = width;
     this.height = height;
     this.levelNumber = levelNumber;
-    this.bricks = new Bricks[height][width];
+    this.bricks = new Brick[height][width];
     this.levelClear =false;
 }
 
