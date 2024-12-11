@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class MainMenu{
+public class MainMenu extends Menu {
     /*private WriteText cur_selection; //PLAY is the option by default
     private boolean in_menu = true;
     private final ArrayList<WriteText> options = new ArrayList<>();
