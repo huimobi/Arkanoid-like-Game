@@ -27,18 +27,13 @@ public class ArkanoidTextViewer implements TextViewer{
 
                 } else{  //adds position to the map
                     textMap.get(charMap.get(character)).add(position);
-                    setForeground(gui,foregroundColor,position,charMap.get(character));
-
                 }
-
         }
         else{  //if writeChar wasn't initialized gets initialized
             charMap.put(character,c);
             textMap.put(c, new ArrayList<>(Arrays.asList(position)));
-
-            setForeground(gui,foregroundColor,position,c);
         }
-        c.getImage().draw(gui,position);
+        setForeground(gui,foregroundColor,position,c);
     }
 
     @Override
@@ -46,7 +41,6 @@ public class ArkanoidTextViewer implements TextViewer{
         for(int i=0;i<string.length();i++){
             draw(string.charAt(i),new Position(position.getX()+i*WriteChar.CHARWIDTH, position.getY()),foregroundColor,gui);
         }
-
     }
 
     public void draw(char character, Position position,GUI gui) throws IOException {
@@ -61,9 +55,9 @@ public class ArkanoidTextViewer implements TextViewer{
     private void setForeground(GUI gui,String color,Position startPosition, WriteChar character){
         ArrayList<Position> foreground=character.getForeground(startPosition);
         if(color.equals("WHITE_BRIGHT")){
-            character.getImage().changePixelColor(gui,foreground, TextColor.ANSI.WHITE_BRIGHT);}
+            character.setForegroundDefault(gui,startPosition);}
         else{
-            character.getImage().changePixelColor(gui,foreground,color);
+            character.setForeground(gui,color,startPosition);
         }
     }
 
@@ -76,7 +70,7 @@ public class ArkanoidTextViewer implements TextViewer{
             if(textMap.get(charMap.get(c)).contains(startPosition)){  //checks if exists
                 WriteChar character=charMap.get(c);
                 ArrayList<Position> foreground=character.getForeground(startPosition);
-                character.getImage().changePixelColor(gui,foreground, TextColor.ANSI.WHITE_BRIGHT);
+                character.setForegroundDefault(gui,startPosition);
             }
         }
     }

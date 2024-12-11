@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.awt.event.KeyEvent.*;
@@ -106,6 +107,26 @@ public class LanternaGUI implements GUI {
         }
     }
 
+    @Override
+    public void changedDrawImage(BufferedImage image, Position TopLeftposition, ArrayList<Position> positions, TextColor differentColor) {
+        for(int px=0;px<image.getWidth();px++){
+            for(int py=0;py<image.getHeight();py++){
+
+                int rgb=image.getRGB(px,py); //get RGB color of the pixel
+
+                if(new Color(rgb,true).getAlpha()==0) continue; //checks if it is a transparent pixel
+
+                Position p=new Position(TopLeftposition.getX()+px, TopLeftposition.getY()+py);
+                if(p.getX()< getWidth() && p.getY()< getHeight()){
+                    if (positions.contains(p)) {
+                        drawPixel(p,new TextColor.RGB(differentColor.getRed(),differentColor.getGreen(),differentColor.getBlue()));
+                    }else{
+                    Color color= new Color(rgb,true);
+                    drawPixel(p,new TextColor.RGB(color.getRed(),color.getGreen(),color.getBlue()));}
+                }
+            }
+        }
+    }
 
     @Override
 
@@ -152,7 +173,7 @@ public class LanternaGUI implements GUI {
         screen.close();
     }
 
-    /* public KeyAdapter getKeyAdapter() {
+    /*public KeyAdapter getKeyAdapter() {
         return keyAdapter;
     }*/
 }

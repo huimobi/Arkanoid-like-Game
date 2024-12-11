@@ -25,17 +25,16 @@ public class PNGReader implements ImageReader {
     }
 
 
-    public void changePixelColor(GUI gui, ArrayList<Position> positions, TextColor color){
-        for(Position p: positions){
-            gui.drawPixel(p,color); //changes foreground color
-        }
+
+    public void changePixelColor(GUI gui,Position topLeftPosition, ArrayList<Position> positions, TextColor PixelColor){
+        gui.changedDrawImage(image,topLeftPosition,positions,PixelColor);//changes foreground color
+
     }
 
-    public void changePixelColor(GUI gui, ArrayList<Position> positions, String PixelColor){
+    public void changePixelColor(GUI gui, Position topLeftPosition,ArrayList<Position> positions, String PixelColor){
         TextColor color=parseColor(PixelColor);
-        for(Position p: positions){
-            gui.drawPixel(p,color); //changes foreground color
-        }
+        gui.changedDrawImage(image,topLeftPosition,positions,color); //changes foreground color
+
     }
     private TextColor parseColor(String color){
         return new TextColor.RGB(getRed(color),getGreen(color),getBlue(color));

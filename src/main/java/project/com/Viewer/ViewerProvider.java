@@ -31,7 +31,7 @@ public class ViewerProvider {
         this.logoViewer = new LogoViewer(imageLoader);
     }
 
-    public BrickViewer getParticleViewer() {
+    public BrickViewer getViewer() {
         return brickViewer;
     }
 

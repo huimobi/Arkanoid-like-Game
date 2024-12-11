@@ -1,5 +1,10 @@
 package project.com.Viewer.Screen;
 
+import project.com.Model.Level;
+import project.com.gui.GUI;
+
+import java.io.IOException;
+
 /*public class GameViewer extends Viewer<Level> {
 
     public GameViewer(Level level) {
@@ -22,5 +27,10 @@ package project.com.Viewer.Screen;
 
     private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer) {
         viewer.draw(element, gui);
+    }
+
+    @Override
+    public void draw(GUI gui, long frameTime) throws IOException {
+
     }
 }*/

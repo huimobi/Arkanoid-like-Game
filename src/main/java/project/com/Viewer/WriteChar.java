@@ -14,7 +14,6 @@ public class WriteChar {
     static int CHARHEIGHT = 7;
     static int CHARWIDTH = 7;
     private final ImageReader image;
-    private Position position;
     private final TextColor foregroundColor;
 
     public WriteChar(char c1) throws IOException {
@@ -24,15 +23,15 @@ public class WriteChar {
     }
 
     //changes character foreground (REMOVE)
-    public void setForeground(GUI gui,String foreground){
+    public void setForeground(GUI gui,String foreground,Position position){
         ArrayList<Position> char_foreground=getForeground(position); //get foreground pixels
-        image.changePixelColor(gui,char_foreground,foreground);
+        image.changePixelColor(gui,position,char_foreground,foreground);
     }
 
 
     //set foreground white (REMOVE)
     public void setForegroundDefault(GUI gui,Position position){
-        image.changePixelColor(gui,getForeground(position),foregroundColor);
+        image.changePixelColor(gui,position,getForeground(position),foregroundColor);
     }
 
     //DONT REMOVE PEDRO
@@ -53,7 +52,4 @@ public class WriteChar {
         return whitePixels;
     }
 
-    public ImageReader getImage() {
-        return image;
-    }
 }

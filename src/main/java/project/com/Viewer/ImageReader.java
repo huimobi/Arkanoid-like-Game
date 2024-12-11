@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public interface ImageReader {
     void draw(GUI gui, Position position);
-    void changePixelColor(GUI gui, ArrayList<Position> positions, TextColor color);
-    void changePixelColor(GUI gui, ArrayList<Position> positions, String PixelColor);
+    void changePixelColor(GUI gui, Position topLeftPosition,ArrayList<Position> positions, TextColor PixelColor);
+    void changePixelColor(GUI gui, Position topLeftPosition,ArrayList<Position> positions, String PixelColor);
     BufferedImage getImage();
 
 }
