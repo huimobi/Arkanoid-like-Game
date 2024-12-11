@@ -16,8 +16,8 @@ import java.net.URISyntaxException;
 
 
 public class Arkanoid {
-    final private int width = 264; //terminal width
-    final private int height = 144;//terminal height
+    final static int WIDTH = 264;
+    final static int HEIGHT = 144;
     private final LanternaGUI gui;
     private final ImageLoader imageLoader;
     private State state;
@@ -25,25 +25,12 @@ public class Arkanoid {
     //creates the screen that will be used through the game
     public Arkanoid() throws IOException, URISyntaxException, FontFormatException, NullPointerException {
 
-        ScreenCreator screenCreator = new LanternaScreenCreator(new DefaultTerminalFactory(),new TerminalSize(width,height));
+        ScreenCreator screenCreator = new LanternaScreenCreator(new DefaultTerminalFactory(),new TerminalSize(WIDTH,HEIGHT));
         this.gui = new LanternaGUI(screenCreator);
-        run();
         this.imageLoader = new PNGLoader();
-        //this.state = new MainMenuState(new MainMenu(gui), imageLoader);
+        this.state = new MainMenuState(new MainMenu(), imageLoader);
     }
 
-    //starts the Main Menu
-    public void run() throws IOException, FontFormatException {
-        new MainMenu(gui);
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public int getWidth() {
-        return width;
-    }
 
     public ImageLoader getImageLoader() {
         return imageLoader;
@@ -51,8 +38,8 @@ public class Arkanoid {
 
 
     //starts the game
-    public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
-        new Arkanoid();
+    public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException, InterruptedException {
+        new Arkanoid().start();
     }
 
     public void setState(State state) {
@@ -61,11 +48,10 @@ public class Arkanoid {
 
     private void start() throws IOException, InterruptedException, URISyntaxException, FontFormatException {
         int FPS = 60;
-        long frameTime = 1000 / FPS;
+        long frameTime = 1000 /FPS;
 
         while (this.state != null) {
             long startTime = System.currentTimeMillis();
-
             state.step(this, gui, startTime);
 
             long elapsedTime = System.currentTimeMillis() - startTime;
