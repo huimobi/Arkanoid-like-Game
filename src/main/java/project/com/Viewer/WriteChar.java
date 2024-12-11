@@ -11,61 +11,33 @@ import java.util.ArrayList;
 
 public class WriteChar {
     private final char c;
-    int height = 7;
-    int width = 7;
+    static int CHARHEIGHT = 7;
+    static int CHARWIDTH = 7;
     private final ImageReader image;
     private Position position;
     private final TextColor foregroundColor;
 
     public WriteChar(char c1) throws IOException {
         this.c=Character.toUpperCase(c1);
-        this.image= new PNGReader("Characters/" + c);
+        this.image= new PNGReader("Characters/" + c +".png");
         this.foregroundColor=TextColor.ANSI.WHITE_BRIGHT;
     }
 
-    //draws char on the position
-    public void draw_char(GUI gui, Position position) throws IOException {
-        image.draw(gui,position);
-        this.position=position;
-    }
-
-    //changes character foreground
+    //changes character foreground (REMOVE)
     public void setForeground(GUI gui,String foreground){
-        TextColor color= parseColor(foreground); //picks the color
-        ArrayList<Position> char_foreground=getForeground(); //get foreground pixels
-        image.changePixelColor(gui,char_foreground,color);
+        ArrayList<Position> char_foreground=getForeground(position); //get foreground pixels
+        image.changePixelColor(gui,char_foreground,foreground);
     }
 
-    public void setForeground(GUI gui){
-        ArrayList<Position> char_foreground=getForeground(); //get foreground pixels
-        image.changePixelColor(gui,char_foreground,foregroundColor);
+
+    //set foreground white (REMOVE)
+    public void setForegroundDefault(GUI gui,Position position){
+        image.changePixelColor(gui,getForeground(position),foregroundColor);
     }
 
-    //set foreground white
-    public void setForegroundDefault(GUI gui){
-        image.changePixelColor(gui,getForeground(),foregroundColor);
-    }
-
-    private TextColor parseColor(String color){
-        return new TextColor.RGB(getRed(color),getGreen(color),getBlue(color));
-    }
-
-    private int getRed(String s){
-        return Color.decode(s).getRed();
-    }
-    private int getGreen(String s){
-        return Color.decode(s).getGreen();
-    }
-    private int getBlue(String s){
-        return Color.decode(s).getBlue();
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public ArrayList<Position> getForeground() {
-        ArrayList<Position> white_pixels= new ArrayList<>();
+    //DONT REMOVE PEDRO
+    public ArrayList<Position> getForeground(Position position) {
+        ArrayList<Position> whitePixels= new ArrayList<>();
 
         BufferedImage character=image.getImage();
 
@@ -74,11 +46,14 @@ public class WriteChar {
                 int rgb=character.getRGB(px,py);
                 if(new Color(rgb,true).getAlpha()==0) continue;
                 if(Color.white.equals(new Color(rgb,true))){
-                    white_pixels.add(new Position(px+position.getX(),py+position.getY()));
+                    whitePixels.add(new Position(px+position.getX(),py+position.getY()));
                 }
             }
         }
-        return white_pixels;
+        return whitePixels;
     }
 
+    public ImageReader getImage() {
+        return image;
+    }
 }
