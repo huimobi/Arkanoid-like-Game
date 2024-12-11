@@ -8,7 +8,9 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public interface ImageReader {
-    public void draw(GUI gui, Position position);
-    public void changePixelColor(GUI gui, ArrayList<Position> positions, TextColor color);
-    public BufferedImage getImage();
+    void draw(GUI gui, Position position);
+    void changePixelColor(GUI gui, ArrayList<Position> positions, TextColor color);
+    void changePixelColor(GUI gui, ArrayList<Position> positions, String PixelColor);
+    BufferedImage getImage();
+
 }
