@@ -1,0 +1,89 @@
+package project.com.Viewer;
+
+import com.googlecode.lanterna.TextColor;
+import project.com.Model.Position;
+import project.com.gui.GUI;
+
+import java.io.IOException;
+import java.util.*;
+
+public class ArkanoidTextViewer implements TextViewer{
+    private Map<WriteChar, ArrayList<Position>> textMap;
+    private Map<Character,WriteChar> charMap;
+
+    public ArkanoidTextViewer(){
+        this.charMap=new HashMap<>();
+        this.textMap= new HashMap<>();
+    }
+
+    @Override
+    public void draw(char character, Position position, String foregroundColor, GUI gui) throws IOException {
+        character=Character.toUpperCase(character);
+        WriteChar c= new WriteChar(character);
+
+        if (charMap.containsKey(character)) {   //if a char was used
+                if(textMap.get(charMap.get(character)).contains(position)){ //if the position is equivalent to a char already created
+                    setForeground(gui,foregroundColor,position,charMap.get(character)); //change foreground color
+
+                } else{  //adds position to the map
+                    textMap.get(charMap.get(character)).add(position);
+                    setForeground(gui,foregroundColor,position,charMap.get(character));
+
+                }
+
+        }
+        else{  //if writeChar wasn't initialized gets initialized
+            charMap.put(character,c);
+            textMap.put(c, new ArrayList<>(Arrays.asList(position)));
+
+            setForeground(gui,foregroundColor,position,c);
+        }
+        c.getImage().draw(gui,position);
+    }
+
+    @Override
+    public void draw(String string, Position position, String foregroundColor, GUI gui) throws IOException {
+        for(int i=0;i<string.length();i++){
+            draw(string.charAt(i),new Position(position.getX()+i*WriteChar.CHARWIDTH, position.getY()),foregroundColor,gui);
+        }
+
+    }
+
+    public void draw(char character, Position position,GUI gui) throws IOException {
+        draw(character,position,"WHITE_BRIGHT",gui);
+    }
+
+    public void draw(String string, Position position,GUI gui) throws IOException {
+        draw(string,position,"WHITE_BRIGHT",gui);
+    }
+
+
+    private void setForeground(GUI gui,String color,Position startPosition, WriteChar character){
+        ArrayList<Position> foreground=character.getForeground(startPosition);
+        if(color.equals("WHITE_BRIGHT")){
+            character.getImage().changePixelColor(gui,foreground, TextColor.ANSI.WHITE_BRIGHT);}
+        else{
+            character.getImage().changePixelColor(gui,foreground,color);
+        }
+    }
+
+    public void setForeground(GUI gui,String color,Position startPosition,String text) throws IOException {
+        draw(text,startPosition,color,gui);
+    }
+
+    public void setForegroundDefault(GUI gui,Position startPosition,char c){
+        if(charMap.containsKey(c)){
+            if(textMap.get(charMap.get(c)).contains(startPosition)){  //checks if exists
+                WriteChar character=charMap.get(c);
+                ArrayList<Position> foreground=character.getForeground(startPosition);
+                character.getImage().changePixelColor(gui,foreground, TextColor.ANSI.WHITE_BRIGHT);
+            }
+        }
+    }
+
+    public void setForegroundDefault(GUI gui,Position startPosition,String string){
+        for(int i=0;i<string.length();i++){
+            setForegroundDefault(gui,new Position(startPosition.getX()+i*WriteChar.CHARWIDTH, startPosition.getY()),string.charAt(i));
+        }
+    }
+    }
