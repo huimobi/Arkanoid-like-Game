@@ -6,6 +6,7 @@ import project.com.Viewer.Elements.PaddleViewer;
 import project.com.Viewer.Game.GameBackgroundViewer;
 import project.com.Viewer.MainMenu.LogoViewer;
 import project.com.Viewer.MainMenu.MainMenuBackgroundViewer;
+import project.com.Viewer.MainMenu.OptionViewer;
 
 import java.io.IOException;
 
@@ -15,8 +16,8 @@ public class ViewerProvider {
     private final BallViewer ballViewer;
     private final GameBackgroundViewer gameBackground;
     private final MainMenuBackgroundViewer mainMenuBackground;
-    //private final TextViewer textViewer;
-    //private final EntryViewer entryViewer;
+    private final TextViewer textViewer;
+    private final OptionViewer optionsViewer;
     private final LogoViewer logoViewer;
 
     public ViewerProvider(ImageLoader imageLoader) throws IOException {
@@ -25,8 +26,8 @@ public class ViewerProvider {
         this.ballViewer = new BallViewer(imageLoader);
         this.gameBackground = new GameBackgroundViewer(imageLoader);
         this.mainMenuBackground = new MainMenuBackgroundViewer(imageLoader);
-        //this.textViewer = new GameTextViewer();
-        //this.entryViewer = new EntryViewer(textViewer);
+        this.textViewer= new ArkanoidTextViewer();
+        this.optionsViewer = new OptionViewer(textViewer);
         this.logoViewer = new LogoViewer(imageLoader);
     }
 
@@ -34,13 +35,13 @@ public class ViewerProvider {
         return brickViewer;
     }
 
-    /*public TextViewer getTextViewer() {
+    public TextViewer getTextViewer() {
         return textViewer;
     }
 
-    public EntryViewer getEntryViewer() {
-        return entryViewer;
-    }*/
+    public OptionViewer getOptionsViewer() {
+        return optionsViewer;
+    }
 
     public LogoViewer getLogoViewer() {
         return logoViewer;
