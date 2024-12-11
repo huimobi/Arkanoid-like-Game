@@ -23,6 +23,6 @@ public abstract class Viewer<T> {
         return viewerProvider;
     }
 
-    public abstract void draw(GUI gui) throws IOException;
+    public abstract void draw(GUI gui,long frameTime) throws IOException;
 }
 

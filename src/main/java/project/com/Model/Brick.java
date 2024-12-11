@@ -15,9 +15,6 @@ public class Brick extends Static{
     public Rectangle getHitbox(){
         return hitbox;
     }
-
-
-
     @Override
     public void setSize(int width, int height) {
         hitbox.setSize(new Dimension(width,height));

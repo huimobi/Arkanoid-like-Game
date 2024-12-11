@@ -16,8 +16,8 @@ public class PaddleViewer implements ElementViewer<Paddle>{
 
 
     public PaddleViewer(ImageLoader imageLoader) throws IOException {
-        this.defaultPaddle=imageLoader.get("Elements/Paddle/paddle");
-        this.powerUpPaddle=imageLoader.get("Elements/Paddle/powerUpPaddle");
+        this.defaultPaddle=imageLoader.get("Elements/Paddle/paddle.png");
+        this.powerUpPaddle=imageLoader.get("Elements/Paddle/powerUpPaddle.png");
     }
     @Override
     public void draw(Paddle model, GUI gui) {
