@@ -1,4 +1,5 @@
 package project.com.Control;
+
 import project.com.Arkanoid;
 import project.com.gui.GUI;
 
@@ -17,6 +18,6 @@ public abstract class Controller<T> {
         return model;
     }
 
-    public abstract void step(Arkanoid arkanoid, GUI.ACTION action) throws IOException, URISyntaxException, FontFormatException;
+    public abstract void step (Arkanoid arkanoid, GUI.ACTION action, long frameCount) throws IOException, URISyntaxException, FontFormatException;
 
 }
