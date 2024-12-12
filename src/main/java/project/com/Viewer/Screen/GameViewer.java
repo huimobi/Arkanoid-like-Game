@@ -1,36 +1,60 @@
 package project.com.Viewer.Screen;
 
+import com.googlecode.lanterna.TextColor;
+import project.com.Model.Brick;
+import project.com.Model.Element;
 import project.com.Model.Level;
+import project.com.Viewer.Elements.*;
+import project.com.Viewer.Game.GameBackgroundViewer;
+import project.com.Viewer.Game.RoundViewer;
+import project.com.Viewer.ViewerProvider;
 import project.com.gui.GUI;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-/*public class GameViewer extends Viewer<Level> {
+public class GameViewer extends Viewer<Level> {
+    private final PaddleViewer paddleViewer;
+    private final BrickViewer brickViewer;
+    private final BallViewer ballViewer;
+    private final LivesViewer livesViewer;
+    private final GameBackgroundViewer gameBackgroundViewer;
+    private final RoundViewer roundViewer;
 
-    public GameViewer(Level level) {
-        super(level);
+
+    public GameViewer(Level model, ViewerProvider viewerProvider) {
+            super(model,viewerProvider);
+            this.paddleViewer = viewerProvider.getPaddleViewer();
+            this.ballViewer = viewerProvider.getBallViewer();
+            this.brickViewer = viewerProvider.getBrickViewer();
+            this.gameBackgroundViewer = viewerProvider.getGameBackground();
+            this.livesViewer = viewerProvider.getLivesViewer();
+            this.roundViewer=viewerProvider.getRoundViewer();
     }
+
 
     @Override
-    public void drawElements(GUI gui) {
-        drawElements(gui, getModel().getWalls(), new WallViewer());
-        drawElements(gui, getModel().getMonsters(), new MonsterViewer());
-        drawElement(gui, getModel().getHero(), new HeroViewer());
+        public void draw(GUI gui) throws IOException {
+            gui.clear();
+            gameBackgroundViewer.draw(gui);
+            drawElement(gui, getModel().getBall(),getViewerProvider().getBallViewer());
+            drawElement(gui, getModel().getPaddle(), getViewerProvider().getPaddleViewer());
+            //drawElement(gui,getModel().getLives());
+            roundViewer.draw(getModel(),gui);
+            drawBricks(gui);
 
-        gui.drawText(new Position(0, 0), "Energy: " + getModel().getHero().getEnergy(), "#FFD700");
+            gui.refresh();
+        }
+
+        private void drawBricks(GUI gui) throws IOException {
+            ArrayList<Brick> bricks= getModel().getBricks();
+            for(Brick brick:bricks){
+                drawElement(gui,brick,brickViewer);
+            }
     }
 
-    private <T extends Element> void drawElements(GUI gui, List<T> elements, ElementViewer<T> viewer) {
-        for (T element : elements)
-            drawElement(gui, element, viewer);
-    }
-
-    private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer) {
+    private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer) throws IOException {
         viewer.draw(element, gui);
     }
 
-    @Override
-    public void draw(GUI gui, long frameTime) throws IOException {
-
-    }
-}*/
+}

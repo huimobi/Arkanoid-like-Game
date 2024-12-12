@@ -1,5 +1,8 @@
 package project.com.Model;
 
+import project.com.Arkanoid;
+
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URL;
@@ -8,20 +11,31 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Character.isLetterOrDigit;
+
 import static java.lang.Character.isSpaceChar;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 
 public class LevelCreator {
     private final List<String> lines;
+    private final int levelNumber;
+    private final Rectangle gameArea;
 
+
+    public Level createLevel(Paddle paddle) {
+        Level level= new Level(gameArea,levelNumber,paddle,createBricks());
+        level.setPaddle(new Position((gameArea.width-5)/2, 130));
+
+        return level;
+    }
 
     public LevelCreator(int levelNumber) throws IOException {
-            URL resource = getClass().getClassLoader().getResource("levels/level" + levelNumber + ".txt");
+            URL resource = getClass().getClassLoader().getResource("Levels/level"+ levelNumber+".txt");
 
             BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
-            this.lines = readLines(bufferedReader);
+            this.lines = readLines(bufferedReader);  //set all file lines in lines
+            this.levelNumber=levelNumber;
+            this.gameArea= new Rectangle(8,8,165,144);
     }
 
     private List<String> readLines(BufferedReader bufferedReader) throws IOException {
@@ -31,34 +45,20 @@ public class LevelCreator {
             return lines;
     }
 
-    private int getWidth() {
-            int width = 0;
-            for (String line : lines)
-                width = Math.max(width, line.length());
-            return width;
-    }
 
-    private int getHeight() {
-            return lines.size();
-    }
 
-    private Brick[][] createBricks() {
-            Brick[][] bricks = new Brick[lines.size()][lines.get(0).length()];
-
-            for (int y = 0; y < lines.size() - 4; y++) {
+    private ArrayList<Brick> createBricks() {
+            ArrayList<Brick> bricks = new ArrayList<>();
+            for (int y = 0; y < lines.size(); y++) {
                 String line = lines.get(y);
-                Brick[] lineBricks= new Brick[11];
                 for (int x = 0; x < line.length(); x++) {
-                    if (!isSpaceChar(line.charAt(x)))
-                        lineBricks[x] = new Brick(new Position(x,y), line.charAt(x));
-                    else {
-                        lineBricks[x] = null;
+                    if(!isSpaceChar(line.charAt(x))) {
+                        bricks.add(new Brick(new Position(gameArea.x-1+(x*15),gameArea.y-1+(y*8)),line.charAt(x))); //15 and 8 are the width and height of the brick
                     }
                 }
-                lineBricks[10] = null;
-                bricks[y] = lineBricks;
             }
             return bricks;
     }
 
 }
+

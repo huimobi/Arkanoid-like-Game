@@ -1,4 +1,4 @@
-package project.com.Viewer.Elements;
+package project.com.Viewer.Game;
 
 /*public class ScoreViewer implements ElementViewer<Score> {
 

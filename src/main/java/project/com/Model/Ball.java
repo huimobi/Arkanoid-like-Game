@@ -7,6 +7,7 @@ public class Ball extends Movable{
     private Rectangle hitbox;
 
     public Ball(Position position) {
+
         super(position);
 
     }
