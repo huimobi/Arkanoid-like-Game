@@ -43,7 +43,7 @@ public abstract class State<T> {
         //arkanoid.setKeySpam(allowArrowSpam());
         //GUI.ACTION action = gui.getNextAction();
         //controller.step(arkanoid, action,frametime);
-        viewer.draw(gui,frametime);
+        viewer.draw(gui);
     }
     }
 

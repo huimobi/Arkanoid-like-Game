@@ -2,7 +2,7 @@ package project.com.Model;
 
 public class Paddle extends Movable{
     private boolean powerUp;
-    Paddle(Position position) {
+    public Paddle(Position position) {
         super(position);
         this.powerUp=false;
     }

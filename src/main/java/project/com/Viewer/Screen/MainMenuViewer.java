@@ -27,7 +27,7 @@ public class MainMenuViewer extends Viewer<MainMenu> {
         }
 
         @Override
-        public void draw(GUI gui,long frameTime) throws IOException {
+        public void draw(GUI gui) throws IOException {
             gui.clear();
             background.draw(gui);
             LogoViewer.draw(gui,new Position(70,36));
