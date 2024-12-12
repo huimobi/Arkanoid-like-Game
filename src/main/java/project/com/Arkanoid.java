@@ -2,6 +2,11 @@ package project.com;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
+import project.com.Model.Level;
+import project.com.Model.LevelCreator;
+import project.com.Model.Paddle;
+import project.com.Model.Position;
+import project.com.State.GameState;
 import project.com.State.MainMenuState;
 import project.com.State.State;
 import project.com.Viewer.ImageLoader;
@@ -28,7 +33,8 @@ public class Arkanoid {
         ScreenCreator screenCreator = new LanternaScreenCreator(new DefaultTerminalFactory(),new TerminalSize(WIDTH,HEIGHT));
         this.gui = new LanternaGUI(screenCreator);
         this.imageLoader = new PNGLoader();
-        this.state = new MainMenuState(new MainMenu(), imageLoader);
+        //this.state = new MainMenuState(new MainMenu(), imageLoader); //<---ORIGINAL
+        this.state=new GameState(new LevelCreator(1).createLevel(new Paddle(new Position(60,130))),imageLoader);
     }
 
 

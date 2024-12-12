@@ -41,10 +41,10 @@ public abstract class State<T> {
         return controller;
     }
 
-    public void step(Arkanoid arkanoid, GUI gui, long frametime) throws IOException, URISyntaxException, FontFormatException {
+    public void step(Arkanoid arkanoid, GUI gui, long frameTime) throws IOException, URISyntaxException, FontFormatException {
         GUI.ACTION action = gui.getNextAction();
-        controller.step(arkanoid, action, frametime);
-        viewer.draw(gui, frametime);
+        controller.step(arkanoid, action, frameTime);
+        viewer.draw(gui);
     }
 }
 

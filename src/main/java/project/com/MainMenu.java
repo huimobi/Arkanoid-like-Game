@@ -39,29 +39,6 @@ public class MainMenu extends Menu {
         }
     }
 
-    //draws the Main Menu
-    private void draw() throws IOException {
-        gui.clear();
-        PNGReader background_image = new PNGReader("Menu/background");
-        background_image.draw(this.gui, new Position(0, 0));
-
-
-        //print "play"
-        Position p_position = new Position((gui.getWidth() - 4 * 7) / 2, (gui.getHeight() + 7) / 2);
-        for (WriteText option : options) {
-            option.drawText(this.gui, new Position((gui.getWidth() - option.getLength() * 7) / 2, p_position.getY()));
-            p_position.setY(p_position.getY() + 18);
-
-        }
-
-        //Arkanoid LOGO
-        PNGReader arkanoid = new PNGReader("Menu/arkanoid");
-        arkanoid.draw(this.gui, new Position(70, 36));
-
-        options.getFirst().setForegroundColor(gui, "#ff7129"); //shows first option selected as default
-        this.gui.refresh();
-    }
-
 
     private void processKey(KeyStroke key) throws IOException {
         switch (key.getKeyType()) {
