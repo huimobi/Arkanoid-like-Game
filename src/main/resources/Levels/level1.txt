@@ -1,12 +1,9 @@
-     Y
-    YYY
-    YYY
-    BBB
-    BBB
-    BBB
-    GGG
-    GGG
-    GGG
-  #######
-  #P# #P#
-  ### ###
+###########
+BYGPBYGPBYG
+PBYGPBYGPBY
+GPBYGPBYGPB
+YGPBYGPBYGP
+BYGPBYGPBYG
+PBYGPBYGPBY
+GPBYGPBYGPB
+YGPBYGPBYGP
