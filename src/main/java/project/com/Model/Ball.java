@@ -31,5 +31,12 @@ public class Ball extends Movable{
 
     //falta implementar
     public Position updatePosition() {
+        Position currentPosition = getPosition();
+        int newX = currentPosition.getX() + velocity.getX();
+        int newY = currentPosition.getY() + velocity.getY();
+
+        hitbox.setLocation(newX, newY);
+        return new Position(newX, newY);
     }
+
 }

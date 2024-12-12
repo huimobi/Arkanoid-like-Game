@@ -42,8 +42,4 @@ public class BrickController extends Controller<List<Brick>> {
 
     }
 
-    @Override
-    public void step() throws IOException, URISyntaxException, FontFormatException {
-
-    }
 }

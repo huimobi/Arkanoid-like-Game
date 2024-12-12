@@ -19,5 +19,4 @@ public abstract class Controller<T> {
 
     public abstract void step(Arkanoid arkanoid, GUI.ACTION action) throws IOException, URISyntaxException, FontFormatException;
 
-    public abstract void step() throws IOException, URISyntaxException, FontFormatException;
 }

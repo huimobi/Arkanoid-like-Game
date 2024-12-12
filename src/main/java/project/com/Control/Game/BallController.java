@@ -26,11 +26,6 @@ public class BallController extends Controller<Ball> {
 
     @Override
     public void step(Arkanoid arkanoid, GUI.ACTION action) throws IOException, URISyntaxException, FontFormatException {
-
-    }
-
-    @Override
-    public void step() throws IOException, URISyntaxException, FontFormatException {
         Ball ball=getModel();
         Position newposition=ball.updatePosition();
         if(newposition.getX()<=0 || newposition.getX()+ball.getLENGTH() >= screenWidth){
@@ -41,10 +36,25 @@ public class BallController extends Controller<Ball> {
         }
         if (ball.getHitbox().intersects(paddle.getHitbox())){
             ball.reflectVertical();
+            //spin effect
+            int paddleCentre = paddle.getPosition().getX() + paddle.getWIDTH() / 2;
+            int ballCentre = newposition.getX() + ball.getLENGTH() / 2;
+
+            int spin = ballCentre - paddleCentre;
+            ball.reflectHorizontal();
+            ball.reflectVertical();
         }
         if (newposition.getY()>=screenHeight){
             //handle ball lost
+            lostBall(arkanoid);
         }
         ball.setPosition(newposition);
+    }
+
+    private void lostBall(Arkanoid arkanoid){
+        Ball ball = getModel();
+        ball.setPosition(new Position(screenWidth / 2, screenHeight - 20));
+        ball.reflectVertical();
+        // should include the logic of another level
     }
 }
