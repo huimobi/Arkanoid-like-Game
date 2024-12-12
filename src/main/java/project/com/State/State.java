@@ -24,7 +24,9 @@ public abstract class State<T> {
     }
 
     protected abstract Viewer<T> createViewer(ViewerProvider viewerProvider);
+
     protected abstract Controller<T> createController();
+
     protected abstract boolean allowArrowSpam();
 
     public T getModel() {
@@ -39,11 +41,10 @@ public abstract class State<T> {
         return controller;
     }
 
-    public void step(Arkanoid arkanoid, GUI gui,long frametime) throws IOException, URISyntaxException, FontFormatException {
-        //arkanoid.setKeySpam(allowArrowSpam());
-        //GUI.ACTION action = gui.getNextAction();
-        //controller.step(arkanoid, action,frametime);
-        viewer.draw(gui,frametime);
+    public void step(Arkanoid arkanoid, GUI gui, long frametime) throws IOException, URISyntaxException, FontFormatException {
+        GUI.ACTION action = gui.getNextAction();
+        controller.step(arkanoid, action, frametime);
+        viewer.draw(gui, frametime);
     }
-    }
+}
 
