@@ -1,5 +1,12 @@
-###########
-BBBBBBBBBBB
-YYYYYYYYYYY
-GGGGGGGGGGG
-PPPPPPPPPPP
+     Y
+    YYY
+    YYY
+    BBB
+    BBB
+    BBB
+    GGG
+    GGG
+    GGG
+  #######
+  #P# #P#
+  ### ###
