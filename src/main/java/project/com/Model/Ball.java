@@ -28,4 +28,8 @@ public class Ball extends Movable{
     public int getLENGTH() {
         return LENGTH;
     }
+
+    //falta implementar
+    public Position updatePosition() {
+    }
 }
