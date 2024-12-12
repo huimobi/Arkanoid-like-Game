@@ -1,9 +1,43 @@
 package project.com.Model;
 
+import java.awt.*;
+
 public class Ball extends Movable{
     private int LENGTH=5;
-    Ball(Position position){
+    private Rectangle hitbox;
+
+    public Ball(Position position) {
+
         super(position);
-        super.setSize(LENGTH, LENGTH);
+
     }
+
+    public Rectangle getHitbox(){
+        return hitbox;
+    }
+
+    public void reflectHorizontal(){
+        move(-getPosition().getX(),0);
+    }
+    public void reflectVertical(){
+        move(0,-getPosition().getY());
+    }
+
+    public void checkCollision(Paddle paddle) {
+    }
+
+    public int getLENGTH() {
+        return LENGTH;
+    }
+
+    //falta implementar
+    public Position updatePosition() {
+        Position currentPosition = getPosition();
+        int newX = currentPosition.getX() + velocity.getX();
+        int newY = currentPosition.getY() + velocity.getY();
+
+        hitbox.setLocation(newX, newY);
+        return new Position(newX, newY);
+    }
+
 }
