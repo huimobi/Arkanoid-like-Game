@@ -12,6 +12,8 @@ public class Level {
     private boolean levelClear;
     private Ball ball;
     private boolean initialSleep;
+    private long waitStartTime;
+    private static final long WAIT_TIME = 3000;
 
     public Level(Rectangle gameArea, int levelNumber,Paddle paddle,ArrayList<Brick>bricks) {
         this.gameArea = gameArea;
@@ -21,6 +23,7 @@ public class Level {
         this.ball = new Ball(new Position(paddle.getPosition().getX()+12,paddle.getPosition().getY()-5));
         this.bricks=bricks;
         this.initialSleep=true;
+        this.waitStartTime=System.currentTimeMillis();
     }
 
     public int getWidth() {
@@ -55,9 +58,11 @@ public class Level {
         paddle.setPosition(position);
     }
 
-    public boolean isInitialSleep() {
-        return initialSleep;
+    public boolean isInitialSleep() { if (System.currentTimeMillis() - waitStartTime <= WAIT_TIME){
+        return true;
     }
+        return false; }
+
 
     /*private boolean checkOutsideLevel(Rectangle) {
 

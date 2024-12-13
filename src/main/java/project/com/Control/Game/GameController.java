@@ -18,6 +18,7 @@ public class GameController extends Controller<Level> {
     private final PaddleController paddleController;
 
 
+
     public GameController(Level model, BallController ballController, PaddleController paddleController) {
         super(model);
         this.ballController=ballController;
