@@ -6,9 +6,7 @@ import project.com.Viewer.Elements.LivesViewer;
 import project.com.Viewer.Elements.PaddleViewer;
 import project.com.Viewer.Game.GameBackgroundViewer;
 import project.com.Viewer.Game.RoundViewer;
-import project.com.Viewer.MainMenu.LogoViewer;
-import project.com.Viewer.MainMenu.MainMenuBackgroundViewer;
-import project.com.Viewer.MainMenu.OptionViewer;
+import project.com.Viewer.MainMenu.*;
 
 import java.io.IOException;
 
@@ -23,6 +21,8 @@ public class ViewerProvider {
     private final OptionViewer optionsViewer;
     private final LogoViewer logoViewer;
     private final RoundViewer roundViewer;
+    private final InfosViewer infosViewer;
+    private final WordInfoViewer wordInfoViewer;
 
 
     public ViewerProvider(ImageLoader imageLoader) throws IOException {
@@ -34,8 +34,10 @@ public class ViewerProvider {
         this.textViewer= new ArkanoidTextViewer();
         this.optionsViewer = new OptionViewer(textViewer);
         this.logoViewer = new LogoViewer(imageLoader);
-        this.livesViewer= new LivesViewer(imageLoader);
-        this.roundViewer= new RoundViewer(textViewer);
+        this.livesViewer = new LivesViewer(imageLoader);
+        this.roundViewer = new RoundViewer(textViewer);
+        this.infosViewer = new InfosViewer(textViewer);
+        this.wordInfoViewer = new WordInfoViewer(imageLoader);
     }
 
     public BrickViewer getViewer() {
@@ -81,4 +83,8 @@ public class ViewerProvider {
     public LivesViewer getLivesViewer() {
         return livesViewer;
     }
+
+    public InfosViewer getInfosViewer() {return infosViewer;}
+
+    public WordInfoViewer getWordInfoViewer() {return wordInfoViewer;}
 }

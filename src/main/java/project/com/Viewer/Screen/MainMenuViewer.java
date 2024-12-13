@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class MainMenuViewer extends Viewer<MainMenu> {
         public static final String selectedColor = "#ff7129";
-        private final MainMenuBackgroundViewer background;
+        public MainMenuBackgroundViewer background;
         private final OptionViewer optionViewer;
         private final LogoViewer LogoViewer;
 

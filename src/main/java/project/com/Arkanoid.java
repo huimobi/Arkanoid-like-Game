@@ -21,8 +21,8 @@ import java.net.URISyntaxException;
 
 
 public class Arkanoid {
-    final static int WIDTH = 264;
-    final static int HEIGHT = 144;
+    public final static int WIDTH = 264;
+    public final static int HEIGHT = 144;
     private final LanternaGUI gui;
     private final ImageLoader imageLoader;
     private State state;
