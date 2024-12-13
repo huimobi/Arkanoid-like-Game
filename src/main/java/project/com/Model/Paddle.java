@@ -5,42 +5,33 @@ import java.nio.file.Path;
 import java.util.Vector;
 
 public class Paddle extends Movable{
-    private final boolean powerUp;
-    private final int HEIGHT=28;
-    private final int WIDTH=6;
-    private final Rectangle hitbox;
-    private Position position;
-    Paddle(Position position) {
-        super(position);
+    private boolean powerUp;
+    private final int WIDTH=28;
+    private final int HEIGHT=6;
+    private Rectangle hitbox;
+    private int lives;
+
+    public Paddle(Position position) {
+        super(position,new Position(5,0));
         this.powerUp=false;
-        this.position=position;
-        hitbox= new Rectangle(getPosition().getX(), getPosition().getY(), HEIGHT, WIDTH);
+        hitbox= new Rectangle(getPosition().getX(), getPosition().getY(), WIDTH, HEIGHT);
+        this.lives=3;
     }
 
     public void moveLeft() {
-        if (position.getX() > 5) {
-            position.setX(position.getX() - 5);
-        }
+        super.setPosition(new Position(getPosition().getX()-getVelocity().getX(),getPosition().getY()));
     }
 
-    public void moveRight(int screenWidth) {
-        if (position.getX() + WIDTH < screenWidth) {
-            position.setX(position.getX() + 5);
-        }
-    }
-
-    //Velocity is an incrementation of the position, so its type is Position
-    public Position updatePosition(Position velocity) {
-        return new Position(getPosition().getX() + velocity.getX(), getPosition().getY() + velocity.getY());
+    public void moveRight() {
+        super.setPosition(new Position(getPosition().getX()+getVelocity().getX(),getPosition().getY()));
     }
 
     public Rectangle getHitbox() {
         return hitbox;
     }
 
-    @Override
-    public Position getPosition() {
-        return position;
+    public void setPowerUp(boolean powerUp) {
+        this.powerUp = powerUp;
     }
 
     @Override
@@ -48,7 +39,7 @@ public class Paddle extends Movable{
         super.setPosition(position);
     }
 
-    public Boolean getpowerUp(){
+    public Boolean getPowerUp(){
         return powerUp;
     }
     public int getWIDTH(){
@@ -58,4 +49,11 @@ public class Paddle extends Movable{
         return HEIGHT;
     }
 
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
+
+    public int getLives() {
+        return lives;
+    }
 }
