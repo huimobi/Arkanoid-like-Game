@@ -3,19 +3,19 @@ package project.com.Model;
 import java.awt.*;
 
 public class Brick extends Static {
-    private final Rectangle hitbox;
+    private final Rectangle hitBox;
     private final char character;
     private int durability;
 
     public Brick(Position position, char character) {
         super(position);
         this.character = character;
-        this.hitbox = new Rectangle(position.getX(), position.getY(), 15, 5);
-        this.durability = durability;
+        this.hitBox = new Rectangle(position.getX(), position.getY(), 15, 5);
+        this.durability = 1;
     }
 
-    public Rectangle getHitbox() {
-        return hitbox;
+    public Rectangle getHitBox() {
+        return hitBox;
     }
 
     public char getCharacter() {
@@ -31,16 +31,6 @@ public class Brick extends Static {
     }
 
     public void hit(){
-        if (durability>0){
-            durability--;
-        }
-    }
-
-    public boolean checkCollision(Rectangle ballHitbox){
-        if(hitbox.intersects(ballHitbox)){
-            hit();
-            return true;
-        }
-        return false;
+        durability--;
     }
 }

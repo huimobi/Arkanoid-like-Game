@@ -13,18 +13,16 @@ import java.net.URISyntaxException;
 
 public class PaddleController extends Controller<Paddle> {
     private GUI lanternaGUI;
-    private final int screenWidth;
     private Position position;
     private Paddle paddle;
 
-    protected PaddleController(Paddle paddle, int screenWidth) {
+    public PaddleController(Paddle paddle) {
         super(paddle);
         this.paddle=paddle;
-        this.screenWidth = screenWidth;
     }
 
     @Override
-    public void step(Arkanoid arkanoid, GUI.ACTION action) throws IOException, URISyntaxException, FontFormatException {
+    public void step(Arkanoid arkanoid, GUI.ACTION action,long frameTime) throws IOException, URISyntaxException, FontFormatException {
         Paddle paddle=getModel();
 
         switch (action){
@@ -32,21 +30,15 @@ public class PaddleController extends Controller<Paddle> {
                 paddle.moveLeft();
                 break;
             case RIGHT:
-                paddle.moveRight(lanternaGUI.getWidth());
+                paddle.moveRight();
                 break;
             default:
                 break;
         }
-        Position velocity = new Position(1,2);
-        paddle.setPosition(paddle.updatePosition(velocity));
-        // collision logic
     }
 
     public Position getPosition() {
         return position;
     }
 
-    public int getScreenWidth() {
-        return screenWidth;
-    }
 }
