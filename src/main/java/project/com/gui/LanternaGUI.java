@@ -8,6 +8,8 @@ import project.com.Model.Position;
 
 
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -18,25 +20,17 @@ import static java.awt.event.KeyEvent.*;
 
 
 public class LanternaGUI implements GUI {
-    private static final List<Integer> SPAM_KEYS = List.of(VK_LEFT, VK_RIGHT);
-
     private final ScreenCreator screenCreator;
     private final Screen screen;
-    /*
-    private boolean keySpam;
-    private KeyEvent priorityKeyPressed;
-    */
+    private KeyStroke keyPressed;
+
 
 
     public LanternaGUI(ScreenCreator screenCreator) throws IOException, URISyntaxException, FontFormatException {
         this.screenCreator = screenCreator;
         this.screen= screenCreator.createScreen();
         createScreen();
-
-        //this.keySpam = false;
-        //this.priorityKeyPressed = null;
-        //this.keyAdapter = createKeyAdapter();
-        //this.keyPressed = null;
+        this.keyPressed = readInput();
     }
 
     private void createScreen() throws IOException, URISyntaxException, FontFormatException {
@@ -45,30 +39,11 @@ public class LanternaGUI implements GUI {
         screen.doResizeIfNecessary();
     }
 
-    //still need to understand this
-    /*private KeyAdapter createKeyAdapter() {
-        return new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (keySpam && SPAM_KEYS.contains(e.getKeyCode()))
-                    keyPressed = priorityKeyPressed = e;
-                else
-                    keyPressed = e;
-            }
 
-            @Override
-            public void keyReleased(KeyEvent e) {
-                if (keySpam && SPAM_KEYS.contains(e.getKeyCode()))
-                    keyPressed = priorityKeyPressed = null;
-                else
-                    keyPressed = priorityKeyPressed;
-            }
-        };
-    }*/
 
     @Override
     public KeyStroke readInput() throws IOException {
-        return screen.readInput();
+        return screen.pollInput();
     }
 
     @Override
@@ -131,8 +106,12 @@ public class LanternaGUI implements GUI {
     @Override
 
     public ACTION getNextAction() throws IOException {
-        KeyStroke keyStroke = screen.pollInput();
-        switch (keyStroke.getKeyType()){
+        this.keyPressed=readInput();
+
+        if (keyPressed == null)
+            return ACTION.NONE;
+
+        switch (keyPressed.getKeyType()){
             case ArrowLeft -> {
                 return ACTION.LEFT;
             }
@@ -145,7 +124,7 @@ public class LanternaGUI implements GUI {
             case ArrowDown -> {
                 return ACTION.DOWN;
             }
-            case Escape -> {
+            case Escape, EOF -> {
                 return ACTION.QUIT;
             }
             case Enter -> {
