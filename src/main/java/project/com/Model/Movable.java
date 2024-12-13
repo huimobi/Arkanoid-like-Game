@@ -7,8 +7,8 @@ public abstract class Movable extends Element{
     private Level level;
     private Position velocity;
 
-    Movable(Position position,Position velocity,Level level){
-        super(position);
+    Movable(Position position,int width,int height,Position velocity,Level level){
+        super(position,width,height);
         this.velocity=velocity;
         this.level=level;
     }

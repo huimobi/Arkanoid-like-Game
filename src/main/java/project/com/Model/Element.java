@@ -1,16 +1,30 @@
 package project.com.Model;
 
+import java.awt.*;
+
 public abstract class Element {
-    private Position position;
-    public Element(Position position){
-        this.position=position;
+    private final Rectangle hitBox;
+    public Element(Position position,int width, int height){
+        this.hitBox=new Rectangle(position.getX(),position.getY(),width,height);
     }
 
     public void setPosition(Position position) {
-        this.position = position;
+        this.hitBox.setLocation(position.getX(),position.getY());
     }
 
     public Position getPosition() {
-        return position;
+        return new Position(hitBox.x,hitBox.y);
     }
+
+    public int getWidth(){
+        return hitBox.width;
+    }
+    public int getHeight(){
+        return hitBox.height;
+    }
+
+    public Rectangle getHitBox() {
+        return hitBox;
+    }
+
 }

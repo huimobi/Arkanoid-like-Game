@@ -2,20 +2,18 @@ package project.com.Model;
 
 import java.awt.*;
 
-public class Brick extends Static {
-    private final Rectangle hitBox;
+public class Brick extends Element {
     private final char character;
     private int durability;
 
     public Brick(Position position, char character) {
-        super(position);
+        super(position,15,5);
         this.character = character;
-        this.hitBox = new Rectangle(position.getX(), position.getY(), 15, 5);
         this.durability = 1;
     }
 
     public Rectangle getHitBox() {
-        return hitBox;
+        return super.getHitBox();
     }
 
     public char getCharacter() {
