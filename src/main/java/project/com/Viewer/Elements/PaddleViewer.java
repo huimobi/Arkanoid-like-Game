@@ -21,7 +21,7 @@ public class PaddleViewer implements ElementViewer<Paddle>{
     }
     @Override
     public void draw(Paddle model, GUI gui) {
-        if(model.getpowerUp()) powerUpPaddle.draw(gui,model.getPosition());
+        if(model.getPowerUp()) powerUpPaddle.draw(gui,model.getPosition());
         else defaultPaddle.draw(gui,model.getPosition());
     }
 }

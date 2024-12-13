@@ -26,8 +26,4 @@ public class MainMenuState extends State<MainMenu> {
         return new MainMenuController(getModel(), new OptionsController(getModel()));
     }
 
-    @Override
-    protected boolean allowArrowSpam() {
-        return false;
-    }
 }

@@ -27,7 +27,6 @@ public abstract class State<T> {
 
     protected abstract Controller<T> createController();
 
-    protected abstract boolean allowArrowSpam();
 
     public T getModel() {
         return model;

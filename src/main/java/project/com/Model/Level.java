@@ -53,9 +53,11 @@ public class Level {
 
     public void setPaddle(Position position) {
         paddle.setPosition(position);
-        if(initialSleep) ball.setPosition(new Position(paddle.getPosition().getX()+12,paddle.getPosition().getY()-5));
     }
 
+    public boolean isInitialSleep() {
+        return initialSleep;
+    }
 
     /*private boolean checkOutsideLevel(Rectangle) {
 
