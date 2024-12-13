@@ -4,6 +4,7 @@ import com.googlecode.lanterna.TextColor;
 import project.com.Model.Brick;
 import project.com.Model.Element;
 import project.com.Model.Level;
+import project.com.Model.Position;
 import project.com.Viewer.Elements.*;
 import project.com.Viewer.Game.GameBackgroundViewer;
 import project.com.Viewer.Game.RoundViewer;
@@ -39,10 +40,10 @@ public class GameViewer extends Viewer<Level> {
             gameBackgroundViewer.draw(gui);
             drawElement(gui, getModel().getBall(),getViewerProvider().getBallViewer());
             drawElement(gui, getModel().getPaddle(), getViewerProvider().getPaddleViewer());
-            //drawElement(gui,getModel().getLives());
+            livesViewer.draw(getModel().getPaddle(),gui);
             roundViewer.draw(getModel(),gui);
             drawBricks(gui);
-
+            drawStrings(gui);
             gui.refresh();
         }
 
@@ -55,6 +56,15 @@ public class GameViewer extends Viewer<Level> {
 
     private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer) throws IOException {
         viewer.draw(element, gui);
+    }
+
+    private void drawStrings(GUI gui) throws IOException {
+        String score="score";
+        String highScore="highScore";
+        String round="round";
+        getViewerProvider().getTextViewer().draw(score,new Position((gui.getWidth()-(score.length()*7)+180)/2,(gui.getHeight()-7)/4),"#00ff00",gui);
+        getViewerProvider().getTextViewer().draw(highScore,new Position((((gui.getWidth()-(highScore.length()*7)+180)/2)),gui.getHeight()/2),"#00ff00",gui);
+        getViewerProvider().getTextViewer().draw(round,new Position(gui.getWidth()-5*7-3,gui.getHeight()-14),"#ff0000",gui);
     }
 
 }
