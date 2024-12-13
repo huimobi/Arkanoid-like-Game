@@ -19,6 +19,10 @@ public class BallController extends Controller<Ball> {
 
     @Override
     public void step(Arkanoid arkanoid, GUI.ACTION action,long frameTime) {
+        if(getModel().getLevel().isInitialSleep()) {
+            getModel().setPosition(new Position(getModel().getLevel().getPaddle().getPosition().getX()+15,getModel().getLevel().getPaddle().getPosition().getY()-5));
+            return;
+        }
         getModel().move();
     }
 }

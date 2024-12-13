@@ -4,11 +4,13 @@ import java.io.PipedOutputStream;
 import java.util.Vector;
 
 public abstract class Movable extends Element{
-
+    private Level level;
     private Position velocity;
-    Movable(Position position,Position velocity){
+
+    Movable(Position position,Position velocity,Level level){
         super(position);
         this.velocity=velocity;
+        this.level=level;
     }
 
     public void move(){
@@ -23,4 +25,11 @@ public abstract class Movable extends Element{
         this.velocity = velocity;
     }
 
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
+    }
 }

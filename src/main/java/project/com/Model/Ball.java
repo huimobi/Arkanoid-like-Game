@@ -6,8 +6,8 @@ public class Ball extends Movable{
     private int LENGTH=5;
     private Rectangle hitbox;
 
-    public Ball(Position position) {
-        super(position,new Position(1,-4));
+    public Ball(Position position,Level level) {
+        super(position,new Position(2,-4),level);
         this.hitbox=new Rectangle(position.getX(),position.getY(),LENGTH,LENGTH);
     }
 

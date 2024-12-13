@@ -27,12 +27,10 @@ public class GameController extends Controller<Level> {
     @Override
     public void step(Arkanoid arkanoid, GUI.ACTION action,long frameTime) throws IOException, URISyntaxException, FontFormatException{
 
-
         switch (action) {
-            case LEFT, RIGHT:
+            case RIGHT, LEFT:
                 paddleController.step(arkanoid,action,frameTime);
                 break;
-
             case QUIT:
                 onQuit(arkanoid);
                 break;
@@ -40,12 +38,6 @@ public class GameController extends Controller<Level> {
             default:
                 break;
         }
-
-        if(getModel().isInitialSleep()) {
-            getModel().getBall().setPosition(new Position(getModel().getPaddle().getPosition().getX()+10,getModel().getPaddle().getPosition().getY()-5));
-            return;
-        }
-
         ballController.step(arkanoid,action,frameTime);
 
     }

@@ -3,6 +3,7 @@ package project.com.Model;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class Level {
     private Rectangle gameArea;
@@ -13,12 +14,12 @@ public class Level {
     private Ball ball;
     private boolean initialSleep;
 
-    public Level(Rectangle gameArea, int levelNumber,Paddle paddle,ArrayList<Brick>bricks) {
+    public Level(Rectangle gameArea, int levelNumber,Paddle paddle,Ball ball,ArrayList<Brick>bricks) {
         this.gameArea = gameArea;
         this.levelNumber = levelNumber;
         this.levelClear = false;
         this.paddle = paddle;
-        this.ball = new Ball(new Position(paddle.getPosition().getX()+12,paddle.getPosition().getY()-5));
+        this.ball= ball;
         this.bricks=bricks;
         this.initialSleep=true;
     }
@@ -59,32 +60,55 @@ public class Level {
         return initialSleep;
     }
 
-    /*private boolean checkOutsideLevel(Rectangle) {
-
-}*/
-
-    private boolean checkCollision(Rectangle Element[][]) {
-    /*for (int brickY: List.of((int)y1 / Tile.SIZE, (int)y2 / Tile.SIZE)) {
-        for (int brickX: List.of((int)x1 / Tile.SIZE, (int)x2 / Tile.SIZE)) {
-            if (bricks[brickY][brickX] != null)
-                return true;
-        }
-    }*/
-        return false;
+    public boolean checkOutsideLevel(Rectangle element,Position velocity) {
+        Rectangle check= new Rectangle(element.x+velocity.getX(),element.y+velocity.getY(),element.width,element.height);
+        return !gameArea.contains(check);
     }
 
     public boolean isLevelClear() {
         return levelClear;
     }
-}
-/*public boolean collidesLeft(Vector position, Vector size) {
-    double x = position.x(), y = position.y();
-    return checkCollision(x, x + 1, y, y + size.y() - 1, tiles);
+
+/*public boolean collidesLeft(Position velocity, Rectangle element) {
+    Position left = new Position(element.x + velocity.getX(), element.y + velocity.getY());
+
+    if (checkOutsideLevel(left)) return true;
+    for (Brick brick : bricks) {
+        if (element.x <= (brick.getHitBox().x + brick.getHitBox().width)) {
+            return true;
+        }
+    }
+    return false;
 }*/
 
-/*public boolean collidesRight(Vector position, Vector size) {
-    double x = position.x(), y = position.y();
-    return checkCollision(x + size.x() - 1, x + size.x() - 1, y, y + size.y() - 1, tiles);
+/*public boolean collidesRight(Position velocity, Rectangle element) {
+        // Ball boundaries
+        double ballLeft = ball.getHitbox().getX();
+        double ballRight = ball.getHitbox().getX() + ball.getHitbox().getWidth();
+        double ballTop = ball.getHitbox().getY();
+        double ballBottom = ball.getHitbox().getY() + ball.getHitbox().getHeight();
+
+        // Brick boundaries
+        double brickLeft = brick.getgetX();
+        double brickRight = brick.getX() + brick.getWidth();
+        double brickTop = brick.getY();
+        double brickBottom = brick.getY() + brick.getHeight();
+
+        // Check for collision
+        if (ballRight >= brickLeft && ballLeft <= brickRight &&
+                ballBottom >= brickTop && ballTop <= brickBottom) {
+
+            // Calculate overlap in both directions
+            double overlapX = Math.min(ballRight - brickLeft, brickRight - ballLeft);
+            double overlapY = Math.min(ballBottom - brickTop, brickBottom - ballTop);
+
+            // Determine collision side
+            if (overlapX < overlapY) {
+                return (ball.getHitbox().getX() < brick.getX()) ? "LEFT" : "RIGHT";
+            } else {
+                return (ball.getHitbox().getY() < brick.getY()) ? "TOP" : "BOTTOM";
+            }
+        }
 }*/
 
 /*public boolean collidesUp(Position position) {
@@ -94,5 +118,6 @@ public class Level {
 
 /*public boolean collidesDown(Vector position, Vector size) {
     double x = position.x(), y = position.y();
-    return checkCollision(x, x + size.x() - 1, y + size.y() - 2, y + size.y() - 1, tiles);
-}*/
+    return checkCollision(x, x + size.x() - 1, y + size.y() - 2, y + size.y() - 1, tiles);*/
+
+}

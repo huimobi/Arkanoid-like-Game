@@ -28,9 +28,17 @@ public class PaddleController extends Controller<Paddle> {
         switch (action){
             case LEFT:
                 paddle.moveLeft();
+                if(getModel().getLevel().checkOutsideLevel(getModel().getHitbox(),getModel().getVelocity())){
+                    break;
+                }
+                getModel().move();
                 break;
             case RIGHT:
                 paddle.moveRight();
+                if(getModel().getLevel().checkOutsideLevel(getModel().getHitbox(),getModel().getVelocity())){
+                    break;
+                }
+                getModel().move();
                 break;
             default:
                 break;

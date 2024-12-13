@@ -11,19 +11,21 @@ public class Paddle extends Movable{
     private Rectangle hitbox;
     private int lives;
 
-    public Paddle(Position position) {
-        super(position,new Position(5,0));
+    public Paddle(Position position,Level level) {
+        super(position,new Position(5,0),level);
         this.powerUp=false;
         hitbox= new Rectangle(getPosition().getX(), getPosition().getY(), WIDTH, HEIGHT);
         this.lives=3;
     }
 
     public void moveLeft() {
-        super.setPosition(new Position(getPosition().getX()-getVelocity().getX(),getPosition().getY()));
+        super.setVelocity(new Position(-5,0));
+        hitbox.setLocation(getPosition().getX(),getPosition().getY());
     }
 
     public void moveRight() {
-        super.setPosition(new Position(getPosition().getX()+getVelocity().getX(),getPosition().getY()));
+        super.setVelocity(new Position(5,0));
+        hitbox.setLocation(getPosition().getX(),getPosition().getY());
     }
 
     public Rectangle getHitbox() {
@@ -56,4 +58,5 @@ public class Paddle extends Movable{
     public int getLives() {
         return lives;
     }
+
 }

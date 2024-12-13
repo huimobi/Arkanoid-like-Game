@@ -55,7 +55,6 @@ public class Arkanoid {
     private void start() throws IOException, InterruptedException, URISyntaxException, FontFormatException {
         int FPS = 60;
         long frameTime = 1000 /FPS;
-        int frameCount=0;
 
         while (this.state != null) {
             long startTime = System.currentTimeMillis();
@@ -65,8 +64,7 @@ public class Arkanoid {
             long sleepTime = frameTime - elapsedTime;
 
             if (sleepTime > 0) Thread.sleep(sleepTime);
-            frameCount++;
-            System.out.print(frameCount+"\n");
+
         }
 
         gui.close();

@@ -3,6 +3,7 @@ package project.com.Control.Menu;
 import project.com.Arkanoid;
 import project.com.Control.Controller;
 import project.com.MainMenu;
+import project.com.Model.Ball;
 import project.com.Model.LevelCreator;
 import project.com.Model.Paddle;
 import project.com.Model.Position;
@@ -24,7 +25,7 @@ public class OptionsController extends Controller<MainMenu> {
         switch (getModel().getCurrentOption().getType()){
            case START_GAME:
                 if (action == GUI.ACTION.SELECT){
-                    arkanoid.setState(new GameState(new LevelCreator(1).createLevel(new Paddle(new Position(60,130))), arkanoid.getImageLoader()));
+                    arkanoid.setState(new GameState(new LevelCreator(1).createLevel(new Paddle(new Position(60,130),null),new Ball(new Position(72,125),null)), arkanoid.getImageLoader()));
                 }
                 break;
             /*case INFO:
