@@ -24,8 +24,7 @@ public class LevelCreator {
 
     public Level createLevel(Paddle paddle) {
         Level level= new Level(gameArea,levelNumber,paddle,createBricks());
-        level.setPaddle(new Position((gameArea.width-5)/2, 130));
-
+        level.setPaddle(new Position((gameArea.width-28)/2, 130));
         return level;
     }
 

@@ -4,7 +4,6 @@ import project.com.Model.Option;
 import project.com.Viewer.TextViewer;
 import project.com.gui.GUI;
 
-import javax.sound.midi.SysexMessage;
 import java.io.IOException;
 
 public class OptionViewer {
