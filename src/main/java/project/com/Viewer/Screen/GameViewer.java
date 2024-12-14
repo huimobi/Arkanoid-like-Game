@@ -8,6 +8,7 @@ import project.com.Model.Position;
 import project.com.Viewer.Elements.*;
 import project.com.Viewer.Game.GameBackgroundViewer;
 import project.com.Viewer.Game.RoundViewer;
+import project.com.Viewer.Game.ScoreViewer;
 import project.com.Viewer.ViewerProvider;
 import project.com.gui.GUI;
 
@@ -21,6 +22,7 @@ public class GameViewer extends Viewer<Level> {
     private final LivesViewer livesViewer;
     private final GameBackgroundViewer gameBackgroundViewer;
     private final RoundViewer roundViewer;
+    private final ScoreViewer scoreViewer;
 
 
     public GameViewer(Level model, ViewerProvider viewerProvider) {
@@ -31,6 +33,7 @@ public class GameViewer extends Viewer<Level> {
             this.gameBackgroundViewer = viewerProvider.getGameBackground();
             this.livesViewer = viewerProvider.getLivesViewer();
             this.roundViewer=viewerProvider.getRoundViewer();
+            this.scoreViewer=viewerProvider.getScoreViewer();
     }
 
 
@@ -42,6 +45,8 @@ public class GameViewer extends Viewer<Level> {
             drawElement(gui, getModel().getPaddle(), getViewerProvider().getPaddleViewer());
             livesViewer.draw(getModel().getPaddle(),gui);
             roundViewer.draw(getModel(),gui);
+            scoreViewer.draw(getModel(),gui);
+
             drawBricks(gui);
             drawStrings(gui);
             gui.refresh();

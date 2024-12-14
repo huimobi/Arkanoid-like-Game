@@ -27,4 +27,8 @@ public abstract class Element {
         return hitBox;
     }
 
+    public void setWidth(int width){
+        hitBox.setSize(width,hitBox.height);
+    }
+
 }

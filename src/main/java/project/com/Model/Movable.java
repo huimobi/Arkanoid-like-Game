@@ -32,4 +32,32 @@ public abstract class Movable extends Element{
     public void setLevel(Level level) {
         this.level = level;
     }
+
+    public boolean isMovingUpLeft(){
+        if(velocity.getX()<0 & velocity.getY()<0 &velocity.getY()!=velocity.getX()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isMovingDownLeft(){
+        if(velocity.getX()<0 & velocity.getY()>0 &velocity.getY()!=velocity.getX()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isMovingUpRight(){
+        if(velocity.getX()>0 & velocity.getY()<0 &velocity.getY()!=velocity.getX()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isMovingDownRight(){
+        if(velocity.getX()>0 & velocity.getY()>0 &velocity.getY()!=velocity.getX()){
+            return true;
+        }
+        return false;
+    }
 }

@@ -25,7 +25,7 @@ public class OptionsController extends Controller<MainMenu> {
         switch (getModel().getCurrentOption().getType()){
            case START_GAME:
                 if (action == GUI.ACTION.SELECT){
-                    arkanoid.setState(new GameState(new LevelCreator(1).createLevel(new Paddle(new Position(60,130),null),new Ball(new Position(72,125),null)), arkanoid.getImageLoader()));
+                    arkanoid.setState(new GameState(new LevelCreator(1).createLevel(new Paddle(new Position(60,130),null),new Ball(new Position(72,125),null),0),arkanoid.getImageLoader()));
                 }
                 break;
             /*case INFO:

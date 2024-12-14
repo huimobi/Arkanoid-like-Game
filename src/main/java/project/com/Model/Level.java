@@ -2,28 +2,41 @@ package project.com.Model;
 
 
 import java.awt.*;
+import java.awt.geom.Line2D;
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class Level {
-    private Rectangle gameArea;
-    private int levelNumber;
+    private final Rectangle gameArea;
+    private final int levelNumber;
     private ArrayList<Brick> bricks;
-    private Paddle paddle;
-    private boolean levelClear;
-    private Ball ball;
-    private boolean initialSleep;
+    private final Paddle paddle;
+    private final boolean levelClear;
+    private final Ball ball;
+    private final Position ballDefaultPosition;
+    private final Position ballDefaultVelocity;
+    private long waitStartTime;
+    private static final long SLEEP = 3000;
+    private int score;
 
-    public Level(Rectangle gameArea, int levelNumber,Paddle paddle,Ball ball,ArrayList<Brick>bricks) {
+    //enum COLLISION {LEFT,RIGHT,UP,DOWN,NONE}
+
+    public Level(Rectangle gameArea, int levelNumber,Paddle paddle,Ball ball,ArrayList<Brick>bricks,int score) {
+        this.ballDefaultPosition=ball.getPosition();
+        this.ballDefaultVelocity=ball.getVelocity();
         this.gameArea = gameArea;
         this.levelNumber = levelNumber;
         this.levelClear = false;
         this.paddle = paddle;
         this.ball= ball;
         this.bricks=bricks;
-        this.initialSleep=true;
+        this.waitStartTime= setWaitTime();
+        this.score=score;
     }
 
+    private long setWaitTime(){
+        this.waitStartTime=System.currentTimeMillis();
+        return waitStartTime;
+    }
     public int getWidth() {
         return gameArea.width;
     }
@@ -43,6 +56,9 @@ public class Level {
         return ball;
     }
 
+    public Rectangle getGameArea() {
+        return gameArea;
+    }
 
     public Paddle getPaddle() {
         return paddle;
@@ -52,35 +68,96 @@ public class Level {
         return bricks;
     }
 
+    public int getScore() {
+        return score;
+    }
+
     public void setPaddle(Position position) {
         paddle.setPosition(position);
     }
 
     public boolean isInitialSleep() {
-        return initialSleep;
-    }
-
-    public boolean checkOutsideLevel(Rectangle element,Position velocity) {
-        Rectangle check= new Rectangle(element.x+velocity.getX(),element.y+velocity.getY(),element.width,element.height);
-        return !gameArea.contains(check);
+        return System.currentTimeMillis() - waitStartTime <= SLEEP;
     }
 
     public boolean isLevelClear() {
-        return levelClear;
+        if(bricks.isEmpty()) return true;
+        for(Brick brick:bricks){
+            if(brick.getCharacter()!='#') return false;
+        }
+        return true;
     }
 
-/*public boolean collidesLeft(Position velocity, Rectangle element) {
-    Position left = new Position(element.x + velocity.getX(), element.y + velocity.getY());
+    public boolean checkOutsideLevel(Rectangle element,Position velocity) {
+        Rectangle nextMove= new Rectangle(element.x+velocity.getX(),element.y+velocity.getY(),element.width,element.height);
+        return !gameArea.contains(nextMove);
+    }
 
-    if (checkOutsideLevel(left)) return true;
+    public boolean collides(Rectangle element,Position velocity) {
+    Rectangle check= new Rectangle(element.x+velocity.getX(),element.y+velocity.getY(),element.width,element.height);
     for (Brick brick : bricks) {
-        if (element.x <= (brick.getHitBox().x + brick.getHitBox().width)) {
+        if(check.intersects(brick.getHitBox())) {
+            brick.hit();
+            if(brick.getDurability()==0) bricks.remove(brick);
+            score++;
             return true;
         }
     }
-    return false;
-}*/
 
+    if(paddle.getHitBox().intersects(check)) return true;
+    return false;
+}
+
+public boolean colisionLeft(Rectangle target, Rectangle element, Position velocity){
+    Rectangle nextMove= new Rectangle(element.x+velocity.getX(),element.y+velocity.getY(),element.width,element.height);
+    Line2D.Double leftSide = new Line2D.Double(
+            target.x,
+            target.y,
+            target.x,
+            target.y + target.height
+    );
+    return nextMove.intersectsLine(leftSide);
+}
+
+    public boolean colisionRight(Rectangle target,Rectangle element, Position velocity){
+        Rectangle nextMove= new Rectangle(element.x+velocity.getX(),element.y+velocity.getY(),element.width,element.height);
+        Line2D.Double rightSide = new Line2D.Double(
+                target.x+target.width,
+                target.y,
+                target.x+target.width,
+                target.y + target.height
+        );
+        return nextMove.intersectsLine(rightSide);
+    }
+
+    public boolean colisionUP(Rectangle target,Rectangle element, Position velocity){
+        Rectangle nextMove= new Rectangle(element.x+velocity.getX(),element.y+velocity.getY(),element.width,element.height);
+        Line2D.Double rightSide = new Line2D.Double(
+                target.x,
+                target.y,
+                target.x+target.width,
+                target.y
+        );
+        return nextMove.intersectsLine(rightSide);
+    }
+
+    public boolean colisionDown(Rectangle target,Rectangle element, Position velocity){
+        Rectangle nextMove= new Rectangle(element.x+velocity.getX(),element.y+velocity.getY(),element.width,element.height);
+        Line2D.Double rightSide = new Line2D.Double(
+                target.x,
+                target.y+target.height,
+                target.x+target.width,
+                target.y + target.height
+        );
+        return nextMove.intersectsLine(rightSide);
+    }
+
+    public void updateLives(){
+        paddle.decreaseLives();
+        ball.setPosition(ballDefaultPosition);
+        ball.setVelocity(ballDefaultVelocity);
+        setWaitTime();
+    }
 /*public boolean collidesRight(Position velocity, Rectangle element) {
         // Ball boundaries
         double ballLeft = ball.getHitbox().getX();

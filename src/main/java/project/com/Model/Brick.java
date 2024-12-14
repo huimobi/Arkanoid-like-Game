@@ -29,6 +29,6 @@ public class Brick extends Element {
     }
 
     public void hit(){
-        durability--;
+        if(character!='#') durability--;
     }
 }

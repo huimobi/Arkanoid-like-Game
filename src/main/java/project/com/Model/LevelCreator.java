@@ -22,22 +22,24 @@ public class LevelCreator {
     private final Rectangle gameArea;
 
 
-    public Level createLevel(Paddle paddle,Ball ball) {
-        Level level= new Level(gameArea,levelNumber,paddle,ball,createBricks());
+    public LevelCreator(int levelNumber) throws IOException {
+        URL resource = getClass().getClassLoader().getResource("Levels/level"+ levelNumber+".txt");
+
+        BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
+        this.lines = readLines(bufferedReader);  //set all file lines in lines
+        this.levelNumber=levelNumber;
+        this.gameArea= new Rectangle(8,8,165,144);
+    }
+
+    public Level createLevel(Paddle paddle,Ball ball,int score) {
+        Level level= new Level(gameArea,levelNumber,paddle,ball,createBricks(),score);
         paddle.setLevel(level);
         ball.setLevel(level);
         level.setPaddle(new Position((gameArea.width-28)/2, 130));
         return level;
     }
 
-    public LevelCreator(int levelNumber) throws IOException {
-            URL resource = getClass().getClassLoader().getResource("Levels/level"+ levelNumber+".txt");
 
-            BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
-            this.lines = readLines(bufferedReader);  //set all file lines in lines
-            this.levelNumber=levelNumber;
-            this.gameArea= new Rectangle(8,8,165,144);
-    }
 
     private List<String> readLines(BufferedReader bufferedReader) throws IOException {
             List<String> lines = new ArrayList<>();
@@ -60,6 +62,5 @@ public class LevelCreator {
             }
             return bricks;
     }
-
 }
 

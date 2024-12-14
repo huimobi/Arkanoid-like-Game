@@ -5,7 +5,10 @@ import project.com.Control.Controller;
 import project.com.MainMenu;
 import project.com.Model.Brick;
 import project.com.Model.Level;
+import project.com.Model.LevelCreator;
 import project.com.Model.Position;
+import project.com.State.GameState;
+import project.com.State.MainMenuState;
 import project.com.gui.GUI;
 
 import java.awt.*;
@@ -25,7 +28,7 @@ public class GameController extends Controller<Level> {
     }
 
     @Override
-    public void step(Arkanoid arkanoid, GUI.ACTION action,long frameTime) throws IOException, URISyntaxException, FontFormatException{
+    public void step(Arkanoid arkanoid, GUI.ACTION action,long frameTime) throws IOException, URISyntaxException, FontFormatException {
 
         switch (action) {
             case RIGHT, LEFT:
@@ -39,7 +42,14 @@ public class GameController extends Controller<Level> {
                 break;
         }
         ballController.step(arkanoid,action,frameTime);
-
+        if(getModel().isLevelClear()){
+            LevelCreator levelCreator = new LevelCreator((getModel().getLevelNumber() + 1));
+            Level newLevel = levelCreator.createLevel(getModel().getPaddle(),getModel().getBall(),getModel().getScore());
+            arkanoid.setState(new GameState(newLevel, arkanoid.getImageLoader()));
+        }
+        if(getModel().getPaddle().getLives()==0){
+            arkanoid.setState(new MainMenuState(new MainMenu(), arkanoid.getImageLoader()));
+        }
     }
     protected void onQuit (Arkanoid arkanoid) throws IOException {
         arkanoid.setState(null);

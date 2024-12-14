@@ -15,16 +15,17 @@ public class Paddle extends Movable{
     }
 
     public void moveLeft() {
-        super.setVelocity(new Position(-5,0));
+        super.setVelocity(new Position(-10,0));
     }
 
     public void moveRight() {
-        super.setVelocity(new Position(5,0));
+        super.setVelocity(new Position(10,0));
     }
 
 
     public void setPowerUp(boolean powerUp) {
         this.powerUp = powerUp;
+        this.setWidth(42);
     }
 
 
@@ -32,11 +33,15 @@ public class Paddle extends Movable{
         return powerUp;
     }
 
-    public void setLives(int lives) {
-        this.lives = lives;
+    public void decreaseLives() {
+        lives--;
     }
 
-    public int getLives() {
+    public void increaseLives(){
+        lives++;
+    }
+
+    public int getLives(){
         return lives;
     }
 
