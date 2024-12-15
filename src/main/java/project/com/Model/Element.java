@@ -31,4 +31,7 @@ public abstract class Element {
         hitBox.setSize(width,hitBox.height);
     }
 
+    public void setSize(Dimension size){
+        hitBox.setSize(size);
+    }
 }

@@ -2,6 +2,7 @@ package project.com.Control.Game;
 
 import project.com.Arkanoid;
 import project.com.Control.Controller;
+import project.com.Model.Level;
 import project.com.Model.Paddle;
 import project.com.Model.Position;
 import project.com.gui.GUI;
@@ -14,7 +15,7 @@ import java.net.URISyntaxException;
 public class PaddleController extends Controller<Paddle> {
     private GUI lanternaGUI;
     private Position position;
-    private Paddle paddle;
+    private final Paddle paddle;
 
     public PaddleController(Paddle paddle) {
         super(paddle);
@@ -23,19 +24,24 @@ public class PaddleController extends Controller<Paddle> {
 
     @Override
     public void step(Arkanoid arkanoid, GUI.ACTION action,long frameTime) throws IOException, URISyntaxException, FontFormatException {
-        Paddle paddle=getModel();
+        Level level=getModel().getLevel();
+        Rectangle nextMove = new Rectangle(paddle.getHitBox().x + paddle.getVelocity().getX(), paddle.getHitBox().y + paddle.getVelocity().getY(), paddle.getHitBox().width, paddle.getHitBox().height);
 
         switch (action){
             case LEFT:
                 paddle.moveLeft();
-                if(getModel().getLevel().checkOutsideLevel(getModel().getHitBox(),getModel().getVelocity())){
+                nextMove.setLocation(paddle.getHitBox().x + paddle.getVelocity().getX(), paddle.getHitBox().y + paddle.getVelocity().getY());
+                if(level.checkOutsideLevel(nextMove)){
+                    paddle.setPosition(new Position(level.getGameArea().x,paddle.getPosition().getY()));
                     break;
                 }
-                getModel().move();
+                paddle.move();
                 break;
             case RIGHT:
                 paddle.moveRight();
-                if(getModel().getLevel().checkOutsideLevel(getModel().getHitBox(),getModel().getVelocity())){
+                nextMove.setLocation(paddle.getHitBox().x + paddle.getVelocity().getX(), paddle.getHitBox().y + paddle.getVelocity().getY());
+                if(level.checkOutsideLevel(nextMove)){
+                    paddle.setPosition(new Position(level.getGameArea().x+level.getWidth()-paddle.getWidth()-1,paddle.getPosition().getY()));
                     break;
                 }
                 getModel().move();
@@ -43,10 +49,6 @@ public class PaddleController extends Controller<Paddle> {
             default:
                 break;
         }
-    }
-
-    public Position getPosition() {
-        return position;
     }
 
 }

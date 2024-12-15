@@ -1,18 +1,18 @@
 package project.com.Model;
 
 
+import javax.naming.NamingException;
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 public class Level {
     private final Rectangle gameArea;
     private final int levelNumber;
     private ArrayList<Brick> bricks;
     private final Paddle paddle;
-    private final boolean levelClear;
     private final Ball ball;
-    private final Position ballDefaultPosition;
     private final Position ballDefaultVelocity;
     private long waitStartTime;
     private static final long SLEEP = 3000;
@@ -20,23 +20,22 @@ public class Level {
 
     //enum COLLISION {LEFT,RIGHT,UP,DOWN,NONE}
 
-    public Level(Rectangle gameArea, int levelNumber,Paddle paddle,Ball ball,ArrayList<Brick>bricks,int score) {
-        this.ballDefaultPosition=ball.getPosition();
-        this.ballDefaultVelocity=ball.getVelocity();
+    public Level(Rectangle gameArea, int levelNumber, Paddle paddle, Ball ball, ArrayList<Brick> bricks, int score) {
+        this.ballDefaultVelocity = ball.getVelocity();
         this.gameArea = gameArea;
         this.levelNumber = levelNumber;
-        this.levelClear = false;
         this.paddle = paddle;
-        this.ball= ball;
-        this.bricks=bricks;
-        this.waitStartTime= setWaitTime();
-        this.score=score;
+        this.ball = ball;
+        this.bricks = bricks;
+        this.waitStartTime = setWaitTime();
+        this.score = score;
     }
 
-    private long setWaitTime(){
-        this.waitStartTime=System.currentTimeMillis();
+    private long setWaitTime() {
+        this.waitStartTime = System.currentTimeMillis();
         return waitStartTime;
     }
+
     public int getWidth() {
         return gameArea.width;
     }
@@ -48,8 +47,9 @@ public class Level {
     public int getHeight() {
         return gameArea.height;
     }
-    public Position getPosition(){
-        return new Position(gameArea.x,gameArea.y);
+
+    public Position getPosition() {
+        return new Position(gameArea.x, gameArea.y);
     }
 
     public Ball getBall() {
@@ -81,120 +81,149 @@ public class Level {
     }
 
     public boolean isLevelClear() {
-        if(bricks.isEmpty()) return true;
-        for(Brick brick:bricks){
-            if(brick.getCharacter()!='#') return false;
+        if (bricks.isEmpty()) return true;
+        for (Brick brick : bricks) {
+            if (brick.getCharacter() != '#') return false;
         }
         return true;
     }
 
-    public boolean checkOutsideLevel(Rectangle element,Position velocity) {
-        Rectangle nextMove= new Rectangle(element.x+velocity.getX(),element.y+velocity.getY(),element.width,element.height);
+    public boolean checkOutsideLevel(Rectangle nextMove) {
         return !gameArea.contains(nextMove);
     }
 
-    public boolean collides(Rectangle element,Position velocity) {
-    Rectangle check= new Rectangle(element.x+velocity.getX(),element.y+velocity.getY(),element.width,element.height);
-    for (Brick brick : bricks) {
-        if(check.intersects(brick.getHitBox())) {
-            brick.hit();
-            if(brick.getDurability()==0) bricks.remove(brick);
-            score++;
-            return true;
+    public COLLISIONS collides(Rectangle nextMove) {
+        //checks collision AreaGame sides
+        if(checkOutsideLevel(nextMove)) {
+           return areaGameCollision(nextMove);
         }
+
+        //checks collision Bricks
+        for(Brick brick:bricks){
+            if (nextMove.intersects(brick.getHitBox())) {
+                COLLISIONS collision=brickCollision(brick.getHitBox(),nextMove);
+                hit(brick);
+                return collision;
+            }
+        }
+
+        //checks collision Paddle
+        if (nextMove.intersects(paddle.getHitBox())) {
+            return paddleCollision(nextMove);
+        }
+        return COLLISIONS.NONE;
     }
 
-    if(paddle.getHitBox().intersects(check)) return true;
-    return false;
-}
 
-public boolean colisionLeft(Rectangle target, Rectangle element, Position velocity){
-    Rectangle nextMove= new Rectangle(element.x+velocity.getX(),element.y+velocity.getY(),element.width,element.height);
-    Line2D.Double leftSide = new Line2D.Double(
-            target.x,
-            target.y,
-            target.x,
-            target.y + target.height
-    );
-    return nextMove.intersectsLine(leftSide);
-}
+    private COLLISIONS areaGameCollision(Rectangle nextMove){
+        if (collisionLeft(gameArea, nextMove)){
+            return COLLISIONS.LEFT;
+        }
+        if (collisionRight(gameArea,nextMove)){
+            return COLLISIONS.RIGHT;
+        }
+        if (collisionUP(gameArea,nextMove)) {
+            return COLLISIONS.UP;
+        }
+        return COLLISIONS.NONE;
+    }
 
-    public boolean colisionRight(Rectangle target,Rectangle element, Position velocity){
-        Rectangle nextMove= new Rectangle(element.x+velocity.getX(),element.y+velocity.getY(),element.width,element.height);
-        Line2D.Double rightSide = new Line2D.Double(
-                target.x+target.width,
+    private COLLISIONS brickCollision(Rectangle brick,Rectangle nextMove){
+        Rectangle collision = brick.intersection(nextMove);
+        if (collision.width > collision.height) {
+            if (collisionDown(brick, nextMove)) {
+                return COLLISIONS.DOWN;
+            }
+            if (collisionUP(brick,nextMove)){
+                return COLLISIONS.UP;
+            }
+        } else if (collision.width < collision.height) {
+            if (collisionLeft(brick, nextMove)) {
+                return COLLISIONS.LEFT;
+            }
+            if (collisionRight(brick, nextMove)) {
+                return COLLISIONS.RIGHT;
+            }
+        } else { //it's a corner collision
+            if(collisionDown(brick,nextMove) & collisionLeft(brick,nextMove)){
+                return COLLISIONS.BOTTOMLEFT;
+            }
+            if(collisionDown(brick,nextMove) & collisionRight(brick,nextMove)){
+                return COLLISIONS.BOTTOMRIGHT;
+            }
+            if(collisionUP(brick,nextMove) & collisionRight(brick,nextMove)){
+                return COLLISIONS.TOPRIGHT;
+            }
+            if(collisionUP(brick,nextMove) & collisionLeft(brick,nextMove)){
+                return COLLISIONS.TOPLEFT;
+            }
+        }
+        return COLLISIONS.NONE;
+    }
+
+    private COLLISIONS paddleCollision(Rectangle nextMove){
+        if(nextMove.intersects(paddle.farLeft())) return COLLISIONS.PADDLELEFT;
+        if(nextMove.intersects(paddle.farRight())) return COLLISIONS.PADDLERIGHT;
+        if(nextMove.intersects(paddle.middleLeft())) return COLLISIONS.PADDLEMIDDLELEFT;
+        if(nextMove.intersects(paddle.middleRight())) return COLLISIONS.PADDLEMIDDLERIGHT;
+        return COLLISIONS.NONE;
+    }
+
+    //left side
+    public boolean collisionLeft(Rectangle target, Rectangle nextMove) {
+        Line2D.Double leftSide = new Line2D.Double(
+                target.x,
                 target.y,
-                target.x+target.width,
+                target.x,
+                target.y + target.height
+        );
+        return nextMove.intersectsLine(leftSide);
+    }
+
+    //right side
+    public boolean collisionRight(Rectangle target, Rectangle nextMove) {
+        Line2D.Double rightSide = new Line2D.Double(
+                target.x + target.width,
+                target.y,
+                target.x + target.width,
                 target.y + target.height
         );
         return nextMove.intersectsLine(rightSide);
     }
 
-    public boolean colisionUP(Rectangle target,Rectangle element, Position velocity){
-        Rectangle nextMove= new Rectangle(element.x+velocity.getX(),element.y+velocity.getY(),element.width,element.height);
+    //top side
+    public boolean collisionUP(Rectangle target, Rectangle nextMove) {
         Line2D.Double rightSide = new Line2D.Double(
                 target.x,
                 target.y,
-                target.x+target.width,
+                target.x + target.width,
                 target.y
         );
         return nextMove.intersectsLine(rightSide);
     }
 
-    public boolean colisionDown(Rectangle target,Rectangle element, Position velocity){
-        Rectangle nextMove= new Rectangle(element.x+velocity.getX(),element.y+velocity.getY(),element.width,element.height);
+    //ground side
+    public boolean collisionDown(Rectangle target, Rectangle nextMove) {
         Line2D.Double rightSide = new Line2D.Double(
                 target.x,
-                target.y+target.height,
-                target.x+target.width,
+                target.y + target.height,
+                target.x + target.width,
                 target.y + target.height
         );
         return nextMove.intersectsLine(rightSide);
     }
 
-    public void updateLives(){
+
+    public void updateLives() {
         paddle.decreaseLives();
-        ball.setPosition(ballDefaultPosition);
         ball.setVelocity(ballDefaultVelocity);
         setWaitTime();
     }
-/*public boolean collidesRight(Position velocity, Rectangle element) {
-        // Ball boundaries
-        double ballLeft = ball.getHitbox().getX();
-        double ballRight = ball.getHitbox().getX() + ball.getHitbox().getWidth();
-        double ballTop = ball.getHitbox().getY();
-        double ballBottom = ball.getHitbox().getY() + ball.getHitbox().getHeight();
 
-        // Brick boundaries
-        double brickLeft = brick.getgetX();
-        double brickRight = brick.getX() + brick.getWidth();
-        double brickTop = brick.getY();
-        double brickBottom = brick.getY() + brick.getHeight();
-
-        // Check for collision
-        if (ballRight >= brickLeft && ballLeft <= brickRight &&
-                ballBottom >= brickTop && ballTop <= brickBottom) {
-
-            // Calculate overlap in both directions
-            double overlapX = Math.min(ballRight - brickLeft, brickRight - ballLeft);
-            double overlapY = Math.min(ballBottom - brickTop, brickBottom - ballTop);
-
-            // Determine collision side
-            if (overlapX < overlapY) {
-                return (ball.getHitbox().getX() < brick.getX()) ? "LEFT" : "RIGHT";
-            } else {
-                return (ball.getHitbox().getY() < brick.getY()) ? "TOP" : "BOTTOM";
-            }
-        }
-}*/
-
-/*public boolean collidesUp(Position position) {
-    double x = position.x(), y = position.y();
-    return checkCollision(x, x + size.x() - 1, y, y + 1, tiles);
-}*/
-
-/*public boolean collidesDown(Vector position, Vector size) {
-    double x = position.x(), y = position.y();
-    return checkCollision(x, x + size.x() - 1, y + size.y() - 2, y + size.y() - 1, tiles);*/
+    public void hit(Brick brick){
+        brick.hit();
+        if (brick.getDurability() == 0) bricks.remove(brick);
+        if (brick.getCharacter()!='#') score++;
+    }
 
 }

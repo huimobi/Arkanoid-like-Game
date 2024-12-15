@@ -26,4 +26,28 @@ public class Ball extends Movable {
     public void reflectVertical() {
         setVelocity(new Position(getVelocity().getX(), -getVelocity().getY()));
     }
+
+    public void setAngle45(){
+        setVelocity(new Position(3,-3));
+    }
+
+    public void setAngle135(){
+        setVelocity(new Position(-3,-3));
+    }
+    public void setAngle225(){
+        setVelocity(new Position(-3,3));
+    }
+    public void setAngle315(){
+        setVelocity(new Position(3,3));
+    }
+
+    public void setAngleBigger135(){
+        setVelocity(new Position(-4,-2));
+    }
+
+    public void setAngleLess45(){
+        setVelocity(new Position(4,-2));
+    }
+
+
 }
