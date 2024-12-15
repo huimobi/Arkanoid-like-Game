@@ -5,6 +5,8 @@ import project.com.Viewer.Elements.*;
 import project.com.Viewer.Game.GameBackgroundViewer;
 import project.com.Viewer.Game.HighScoreViewer;
 import project.com.Viewer.Game.RoundViewer;
+import project.com.Viewer.Info.*;
+import project.com.Viewer.MainMenu.*;
 import project.com.Viewer.Game.ScoreViewer;
 import project.com.Viewer.MainMenu.LogoViewer;
 import project.com.Viewer.MainMenu.MainMenuBackgroundViewer;
@@ -23,6 +25,12 @@ public class ViewerProvider {
     private final OptionViewer optionsViewer;
     private final LogoViewer logoViewer;
     private final RoundViewer roundViewer;
+    private final InformationsViewer informationsViewer;
+    private final WordInfoViewer wordInfoViewer;
+    private final LeftViewer leftViewer;
+    private final RightViewer rightViewer;
+    private final ESCViewer escViewer;
+    private final EnterViewer enterViewer;
     private final ScoreViewer scoreViewer;
     private final PowerUpViewer powerUpViewer;
     private final HighScoreViewer highScoreViewer;
@@ -37,6 +45,14 @@ public class ViewerProvider {
         this.textViewer= new ArkanoidTextViewer();
         this.optionsViewer = new OptionViewer(textViewer);
         this.logoViewer = new LogoViewer(imageLoader);
+        this.livesViewer = new LivesViewer(imageLoader);
+        this.roundViewer = new RoundViewer(textViewer);
+        this.informationsViewer = new InformationsViewer(textViewer);
+        this.wordInfoViewer = new WordInfoViewer(imageLoader);
+        this.leftViewer = new LeftViewer(imageLoader);
+        this.rightViewer = new RightViewer(imageLoader);
+        this.escViewer = new ESCViewer(imageLoader);
+        this.enterViewer = new EnterViewer(imageLoader);
         this.livesViewer= new LivesViewer(imageLoader);
         this.roundViewer= new RoundViewer(textViewer);
         this.scoreViewer=new ScoreViewer(textViewer);
@@ -97,4 +113,16 @@ public class ViewerProvider {
     public PowerUpViewer getPowerUpViewer() {
         return powerUpViewer;
     }
+
+    public InformationsViewer getInfosViewer() {return informationsViewer;}
+
+    public WordInfoViewer getWordInfoViewer() {return wordInfoViewer;}
+
+    public LeftViewer getLeftViewer() {return leftViewer;}
+
+    public RightViewer getRightViewer() {return rightViewer;}
+
+    public ESCViewer getEscViewer() {return escViewer;}
+
+    public EnterViewer getEnterViewer() {return enterViewer;}
 }

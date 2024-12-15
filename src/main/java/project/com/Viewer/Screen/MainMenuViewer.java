@@ -1,7 +1,8 @@
 package project.com.Viewer.Screen;
 
-import com.googlecode.lanterna.TextColor;
-import project.com.MainMenu;
+import com.sun.tools.javac.Main;
+import project.com.Model.MainMenu;
+import project.com.Model.Menu;
 import project.com.Model.Option;
 import project.com.Model.Position;
 import project.com.Viewer.MainMenu.LogoViewer;
@@ -15,12 +16,12 @@ import java.util.ArrayList;
 
 public class MainMenuViewer extends Viewer<MainMenu> {
         public static final String selectedColor = "#ff7129";
-        private final MainMenuBackgroundViewer background;
+        public MainMenuBackgroundViewer background;
         private final OptionViewer optionViewer;
         private final LogoViewer LogoViewer;
 
         public MainMenuViewer(MainMenu model, ViewerProvider viewerProvider) {
-            super(model,viewerProvider);
+            super(model ,viewerProvider);
             this.optionViewer = viewerProvider.getOptionsViewer();
             this.LogoViewer = viewerProvider.getLogoViewer();
             this.background = viewerProvider.getMainMenuBackground();
@@ -39,7 +40,7 @@ public class MainMenuViewer extends Viewer<MainMenu> {
             for (Option option: options){
                 optionViewer.draw(option, gui);
                 if(option.equals(getModel().getCurrentOption())){
-                    optionViewer.showSelect(option,selectedColor,gui);
+                    optionViewer.showSelect(option, selectedColor, gui);
                 }
             }
         }

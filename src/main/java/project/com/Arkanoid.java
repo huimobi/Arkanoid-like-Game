@@ -2,11 +2,7 @@ package project.com;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import project.com.Model.Level;
-import project.com.Model.LevelCreator;
-import project.com.Model.Paddle;
-import project.com.Model.Position;
-import project.com.State.GameState;
+import project.com.Model.*;
 import project.com.State.MainMenuState;
 import project.com.State.State;
 import project.com.Viewer.ImageLoader;
@@ -21,8 +17,8 @@ import java.net.URISyntaxException;
 
 
 public class Arkanoid {
-    final static int WIDTH = 264;
-    final static int HEIGHT = 144;
+    public final static int WIDTH = 264;
+    public final static int HEIGHT = 144;
     private final LanternaGUI gui;
     private final ImageLoader imageLoader;
     private State state;
@@ -53,7 +49,7 @@ public class Arkanoid {
     }
 
     private void start() throws IOException, InterruptedException, URISyntaxException, FontFormatException {
-        int FPS = 30;
+        int FPS = 60;
         long frameTime = 1000 /FPS;
 
         while (this.state != null) {
@@ -64,7 +60,6 @@ public class Arkanoid {
             long sleepTime = frameTime - elapsedTime;
 
             if (sleepTime > 0) Thread.sleep(sleepTime);
-
         }
 
         gui.close();

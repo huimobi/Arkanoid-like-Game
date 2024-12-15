@@ -6,7 +6,8 @@ import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public interface ScreenCreator {
+public interface
+ScreenCreator {
     Screen createScreen() throws IOException, URISyntaxException, FontFormatException;
 
     int getWidth();

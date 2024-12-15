@@ -1,7 +1,7 @@
 package project.com.Model;
 
 public class Option{
-    public enum Type { START_GAME, INFO, EXIT, TO_MAIN_MENU}
+    public enum Type { START_GAME, INFO, EXIT, TO_MAIN_MENU, LEFT, RIGHT, ENTER, ESC}
     private final Type type;
     private final Position position;
 

@@ -2,22 +2,27 @@ package project.com.Control.Menu;
 
 import project.com.Arkanoid;
 import project.com.Control.Controller;
-import project.com.MainMenu;
-import project.com.Model.HighScore;
-import project.com.Model.LevelCreator;
-import project.com.Model.Paddle;
-import project.com.Model.Position;
+import project.com.Model.MainMenu;
+import project.com.Model.*;
+import project.com.Model.Menu;
 import project.com.State.GameState;
+import project.com.State.InfoMenuState;
 import project.com.State.MainMenuState;
 import project.com.gui.GUI;
 
+import java.awt.*;
 import java.io.IOException;
 
 import static project.com.Model.HighScore.loadHighScore;
 
-public class OptionsController extends Controller<MainMenu> {
-    public OptionsController(MainMenu mainMenu) {
-        super(mainMenu);
+import static project.com.Model.Option.Type.*;
+
+public class OptionsController extends Controller<Menu> {
+    public OptionsController(Menu Menu) {
+        super(Menu);
+        if (Menu == null){
+            throw new NullPointerException("Menu cannot be null");
+        }
     }
 
     @Override
@@ -29,13 +34,12 @@ public class OptionsController extends Controller<MainMenu> {
                     arkanoid.setState(new GameState(new LevelCreator(1).createLevel(new Paddle(new Position(60,130)),0, highestScore),arkanoid.getImageLoader()));
                 }
                 break;
-            /*case INFO:
+           case INFO:
                 if(action == GUI.ACTION.SELECT){
                     arkanoid.setState(new InfoMenuState(new InfoMenu(), arkanoid.getImageLoader()));
                 }
-                break;*/
-
-            case EXIT:
+                break;
+           case EXIT:
                 if (action == GUI.ACTION.SELECT){
                     arkanoid.setState(null);
                 }

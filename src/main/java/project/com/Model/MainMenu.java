@@ -1,18 +1,9 @@
-package project.com;
+package project.com.Model;
 
-import com.googlecode.lanterna.input.KeyStroke;
-import project.com.Model.Option;
-import project.com.Model.Position;
-import project.com.Viewer.PNGReader;
-import project.com.Viewer.WriteChar;
+import project.com.Arkanoid;
 
-import project.com.gui.GUI;
-
-import java.awt.*;
-import java.io.IOException;
+import project.com.Model.Menu;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 public class MainMenu extends Menu {
@@ -93,6 +84,8 @@ public class MainMenu extends Menu {
             case "EXIT" -> gui.close();
         }
     }*/
+
+    /*
     private final ArrayList<Option> options;
     private int currentOption = 0;
 
@@ -122,8 +115,9 @@ public class MainMenu extends Menu {
     public Option getCurrentOption() {
         return options.get(currentOption);
     }
+     */
 
-    private ArrayList<Option> createOptions() {
+    protected ArrayList<Option> createOptions() {
         ArrayList<Option> options=new ArrayList<>();
         options.add(new Option(new Position((Arkanoid.WIDTH- 5 * 7) / 2+1, (Arkanoid.HEIGHT + 7) / 2), Option.Type.START_GAME));
         options.add( new Option(new Position((Arkanoid.WIDTH- 4 * 7) / 2, ((Arkanoid.HEIGHT + 7) / 2 )+18), Option.Type.INFO));
