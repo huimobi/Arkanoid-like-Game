@@ -1,4 +1,4 @@
-package project.com.Viewer.MainMenu;
+package project.com.Viewer.Info;
 
 import project.com.Model.Position;
 import project.com.Viewer.ImageLoader;

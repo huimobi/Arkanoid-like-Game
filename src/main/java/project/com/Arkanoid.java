@@ -2,11 +2,7 @@ package project.com;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import project.com.Model.Level;
-import project.com.Model.LevelCreator;
-import project.com.Model.Paddle;
-import project.com.Model.Position;
-import project.com.State.GameState;
+import project.com.Model.*;
 import project.com.State.MainMenuState;
 import project.com.State.State;
 import project.com.Viewer.ImageLoader;
@@ -54,6 +50,7 @@ public class Arkanoid {
 
     private void start() throws IOException, InterruptedException, URISyntaxException, FontFormatException {
         int FPS = 60;
+       
         long frameTime = 1000 /FPS;
 
         while (this.state != null) {

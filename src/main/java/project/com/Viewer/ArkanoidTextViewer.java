@@ -39,6 +39,7 @@ public class ArkanoidTextViewer implements TextViewer{
     @Override
     public void draw(String string, Position position, String foregroundColor, GUI gui) throws IOException {
         for(int i=0;i<string.length();i++){
+            if (string.charAt(i)==' '){continue;}
             draw(string.charAt(i),new Position(position.getX()+i*WriteChar.CHARWIDTH, position.getY()),foregroundColor,gui);
         }
     }

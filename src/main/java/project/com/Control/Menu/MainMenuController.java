@@ -2,7 +2,8 @@ package project.com.Control.Menu;
 
 import project.com.Arkanoid;
 import project.com.Control.Controller;
-import project.com.MainMenu;
+import project.com.Model.MainMenu;
+import project.com.Model.Menu;
 import project.com.gui.GUI;
 
 import java.awt.*;

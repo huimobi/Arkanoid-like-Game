@@ -2,14 +2,11 @@ package project.com.Control.Game;
 
 import project.com.Arkanoid;
 import project.com.Control.Controller;
-import project.com.MainMenu;
-import project.com.Model.Brick;
 import project.com.Model.Level;
 import project.com.Model.Position;
 import project.com.gui.GUI;
 
 import java.awt.*;
-import java.beans.beancontext.BeanContext;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
