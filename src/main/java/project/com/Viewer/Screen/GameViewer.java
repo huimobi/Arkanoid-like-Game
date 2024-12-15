@@ -1,13 +1,12 @@
 package project.com.Viewer.Screen;
 
 import com.googlecode.lanterna.TextColor;
-import project.com.Model.Brick;
-import project.com.Model.Element;
-import project.com.Model.Level;
-import project.com.Model.Position;
+import project.com.Model.*;
 import project.com.Viewer.Elements.*;
 import project.com.Viewer.Game.GameBackgroundViewer;
+import project.com.Viewer.Game.HighScoreViewer;
 import project.com.Viewer.Game.RoundViewer;
+import project.com.Viewer.Game.ScoreViewer;
 import project.com.Viewer.ViewerProvider;
 import project.com.gui.GUI;
 
@@ -21,6 +20,9 @@ public class GameViewer extends Viewer<Level> {
     private final LivesViewer livesViewer;
     private final GameBackgroundViewer gameBackgroundViewer;
     private final RoundViewer roundViewer;
+    private final ScoreViewer scoreViewer;
+    private final HighScoreViewer highScoreViewer;
+    private final PowerUpViewer powerUpViewer;
 
 
     public GameViewer(Level model, ViewerProvider viewerProvider) {
@@ -31,6 +33,9 @@ public class GameViewer extends Viewer<Level> {
             this.gameBackgroundViewer = viewerProvider.getGameBackground();
             this.livesViewer = viewerProvider.getLivesViewer();
             this.roundViewer=viewerProvider.getRoundViewer();
+            this.scoreViewer=viewerProvider.getScoreViewer();
+            this.highScoreViewer=viewerProvider.getHighScoreViewer();
+            this.powerUpViewer=viewerProvider.getPowerUpViewer();
     }
 
 
@@ -42,18 +47,28 @@ public class GameViewer extends Viewer<Level> {
             drawElement(gui, getModel().getPaddle(), getViewerProvider().getPaddleViewer());
             livesViewer.draw(getModel().getPaddle(),gui);
             roundViewer.draw(getModel(),gui);
+            scoreViewer.draw(getModel(),gui);
+            highScoreViewer.draw(getModel(), gui);
+
+            drawPowerUps(gui);
             drawBricks(gui);
             drawStrings(gui);
             gui.refresh();
         }
 
-        private void drawBricks(GUI gui) throws IOException {
-            ArrayList<Brick> bricks= getModel().getBricks();
-            for(Brick brick:bricks){
-                drawElement(gui,brick,brickViewer);
-            }
+
+    private void drawBricks(GUI gui) throws IOException {
+    ArrayList<Brick> bricks= getModel().getBricks();
+    for(Brick brick:bricks){
+        drawElement(gui,brick,brickViewer);}
     }
 
+    private void drawPowerUps(GUI gui) throws IOException{
+        ArrayList<PowerUp> powerUps=getModel().getPowerUps();
+        for(PowerUp powerUp:powerUps){
+            drawElement(gui,powerUp,powerUpViewer);
+        }
+    }
     private <T extends Element> void drawElement(GUI gui, T element, ElementViewer<T> viewer) throws IOException {
         viewer.draw(element, gui);
     }

@@ -4,10 +4,10 @@ import java.io.PipedOutputStream;
 import java.util.Vector;
 
 public abstract class Movable extends Element{
-
     private Position velocity;
-    Movable(Position position,Position velocity){
-        super(position);
+
+    Movable(Position position,int width,int height,Position velocity){
+        super(position,width,height);
         this.velocity=velocity;
     }
 
@@ -23,4 +23,32 @@ public abstract class Movable extends Element{
         this.velocity = velocity;
     }
 
+
+    public boolean isMovingUpLeft(){
+        if(velocity.getX()<0 & velocity.getY()<0 &velocity.getY()!=velocity.getX()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isMovingDownLeft(){
+        if(velocity.getX()<0 & velocity.getY()>0 &velocity.getY()!=velocity.getX()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isMovingUpRight(){
+        if(velocity.getX()>0 & velocity.getY()<0 &velocity.getY()!=velocity.getX()){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isMovingDownRight(){
+        if(velocity.getX()>0 & velocity.getY()>0 &velocity.getY()!=velocity.getX()){
+            return true;
+        }
+        return false;
+    }
 }

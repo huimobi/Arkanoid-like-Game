@@ -53,7 +53,7 @@ public class Arkanoid {
     }
 
     private void start() throws IOException, InterruptedException, URISyntaxException, FontFormatException {
-        int FPS = 60;
+        int FPS = 30;
         long frameTime = 1000 /FPS;
 
         while (this.state != null) {
@@ -64,8 +64,13 @@ public class Arkanoid {
             long sleepTime = frameTime - elapsedTime;
 
             if (sleepTime > 0) Thread.sleep(sleepTime);
+
         }
 
         gui.close();
+    }
+
+    public int getLevels(){
+        return 10;
     }
 }

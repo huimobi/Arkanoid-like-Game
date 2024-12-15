@@ -11,7 +11,6 @@ import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 
 
 import java.awt.*;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -58,6 +57,7 @@ public class LanternaScreenCreator implements ScreenCreator {
     //loads font and put the font size to the terminal configuration
     private AWTTerminalFontConfiguration loadFont() throws URISyntaxException, IOException, FontFormatException{
         URL resource = getClass().getClassLoader().getResource("Fonts/square.ttf");
+        assert resource != null;
         File fontFile = new File(resource.toURI());
         Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();

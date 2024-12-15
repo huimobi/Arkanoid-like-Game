@@ -18,6 +18,7 @@ public class RoundViewer implements ElementViewer<Level> {
 
     @Override
     public void draw(Level model, GUI gui) throws IOException {
-        textViewer.draw(String.valueOf(model.getLevelNumber()),new Position(gui.getWidth()-7,gui.getHeight()-7),gui);
+        String roundNumber= String.valueOf(model.getLevelNumber());
+        textViewer.draw(roundNumber,new Position(gui.getWidth()-7*roundNumber.length(),gui.getHeight()-7),gui);
     }
 }

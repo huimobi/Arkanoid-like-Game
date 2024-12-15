@@ -1,11 +1,11 @@
 package project.com.Viewer;
 
-import project.com.Viewer.Elements.BallViewer;
-import project.com.Viewer.Elements.BrickViewer;
-import project.com.Viewer.Elements.LivesViewer;
-import project.com.Viewer.Elements.PaddleViewer;
+import project.com.Model.PowerUp;
+import project.com.Viewer.Elements.*;
 import project.com.Viewer.Game.GameBackgroundViewer;
+import project.com.Viewer.Game.HighScoreViewer;
 import project.com.Viewer.Game.RoundViewer;
+import project.com.Viewer.Game.ScoreViewer;
 import project.com.Viewer.MainMenu.LogoViewer;
 import project.com.Viewer.MainMenu.MainMenuBackgroundViewer;
 import project.com.Viewer.MainMenu.OptionViewer;
@@ -23,6 +23,9 @@ public class ViewerProvider {
     private final OptionViewer optionsViewer;
     private final LogoViewer logoViewer;
     private final RoundViewer roundViewer;
+    private final ScoreViewer scoreViewer;
+    private final PowerUpViewer powerUpViewer;
+    private final HighScoreViewer highScoreViewer;
 
 
     public ViewerProvider(ImageLoader imageLoader) throws IOException {
@@ -36,6 +39,9 @@ public class ViewerProvider {
         this.logoViewer = new LogoViewer(imageLoader);
         this.livesViewer= new LivesViewer(imageLoader);
         this.roundViewer= new RoundViewer(textViewer);
+        this.scoreViewer=new ScoreViewer(textViewer);
+        this.highScoreViewer=new HighScoreViewer(textViewer);
+        this.powerUpViewer= new PowerUpViewer(imageLoader);
     }
 
     public BrickViewer getViewer() {
@@ -80,5 +86,15 @@ public class ViewerProvider {
 
     public LivesViewer getLivesViewer() {
         return livesViewer;
+    }
+
+    public ScoreViewer getScoreViewer() {
+        return scoreViewer;
+    }
+
+    public HighScoreViewer getHighScoreViewer() { return highScoreViewer; }
+
+    public PowerUpViewer getPowerUpViewer() {
+        return powerUpViewer;
     }
 }

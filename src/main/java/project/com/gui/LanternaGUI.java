@@ -8,15 +8,10 @@ import project.com.Model.Position;
 
 
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.List;
-
-import static java.awt.event.KeyEvent.*;
 
 
 public class LanternaGUI implements GUI {
@@ -33,7 +28,7 @@ public class LanternaGUI implements GUI {
         this.keyPressed = readInput();
     }
 
-    private void createScreen() throws IOException, URISyntaxException, FontFormatException {
+    private void createScreen() throws IOException {
         screen.startScreen();
         screen.setCursorPosition(null);
         screen.doResizeIfNecessary();
@@ -152,7 +147,4 @@ public class LanternaGUI implements GUI {
         screen.close();
     }
 
-    /*public KeyAdapter getKeyAdapter() {
-        return keyAdapter;
-    }*/
 }

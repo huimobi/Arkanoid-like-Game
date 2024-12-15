@@ -1,59 +1,75 @@
 package project.com.Model;
 
 import java.awt.*;
+import java.awt.geom.Line2D;
 import java.nio.file.Path;
 import java.util.Vector;
 
 public class Paddle extends Movable{
     private boolean powerUp;
-    private final int WIDTH=28;
-    private final int HEIGHT=6;
-    private Rectangle hitbox;
     private int lives;
+    private final Dimension defaultSize;
+    private final int maxLives;
 
     public Paddle(Position position) {
-        super(position,new Position(5,0));
+        super(position,28,6,new Position(0,0));
+        this.defaultSize=getHitBox().getSize();
         this.powerUp=false;
-        hitbox= new Rectangle(getPosition().getX(), getPosition().getY(), WIDTH, HEIGHT);
         this.lives=3;
+        this.maxLives= lives;
     }
 
     public void moveLeft() {
-        super.setPosition(new Position(getPosition().getX()-getVelocity().getX(),getPosition().getY()));
+        super.setVelocity(new Position(-10,0));
     }
 
     public void moveRight() {
-        super.setPosition(new Position(getPosition().getX()+getVelocity().getX(),getPosition().getY()));
+        super.setVelocity(new Position(10,0));
     }
 
-    public Rectangle getHitbox() {
-        return hitbox;
+
+    public void setPowerUpOn() {
+        this.powerUp = true;
+        this.setWidth(42);
     }
 
-    public void setPowerUp(boolean powerUp) {
-        this.powerUp = powerUp;
+    public void setPowerUpOff(){
+        this.setSize(defaultSize);
+        this.powerUp=false;
     }
 
-    @Override
-    public void setPosition(Position position) {
-        super.setPosition(position);
+    public Rectangle farLeft(){
+        return new Rectangle(getPosition().getX(), getPosition().getY(),(getWidth()/4), getHeight());
     }
+
+    public Rectangle middleLeft(){
+            return new Rectangle(getPosition().getX() +(getWidth()/4), getPosition().getY(), (getWidth()/4), getHeight());
+    }
+
+    public Rectangle middleRight(){
+        return new Rectangle(getPosition().getX() +2*(getWidth()/4), getPosition().getY(), (getWidth()/4), getHeight());
+    }
+
+
+    public Rectangle farRight(){
+        return new Rectangle(getPosition().getX() +3*(getWidth()/4), getPosition().getY(), (getWidth()/4), getHeight());
+    }
+
 
     public Boolean getPowerUp(){
         return powerUp;
     }
-    public int getWIDTH(){
-        return WIDTH;
-    }
-    public int getHEIGHT(){
-        return HEIGHT;
+
+    public void decreaseLives() {
+        lives--;
     }
 
-    public void setLives(int lives) {
-        this.lives = lives;
+    public void increaseLives(){
+        if(lives<maxLives)lives++;
     }
 
-    public int getLives() {
+    public int getLives(){
         return lives;
     }
+
 }
