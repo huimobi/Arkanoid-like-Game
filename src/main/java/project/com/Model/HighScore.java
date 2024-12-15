@@ -19,6 +19,7 @@ public class HighScore {
         private static void createHighScore() {
             try {
                 File file = new File(saveDataPath, fileName);
+                saveDataPath = file.getAbsolutePath();
                 FileWriter output = new FileWriter(file);
                 BufferedWriter writer = new BufferedWriter(output);
                 writer.write(""+0);     //o argumento é uma string
@@ -31,6 +32,7 @@ public class HighScore {
         public static int loadHighScore(){
             try{
                 File f = new File(saveDataPath, fileName);
+                saveDataPath = f.getAbsolutePath();
                 if(!f.isFile()){
                     createHighScore();
                 }
@@ -45,11 +47,12 @@ public class HighScore {
         }
 
 
-    static void setHighScore(int score){
+    public static void setHighScore(int score){
             FileWriter output = null;
 
             try{
                 File f = new File(saveDataPath, fileName);
+                saveDataPath = f.getAbsolutePath();
                 output = new FileWriter(f);
                 BufferedWriter writer = new BufferedWriter(output);
                     writer.write(""+score);
