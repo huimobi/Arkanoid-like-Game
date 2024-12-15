@@ -25,7 +25,7 @@ public class BallController extends Controller<Level> {
         Rectangle nextMove = new Rectangle(ballHitBox.x + velocity.getX(), ballHitBox.y + velocity.getY(), ballHitBox.width, ballHitBox.height);
 
         switch (getModel().collides(nextMove)){
-            case UP:
+            case UP: case DOWN:
                 ball.reflectVertical();
                 break;
             case LEFT: case RIGHT:
