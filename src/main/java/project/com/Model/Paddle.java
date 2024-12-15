@@ -8,13 +8,15 @@ import java.util.Vector;
 public class Paddle extends Movable{
     private boolean powerUp;
     private int lives;
-    private Dimension defaultSize;
+    private final Dimension defaultSize;
+    private final int maxLives;
 
     public Paddle(Position position,Level level) {
         super(position,28,6,new Position(0,0),level);
         this.defaultSize=getHitBox().getSize();
         this.powerUp=false;
         this.lives=3;
+        this.maxLives= lives;
     }
 
     public void moveLeft() {
@@ -63,7 +65,7 @@ public class Paddle extends Movable{
     }
 
     public void increaseLives(){
-        lives++;
+        if(lives<maxLives)lives++;
     }
 
     public int getLives(){

@@ -1,24 +1,25 @@
 package project.com.Model;
 
 
-import javax.naming.NamingException;
+
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
-import java.util.ListIterator;
+import java.util.Random;
 
 public class Level {
     private final Rectangle gameArea;
     private final int levelNumber;
-    private ArrayList<Brick> bricks;
+    private final ArrayList<Brick> bricks;
     private final Paddle paddle;
     private final Ball ball;
     private final Position ballDefaultVelocity;
     private long waitStartTime;
     private static final long SLEEP = 3000;
     private int score;
+    private ArrayList<PowerUp> powerUps;
+    private PowerUp.Bonus curPowerUp;
 
-    //enum COLLISION {LEFT,RIGHT,UP,DOWN,NONE}
 
     public Level(Rectangle gameArea, int levelNumber, Paddle paddle, Ball ball, ArrayList<Brick> bricks, int score) {
         this.ballDefaultVelocity = ball.getVelocity();
@@ -29,11 +30,21 @@ public class Level {
         this.bricks = bricks;
         this.waitStartTime = setWaitTime();
         this.score = score;
+        this.powerUps=new ArrayList<>();
+        this.curPowerUp= PowerUp.Bonus.breakAll;
     }
 
     private long setWaitTime() {
         this.waitStartTime = System.currentTimeMillis();
         return waitStartTime;
+    }
+
+    public void setCurPowerUp(PowerUp.Bonus curPowerUp) {
+        this.curPowerUp = curPowerUp;
+    }
+
+    public PowerUp.Bonus getCurPowerUp() {
+        return curPowerUp;
     }
 
     public int getWidth() {
@@ -42,6 +53,10 @@ public class Level {
 
     public int getLevelNumber() {
         return levelNumber;
+    }
+
+    public ArrayList<PowerUp> getPowerUps() {
+        return powerUps;
     }
 
     public int getHeight() {
@@ -93,18 +108,9 @@ public class Level {
     }
 
     public COLLISIONS collides(Rectangle nextMove) {
-        //checks collision AreaGame sides
-        if(checkOutsideLevel(nextMove)) {
-           return areaGameCollision(nextMove);
-        }
 
-        //checks collision Bricks
-        for(Brick brick:bricks){
-            if (nextMove.intersects(brick.getHitBox())) {
-                COLLISIONS collision=brickCollision(brick.getHitBox(),nextMove);
-                hit(brick);
-                return collision;
-            }
+        if(checkOutsideLevel(nextMove)){
+            return areaGameCollision(nextMove);
         }
 
         //checks collision Paddle
@@ -128,38 +134,49 @@ public class Level {
         return COLLISIONS.NONE;
     }
 
-    private COLLISIONS brickCollision(Rectangle brick,Rectangle nextMove){
-        Rectangle collision = brick.intersection(nextMove);
-        if (collision.width > collision.height) {
-            if (collisionDown(brick, nextMove)) {
-                return COLLISIONS.DOWN;
-            }
-            if (collisionUP(brick,nextMove)){
-                return COLLISIONS.UP;
-            }
-        } else if (collision.width < collision.height) {
-            if (collisionLeft(brick, nextMove)) {
-                return COLLISIONS.LEFT;
-            }
-            if (collisionRight(brick, nextMove)) {
-                return COLLISIONS.RIGHT;
-            }
-        } else { //it's a corner collision
-            if(collisionDown(brick,nextMove) & collisionLeft(brick,nextMove)){
-                return COLLISIONS.BOTTOMLEFT;
-            }
-            if(collisionDown(brick,nextMove) & collisionRight(brick,nextMove)){
-                return COLLISIONS.BOTTOMRIGHT;
-            }
-            if(collisionUP(brick,nextMove) & collisionRight(brick,nextMove)){
-                return COLLISIONS.TOPRIGHT;
-            }
-            if(collisionUP(brick,nextMove) & collisionLeft(brick,nextMove)){
-                return COLLISIONS.TOPLEFT;
+    public COLLISIONS brickCollision(Rectangle nextMove) {
+        //checks collision Bricks
+        for (Brick brick : bricks) {
+            if (nextMove.intersects(brick.getHitBox())) {
+                COLLISIONS collision = typeBrickCollision(brick.getHitBox(), nextMove);
+                hit(brick);
+                return collision;
             }
         }
         return COLLISIONS.NONE;
     }
+        private COLLISIONS typeBrickCollision (Rectangle brick, Rectangle nextMove){
+            Rectangle collision = brick.intersection(nextMove);
+            if (collision.width > collision.height) {
+                if (collisionDown(brick, nextMove)) {
+                    return COLLISIONS.DOWN;
+                }
+                if (collisionUP(brick, nextMove)) {
+                    return COLLISIONS.UP;
+                }
+            } else if (collision.width < collision.height) {
+                if (collisionLeft(brick, nextMove)) {
+                    return COLLISIONS.LEFT;
+                }
+                if (collisionRight(brick, nextMove)) {
+                    return COLLISIONS.RIGHT;
+                }
+            } else { //it's a corner collision
+                if (collisionDown(brick, nextMove) & collisionLeft(brick, nextMove)) {
+                    return COLLISIONS.BOTTOMLEFT;
+                }
+                if (collisionDown(brick, nextMove) & collisionRight(brick, nextMove)) {
+                    return COLLISIONS.BOTTOMRIGHT;
+                }
+                if (collisionUP(brick, nextMove) & collisionRight(brick, nextMove)) {
+                    return COLLISIONS.TOPRIGHT;
+                }
+                if (collisionUP(brick, nextMove) & collisionLeft(brick, nextMove)) {
+                    return COLLISIONS.TOPLEFT;
+                }
+            }
+            return COLLISIONS.NONE;
+        }
 
     private COLLISIONS paddleCollision(Rectangle nextMove){
         if(nextMove.intersects(paddle.farLeft())) return COLLISIONS.PADDLELEFT;
@@ -216,13 +233,21 @@ public class Level {
 
     public void updateLives() {
         paddle.decreaseLives();
+        curPowerUp= PowerUp.Bonus.None;
+        powerUps.clear();
         ball.setVelocity(ballDefaultVelocity);
         setWaitTime();
     }
 
     public void hit(Brick brick){
         brick.hit();
-        if (brick.getDurability() == 0) bricks.remove(brick);
+        if (brick.getDurability() == 0) {
+            Random random = new Random();
+            if (random.nextInt(100) + 1 <= 15) {
+                powerUps.add(new PowerUp(brick.getPosition(),this));
+            }
+            bricks.remove(brick);
+        }
         if (brick.getCharacter()!='#') score++;
     }
 

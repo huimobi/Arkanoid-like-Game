@@ -19,17 +19,18 @@ import java.net.URISyntaxException;
 public class GameController extends Controller<Level> {
     private final BallController ballController;
     private final PaddleController paddleController;
+    private final PowerUpController powerUpController;
 
 
-    public GameController(Level model, BallController ballController, PaddleController paddleController) {
+    public GameController(Level model, BallController ballController, PaddleController paddleController,PowerUpController powerUpController) {
         super(model);
         this.ballController=ballController;
         this.paddleController=paddleController;
+        this.powerUpController=powerUpController;
     }
 
     @Override
     public void step(Arkanoid arkanoid, GUI.ACTION action,long frameTime) throws IOException, URISyntaxException, FontFormatException {
-
         switch (action) {
             case RIGHT, LEFT:
                 paddleController.step(arkanoid, action, frameTime);
@@ -41,7 +42,15 @@ public class GameController extends Controller<Level> {
             default:
                 break;
         }
+
+        //when initial sleep, ball follows paddle
         ballController.step(arkanoid, action, frameTime);
+
+
+        powerUpController.step(arkanoid,action,frameTime);
+
+
+        //when level cleared gives next level or return mainMenu
         if (getModel().isLevelClear()) {
             if (getModel().getLevelNumber() < arkanoid.getLevels()) {
                 LevelCreator levelCreator = new LevelCreator((getModel().getLevelNumber() + 1));
@@ -51,10 +60,11 @@ public class GameController extends Controller<Level> {
                 arkanoid.setState(new MainMenuState(new MainMenu(), arkanoid.getImageLoader()));
             }
         }
+
+        //Game Over
         if (getModel().getPaddle().getLives() == 0) {
             arkanoid.setState(new MainMenuState(new MainMenu(), arkanoid.getImageLoader()));
         }
-
     }
      private void onQuit(Arkanoid arkanoid){
         arkanoid.setState(null);

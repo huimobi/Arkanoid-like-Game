@@ -2,71 +2,89 @@ package project.com.Control.Game;
 
 import project.com.Arkanoid;
 import project.com.Control.Controller;
-import project.com.Model.Ball;
-import project.com.Model.Level;
-import project.com.Model.Position;
+import project.com.Model.*;
 import project.com.gui.GUI;
 
 import java.awt.*;
 
-public class BallController extends Controller<Ball> {
-    public BallController(Ball model) {
-        super(model);
+import static project.com.Model.COLLISIONS.*;
+
+public class BallController extends Controller<Level> {
+    private Ball ball;
+    public BallController(Level level) {
+        super(level);
+        this.ball=level.getBall();
     }
 
 
     @Override
     public void step(Arkanoid arkanoid, GUI.ACTION action,long frameTime) {
-        Level level=getModel().getLevel();
-        Position defaultPosition=new Position(level.getPaddle().getPosition().getX() + 5*(level.getPaddle().getWidth()/8), level.getPaddle().getPosition().getY() - 5);
-        Rectangle ballHitBox=getModel().getHitBox();
-        Position velocity=getModel().getVelocity();
+        Rectangle ballHitBox=ball.getHitBox();
+        Position velocity=ball.getVelocity();
+
         Rectangle nextMove = new Rectangle(ballHitBox.x + velocity.getX(), ballHitBox.y + velocity.getY(), ballHitBox.width, ballHitBox.height);
 
-        if (level.isInitialSleep()) {
-            getModel().setPosition(defaultPosition);
-            return;
-        }
-
-        switch (level.collides(nextMove)){
-            case UP: case DOWN:
-                getModel().reflectVertical();
+        switch (getModel().collides(nextMove)){
+            case UP:
+                ball.reflectVertical();
                 break;
             case LEFT: case RIGHT:
-                getModel().reflectHorizontal();
-                break;
-            case TOPRIGHT:
-                getModel().setAngle45();
-                break;
-            case TOPLEFT:
-                getModel().setAngle135();
-                break;
-            case BOTTOMLEFT:
-                getModel().setAngle225();
-                break;
-            case BOTTOMRIGHT:
-                getModel().setAngle315();
-                break;
-
+                 ball.reflectHorizontal();
+                 break;
             case PADDLELEFT:
-                getModel().setAngleBigger135();
-                break;
+                 ball.setAngleBigger135();
+                 break;
             case PADDLEMIDDLELEFT:
-                getModel().setAngle135();
+                ball.setAngle135();
                 break;
             case PADDLEMIDDLERIGHT:
-                getModel().setAngle45();
+                ball.setAngle45();
                 break;
             case PADDLERIGHT:
-                getModel().setAngleLess45();
+                ball.setAngleLess45();
                 break;
+            }
+
+
+        //controll lives
+        if(getModel().collisionDown(getModel().getGameArea(),getModel().getBall().getHitBox())) {
+            getModel().updateLives();
         }
 
-        if(level.collisionDown(level.getGameArea(),nextMove)) {
-            level.updateLives();
-            return;
+        //intial time sleep
+        if (getModel().isInitialSleep()) {
+            ball.setPosition(new Position(getModel().getPaddle().getPosition().getX() + 5*(getModel().getPaddle().getWidth()/8), getModel().getPaddle().getPosition().getY() - 5));
+        }else{
+            ball.move();}
+
+
+        COLLISIONS collision=getModel().brickCollision(nextMove);
+
+        //ball destroys all blocks
+        if(getModel().getCurPowerUp().equals(PowerUp.Bonus.breakAll)) return;
+
+        switch (collision){
+            case UP: case DOWN:
+                ball.reflectVertical();
+                break;
+            case LEFT: case RIGHT:
+                ball.reflectHorizontal();
+                break;
+            case TOPRIGHT:
+                ball.setAngle45();
+                break;
+            case TOPLEFT:
+                ball.setAngle135();
+                break;
+            case BOTTOMLEFT:
+                ball.setAngle225();
+                break;
+            case BOTTOMRIGHT:
+                ball.setAngle315();
+                break;
+
         }
-        getModel().move();
+
 
     }
 }
