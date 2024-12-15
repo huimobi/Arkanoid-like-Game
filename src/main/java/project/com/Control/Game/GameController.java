@@ -49,7 +49,7 @@ public class GameController extends Controller<Level> {
         if (getModel().isLevelClear()) {
             if (getModel().getLevelNumber() < arkanoid.getLevels()) {
                 LevelCreator levelCreator = new LevelCreator((getModel().getLevelNumber() + 1));
-                Level newLevel = levelCreator.createLevel(getModel().getPaddle(), getModel().getScore());
+                Level newLevel = levelCreator.createLevel(getModel().getPaddle(), getModel().getScore(), getModel().getHighestScore());
                 arkanoid.setState(new GameState(newLevel, arkanoid.getImageLoader()));
             } else {
                 arkanoid.setState(new MainMenuState(new MainMenu(), arkanoid.getImageLoader()));

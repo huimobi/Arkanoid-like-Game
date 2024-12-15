@@ -7,6 +7,9 @@ import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static project.com.Model.HighScore.loadHighScore;
+import static project.com.Model.HighScore.setHighScore;
+
 public class Level {
     private final Rectangle gameArea;
     private final int levelNumber;
@@ -17,11 +20,12 @@ public class Level {
     private long waitStartTime;
     private static final long SLEEP = 3000;
     private int score;
+    private int highestScore;
     private ArrayList<PowerUp> powerUps;
     private PowerUp.Bonus curPowerUp;
 
 
-    public Level(Rectangle gameArea, int levelNumber, Paddle paddle, Ball ball, ArrayList<Brick> bricks, int score) {
+    public Level(Rectangle gameArea, int levelNumber, Paddle paddle, Ball ball, ArrayList<Brick> bricks, int score, int highestScore) {
         this.ballDefaultVelocity = ball.getVelocity();
         this.gameArea = gameArea;
         this.levelNumber = levelNumber;
@@ -30,6 +34,7 @@ public class Level {
         this.bricks = bricks;
         this.waitStartTime = setWaitTime();
         this.score = score;
+        this.highestScore= highestScore;
         this.powerUps=new ArrayList<>();
         this.curPowerUp= PowerUp.Bonus.None;
     }
@@ -85,6 +90,10 @@ public class Level {
 
     public int getScore() {
         return score;
+    }
+
+    public int getHighestScore(){
+        return highestScore;
     }
 
     public void setPaddle(Position position) {
@@ -238,16 +247,30 @@ public class Level {
         setWaitTime();
     }
 
-    public void hit(Brick brick){
+    public void hit(Brick brick) {
         brick.hit();
         if (brick.getDurability() == 0) {
             Random random = new Random();
             if (random.nextInt(100) + 1 <= 15) {
-                powerUps.add(new PowerUp(brick.getPosition(),this));
+                powerUps.add(new PowerUp(brick.getPosition(), this));
             }
             bricks.remove(brick);
+            //different hits for different bricks
+            if (brick.getCharacter() != '#') {
+                char BrickChar = brick.getCharacter();
+                switch (BrickChar) {
+                    case ('B'):
+                        score+=3;
+                    case ('Y'):
+                        score+=5;
+                    case ('G'):
+                        score+=2;
+                    case ('P'):
+                        score+=1;
+                }
+                setHighScore(score);
+            }
         }
-        if (brick.getCharacter()!='#') score++;
     }
 
     public void setPowerUpsOff() {

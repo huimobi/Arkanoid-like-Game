@@ -31,15 +31,16 @@ public class LevelCreator {
         this.gameArea= new Rectangle(7,7,166,144);
     }
 
-    public Level createLevel(Paddle paddle,int score) {
+    //initial object position
+    public Level createLevel(Paddle paddle,int score, int highScore) {
         Ball ball= new Ball(new Position(paddle.getPosition().getX() + 5*(paddle.getWidth()/8), paddle.getPosition().getY() - 5));
-        Level level= new Level(gameArea,levelNumber,paddle,ball,createBricks(),score);
+        Level level= new Level(gameArea,levelNumber,paddle,ball,createBricks(),score, highScore);   //highScore has to be revised
         level.setPaddle(new Position((gameArea.width-28)/2, 130));
         return level;
     }
 
 
-
+//parses level txt
     private List<String> readLines(BufferedReader bufferedReader) throws IOException {
             List<String> lines = new ArrayList<>();
             for (String line; (line = bufferedReader.readLine()) != null; )
@@ -48,7 +49,7 @@ public class LevelCreator {
     }
 
 
-
+//matches the coordinates with the char position
     private ArrayList<Brick> createBricks() {
             ArrayList<Brick> bricks = new ArrayList<>();
             for (int y = 0; y < lines.size(); y++) {

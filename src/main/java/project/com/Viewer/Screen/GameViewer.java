@@ -4,6 +4,7 @@ import com.googlecode.lanterna.TextColor;
 import project.com.Model.*;
 import project.com.Viewer.Elements.*;
 import project.com.Viewer.Game.GameBackgroundViewer;
+import project.com.Viewer.Game.HighScoreViewer;
 import project.com.Viewer.Game.RoundViewer;
 import project.com.Viewer.Game.ScoreViewer;
 import project.com.Viewer.ViewerProvider;
@@ -20,6 +21,7 @@ public class GameViewer extends Viewer<Level> {
     private final GameBackgroundViewer gameBackgroundViewer;
     private final RoundViewer roundViewer;
     private final ScoreViewer scoreViewer;
+    private final HighScoreViewer highScoreViewer;
     private final PowerUpViewer powerUpViewer;
 
 
@@ -32,6 +34,7 @@ public class GameViewer extends Viewer<Level> {
             this.livesViewer = viewerProvider.getLivesViewer();
             this.roundViewer=viewerProvider.getRoundViewer();
             this.scoreViewer=viewerProvider.getScoreViewer();
+            this.highScoreViewer=viewerProvider.getHighScoreViewer();
             this.powerUpViewer=viewerProvider.getPowerUpViewer();
     }
 
@@ -45,6 +48,7 @@ public class GameViewer extends Viewer<Level> {
             livesViewer.draw(getModel().getPaddle(),gui);
             roundViewer.draw(getModel(),gui);
             scoreViewer.draw(getModel(),gui);
+            highScoreViewer.draw(getModel(), gui);
 
             drawPowerUps(gui);
             drawBricks(gui);

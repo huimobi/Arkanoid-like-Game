@@ -3,6 +3,7 @@ package project.com.Viewer;
 import project.com.Model.PowerUp;
 import project.com.Viewer.Elements.*;
 import project.com.Viewer.Game.GameBackgroundViewer;
+import project.com.Viewer.Game.HighScoreViewer;
 import project.com.Viewer.Game.RoundViewer;
 import project.com.Viewer.Game.ScoreViewer;
 import project.com.Viewer.MainMenu.LogoViewer;
@@ -24,6 +25,7 @@ public class ViewerProvider {
     private final RoundViewer roundViewer;
     private final ScoreViewer scoreViewer;
     private final PowerUpViewer powerUpViewer;
+    private final HighScoreViewer highScoreViewer;
 
 
     public ViewerProvider(ImageLoader imageLoader) throws IOException {
@@ -38,6 +40,7 @@ public class ViewerProvider {
         this.livesViewer= new LivesViewer(imageLoader);
         this.roundViewer= new RoundViewer(textViewer);
         this.scoreViewer=new ScoreViewer(textViewer);
+        this.highScoreViewer=new HighScoreViewer(textViewer);
         this.powerUpViewer= new PowerUpViewer(imageLoader);
     }
 
@@ -88,6 +91,8 @@ public class ViewerProvider {
     public ScoreViewer getScoreViewer() {
         return scoreViewer;
     }
+
+    public HighScoreViewer getHighScoreViewer() { return highScoreViewer; }
 
     public PowerUpViewer getPowerUpViewer() {
         return powerUpViewer;

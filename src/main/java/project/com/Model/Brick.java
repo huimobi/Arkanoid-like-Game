@@ -9,7 +9,7 @@ public class Brick extends Element {
     public Brick(Position position, char character) {
         super(position,15,8);
         this.character = character;
-        this.durability = 1;
+        this.durability = setDurability();
     }
 
     public Rectangle getHitBox() {
@@ -20,8 +20,22 @@ public class Brick extends Element {
         return character;
     }
 
-    public void setDurability(int durability) {
-        this.durability = durability;
+    public int setDurability() {
+        switch (character) {
+            case ('Y'):
+                this.durability = 3;
+                break;
+            case ('B'):
+                this.durability = 2;
+                break;
+            case ('G'):
+                this.durability = 2;
+                break;
+            case ('P'):
+                this.durability = 1;
+                break;
+        }
+        return durability;
     }
 
     public int getDurability(){
