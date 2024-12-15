@@ -52,9 +52,7 @@ public class HighScore {
                 File f = new File(saveDataPath, fileName);
                 output = new FileWriter(f);
                 BufferedWriter writer = new BufferedWriter(output);
-                if (score>=highScore){
                     writer.write(""+score);
-                }
                 writer.close();
             }
             catch (Exception e){

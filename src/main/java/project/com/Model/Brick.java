@@ -5,11 +5,13 @@ import java.awt.*;
 public class Brick extends Element {
     private final char character;
     private int durability;
+    private int score;
 
     public Brick(Position position, char character) {
         super(position,15,8);
         this.character = character;
         this.durability = setDurability();
+        this.score = setScore();
     }
 
     public Rectangle getHitBox() {
@@ -22,14 +24,17 @@ public class Brick extends Element {
 
     public int setDurability() {
         switch (character) {
+            case ('#'):
+                this.durability = 5;
+                break;
             case ('Y'):
-                this.durability = 3;
+                this.durability = 2;
                 break;
             case ('B'):
-                this.durability = 2;
+                this.durability = 1;
                 break;
             case ('G'):
-                this.durability = 2;
+                this.durability = 1;
                 break;
             case ('P'):
                 this.durability = 1;
@@ -43,6 +48,29 @@ public class Brick extends Element {
     }
 
     public void hit(){
-        if(character!='#') durability--;
+        durability--;
     }
-}
+    private int setScore(){
+        switch (character){
+            case ('#'):
+                this.score = 100;
+            case ('Y'):
+                this.score = 50;
+                break;
+            case ('B'):
+                this.score = 30;
+                break;
+            case ('G'):
+                this.score = 20;
+                break;
+            case ('P'):
+                this.score = 10;
+                break;
+        }
+        return score;
+        }
+
+        public int getScore(){
+            return score;
+        }
+    }

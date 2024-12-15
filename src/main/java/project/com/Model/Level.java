@@ -109,6 +109,9 @@ public class Level {
         for (Brick brick : bricks) {
             if (brick.getCharacter() != '#') return false;
         }
+        if (score>loadHighScore()) {
+            setHighScore(score);
+        }
         return true;
     }
 
@@ -256,20 +259,7 @@ public class Level {
             }
             bricks.remove(brick);
             //different hits for different bricks
-            if (brick.getCharacter() != '#') {
-                char BrickChar = brick.getCharacter();
-                switch (BrickChar) {
-                    case ('B'):
-                        score+=3;
-                    case ('Y'):
-                        score+=5;
-                    case ('G'):
-                        score+=2;
-                    case ('P'):
-                        score+=1;
-                }
-                setHighScore(score);
-            }
+                score+=brick.getScore();
         }
     }
 
