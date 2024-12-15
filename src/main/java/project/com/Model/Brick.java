@@ -7,7 +7,7 @@ public class Brick extends Element {
     private int durability;
 
     public Brick(Position position, char character) {
-        super(position,15,5);
+        super(position,15,8);
         this.character = character;
         this.durability = 1;
     }
