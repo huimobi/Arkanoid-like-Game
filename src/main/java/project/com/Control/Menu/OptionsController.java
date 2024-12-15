@@ -19,6 +19,9 @@ import static project.com.Model.Option.Type.*;
 public class OptionsController extends Controller<Menu> {
     public OptionsController(Menu Menu) {
         super(Menu);
+        if (Menu == null){
+            throw new NullPointerException("Menu cannot be null");
+        }
     }
 
     @Override
