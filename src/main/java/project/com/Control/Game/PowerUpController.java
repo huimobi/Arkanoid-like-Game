@@ -7,8 +7,6 @@ import project.com.Model.PowerUp;
 import project.com.gui.GUI;
 
 import java.awt.*;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class PowerUpController extends Controller<Level> {
@@ -16,7 +14,7 @@ public class PowerUpController extends Controller<Level> {
         super(level);
     }
     @Override
-    public void step(Arkanoid arkanoid, GUI.ACTION action, long frameCount) throws IOException, URISyntaxException, FontFormatException {
+    public void step(Arkanoid arkanoid, GUI.ACTION action, long frameCount) {
         if(getModel().getPowerUps().isEmpty())return;
 
         ArrayList<PowerUp> removePowerUps= new ArrayList<>();
@@ -26,7 +24,13 @@ public class PowerUpController extends Controller<Level> {
                 removePowerUps.add(powerUp);
             }
             if(nextMove.intersects(getModel().getPaddle().getHitBox())){
+                getModel().setPowerUpsOff();
                 getModel().setCurPowerUp(powerUp.getPowerUp());
+                switch (powerUp.getPowerUp()){
+                    case extraPaddle -> getModel().getPaddle().increaseLives();
+                    case PaddleSizeUp -> getModel().getPaddle().setPowerUpOn();
+                    case slowBall -> getModel().getBall().setPowerUpOn();
+                }
                 removePowerUps.add(powerUp);
             }else{
             powerUp.move();}

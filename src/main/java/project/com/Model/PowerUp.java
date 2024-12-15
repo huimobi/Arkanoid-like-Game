@@ -7,7 +7,7 @@ public class PowerUp extends Movable{
 
     public enum Bonus{None,PaddleSizeUp,slowBall,extraPaddle,breakAll}
     PowerUp(Position position,Level level) {
-        super(position,13,6,new Position(0,1),level);
+        super(position,13,6,new Position(0,1));
         this.powerUp=getPowerUp();
     }
 

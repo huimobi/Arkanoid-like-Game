@@ -3,18 +3,13 @@ package project.com.Control.Game;
 import project.com.Arkanoid;
 import project.com.Control.Controller;
 import project.com.MainMenu;
-import project.com.Model.Brick;
 import project.com.Model.Level;
 import project.com.Model.LevelCreator;
-import project.com.Model.Position;
 import project.com.State.GameState;
 import project.com.State.MainMenuState;
 import project.com.gui.GUI;
 
-import java.awt.*;
-import java.beans.beancontext.BeanContext;
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class GameController extends Controller<Level> {
     private final BallController ballController;
@@ -30,7 +25,7 @@ public class GameController extends Controller<Level> {
     }
 
     @Override
-    public void step(Arkanoid arkanoid, GUI.ACTION action,long frameTime) throws IOException, URISyntaxException, FontFormatException {
+    public void step(Arkanoid arkanoid, GUI.ACTION action,long frameTime) throws IOException {
         switch (action) {
             case RIGHT, LEFT:
                 paddleController.step(arkanoid, action, frameTime);

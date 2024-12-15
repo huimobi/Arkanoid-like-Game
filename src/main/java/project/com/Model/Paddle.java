@@ -11,8 +11,8 @@ public class Paddle extends Movable{
     private final Dimension defaultSize;
     private final int maxLives;
 
-    public Paddle(Position position,Level level) {
-        super(position,28,6,new Position(0,0),level);
+    public Paddle(Position position) {
+        super(position,28,6,new Position(0,0));
         this.defaultSize=getHitBox().getSize();
         this.powerUp=false;
         this.lives=3;

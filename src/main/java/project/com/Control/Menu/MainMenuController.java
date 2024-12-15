@@ -38,7 +38,7 @@ public class MainMenuController extends Controller<MainMenu> {
     }
 
 
-    protected void onQuit (Arkanoid arkanoid) throws IOException {
+    protected void onQuit (Arkanoid arkanoid) {
         arkanoid.setState(null);
     }
 

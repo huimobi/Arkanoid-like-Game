@@ -53,7 +53,7 @@ public class Arkanoid {
     }
 
     private void start() throws IOException, InterruptedException, URISyntaxException, FontFormatException {
-        int FPS = 60;
+        int FPS = 30;
         long frameTime = 1000 /FPS;
 
         while (this.state != null) {

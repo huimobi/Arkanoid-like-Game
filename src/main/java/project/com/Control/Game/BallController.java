@@ -7,10 +7,10 @@ import project.com.gui.GUI;
 
 import java.awt.*;
 
-import static project.com.Model.COLLISIONS.*;
+
 
 public class BallController extends Controller<Level> {
-    private Ball ball;
+    private final Ball ball;
     public BallController(Level level) {
         super(level);
         this.ball=level.getBall();
@@ -43,33 +43,6 @@ public class BallController extends Controller<Level> {
             case PADDLERIGHT:
                 ball.setAngleLess45();
                 break;
-            }
-
-
-        //controll lives
-        if(getModel().collisionDown(getModel().getGameArea(),getModel().getBall().getHitBox())) {
-            getModel().updateLives();
-        }
-
-        //intial time sleep
-        if (getModel().isInitialSleep()) {
-            ball.setPosition(new Position(getModel().getPaddle().getPosition().getX() + 5*(getModel().getPaddle().getWidth()/8), getModel().getPaddle().getPosition().getY() - 5));
-        }else{
-            ball.move();}
-
-
-        COLLISIONS collision=getModel().brickCollision(nextMove);
-
-        //ball destroys all blocks
-        if(getModel().getCurPowerUp().equals(PowerUp.Bonus.breakAll)) return;
-
-        switch (collision){
-            case UP: case DOWN:
-                ball.reflectVertical();
-                break;
-            case LEFT: case RIGHT:
-                ball.reflectHorizontal();
-                break;
             case TOPRIGHT:
                 ball.setAngle45();
                 break;
@@ -84,6 +57,19 @@ public class BallController extends Controller<Level> {
                 break;
 
         }
+
+
+
+        //control lives
+        if(getModel().collisionDown(getModel().getGameArea(),getModel().getBall().getHitBox())) {
+            getModel().updateLives();
+        }
+
+        //initial time sleep
+        if (getModel().isInitialSleep()) {
+            ball.setPosition(new Position(getModel().getPaddle().getPosition().getX() + 5*(getModel().getPaddle().getWidth()/8), getModel().getPaddle().getPosition().getY() - 5));
+        }else{
+            ball.move();}
 
 
     }

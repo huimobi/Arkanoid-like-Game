@@ -31,7 +31,7 @@ public class Level {
         this.waitStartTime = setWaitTime();
         this.score = score;
         this.powerUps=new ArrayList<>();
-        this.curPowerUp= PowerUp.Bonus.breakAll;
+        this.curPowerUp= PowerUp.Bonus.None;
     }
 
     private long setWaitTime() {
@@ -117,6 +117,15 @@ public class Level {
         if (nextMove.intersects(paddle.getHitBox())) {
             return paddleCollision(nextMove);
         }
+
+        for (Brick brick : bricks) {
+            if (nextMove.intersects(brick.getHitBox())) {
+                COLLISIONS collision = typeBrickCollision(brick.getHitBox(), nextMove);
+                hit(brick);
+                if(curPowerUp.equals(PowerUp.Bonus.breakAll) && brick.getCharacter()!='#') return COLLISIONS.NONE;
+                return collision;
+            }
+        }
         return COLLISIONS.NONE;
     }
 
@@ -134,18 +143,8 @@ public class Level {
         return COLLISIONS.NONE;
     }
 
-    public COLLISIONS brickCollision(Rectangle nextMove) {
-        //checks collision Bricks
-        for (Brick brick : bricks) {
-            if (nextMove.intersects(brick.getHitBox())) {
-                COLLISIONS collision = typeBrickCollision(brick.getHitBox(), nextMove);
-                hit(brick);
-                return collision;
-            }
-        }
-        return COLLISIONS.NONE;
-    }
-        private COLLISIONS typeBrickCollision (Rectangle brick, Rectangle nextMove){
+
+    private COLLISIONS typeBrickCollision (Rectangle brick, Rectangle nextMove){
             Rectangle collision = brick.intersection(nextMove);
             if (collision.width > collision.height) {
                 if (collisionDown(brick, nextMove)) {
@@ -232,8 +231,8 @@ public class Level {
 
 
     public void updateLives() {
+        setPowerUpsOff();
         paddle.decreaseLives();
-        curPowerUp= PowerUp.Bonus.None;
         powerUps.clear();
         ball.setVelocity(ballDefaultVelocity);
         setWaitTime();
@@ -249,6 +248,12 @@ public class Level {
             bricks.remove(brick);
         }
         if (brick.getCharacter()!='#') score++;
+    }
+
+    public void setPowerUpsOff() {
+        paddle.setPowerUpOff();
+        ball.setPowerUpOff();
+        curPowerUp= PowerUp.Bonus.None;
     }
 
 }

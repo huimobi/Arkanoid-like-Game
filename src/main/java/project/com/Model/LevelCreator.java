@@ -32,10 +32,8 @@ public class LevelCreator {
     }
 
     public Level createLevel(Paddle paddle,int score) {
-        Ball ball= new Ball(new Position(paddle.getPosition().getX() + 5*(paddle.getWidth()/8), paddle.getPosition().getY() - 5),null);
+        Ball ball= new Ball(new Position(paddle.getPosition().getX() + 5*(paddle.getWidth()/8), paddle.getPosition().getY() - 5));
         Level level= new Level(gameArea,levelNumber,paddle,ball,createBricks(),score);
-        paddle.setLevel(level);
-        ball.setLevel(level);
         level.setPaddle(new Position((gameArea.width-28)/2, 130));
         return level;
     }
