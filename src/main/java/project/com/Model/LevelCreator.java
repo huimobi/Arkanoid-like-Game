@@ -28,10 +28,11 @@ public class LevelCreator {
         BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
         this.lines = readLines(bufferedReader);  //set all file lines in lines
         this.levelNumber=levelNumber;
-        this.gameArea= new Rectangle(8,8,165,144);
+        this.gameArea= new Rectangle(7,7,166,144);
     }
 
-    public Level createLevel(Paddle paddle,Ball ball,int score) {
+    public Level createLevel(Paddle paddle,int score) {
+        Ball ball= new Ball(new Position(paddle.getPosition().getX() + 5*(paddle.getWidth()/8), paddle.getPosition().getY() - 5),null);
         Level level= new Level(gameArea,levelNumber,paddle,ball,createBricks(),score);
         paddle.setLevel(level);
         ball.setLevel(level);
@@ -56,7 +57,7 @@ public class LevelCreator {
                 String line = lines.get(y);
                 for (int x = 0; x < line.length(); x++) {
                     if(!isSpaceChar(line.charAt(x))) {
-                        bricks.add(new Brick(new Position(gameArea.x-1+(x*15),gameArea.y-1+(y*8)),line.charAt(x))); //15 and 8 are the width and height of the brick
+                        bricks.add(new Brick(new Position(gameArea.x+(x*15),gameArea.y+(y*8)),line.charAt(x))); //15 and 8 are the width and height of the brick
                     }
                 }
             }
