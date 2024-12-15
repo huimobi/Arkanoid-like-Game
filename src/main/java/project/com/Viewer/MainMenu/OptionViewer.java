@@ -20,10 +20,7 @@ public class OptionViewer {
             case INFO -> "Info";
             case EXIT -> "Exit";
             case TO_MAIN_MENU -> "Back";
-            case LEFT -> null;
-            case RIGHT -> null;
-            case ENTER -> null;
-            case ESC -> null;
+            case LEFT, RIGHT, ENTER, ESC -> null;
         };
         this.optionText=optionText;
         text.draw(optionText, model.getPosition(),gui);

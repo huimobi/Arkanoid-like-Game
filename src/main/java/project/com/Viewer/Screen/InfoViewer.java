@@ -12,6 +12,8 @@ import project.com.gui.GUI;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static project.com.Viewer.Screen.MainMenuViewer.selectedColor;
+
 public class InfoViewer extends Viewer<InfoMenu> {
     private final InformationsViewer informationsViewer;
     public MainMenuBackgroundViewer background;
@@ -36,19 +38,22 @@ public class InfoViewer extends Viewer<InfoMenu> {
     public void draw(GUI gui) throws IOException {
         gui.clear();
         background.draw(gui);
-        WordInfoViewer.draw(gui, new Position((Arkanoid.WIDTH - 56) / 2,25));
-        leftViewer.draw(gui, new Position((((Arkanoid.WIDTH - 29 * 7) + 15) / 2) - 14,((Arkanoid.HEIGHT + 7) / 2) - 19));
-        rightViewer.draw(gui, new Position((((Arkanoid.WIDTH - 30 * 7) + 15) / 2) - 14, ((Arkanoid.HEIGHT + 7) / 2) - 1));
-        enterViewer.draw(gui, new Position((((Arkanoid.WIDTH - 26 * 7) + 15) / 2) - 14, ((Arkanoid.HEIGHT + 7) / 2) + 17));
-        escViewer.draw(gui, new Position((((Arkanoid.WIDTH - 32 * 7) + 15) / 2) - 14, ((Arkanoid.HEIGHT + 7) / 2) + 35));
+        WordInfoViewer.draw(gui, new Position((Arkanoid.WIDTH - 56) / 2,22));
+        leftViewer.draw(gui, new Position((((Arkanoid.WIDTH - 29 * 7) + 15) / 2) - 14,((Arkanoid.HEIGHT + 7) / 2) - 23));
+        rightViewer.draw(gui, new Position((((Arkanoid.WIDTH - 30 * 7) + 15) / 2) - 14, ((Arkanoid.HEIGHT + 7) / 2) - 5));
+        enterViewer.draw(gui, new Position((((Arkanoid.WIDTH - 26 * 7) + 15) / 2) - 14, ((Arkanoid.HEIGHT + 7) / 2) + 13));
+        escViewer.draw(gui, new Position((((Arkanoid.WIDTH - 32 * 7) + 15) / 2) - 14, ((Arkanoid.HEIGHT + 7) / 2) + 31));
         drawInfo(gui, getModel().getInfo());
 
         gui.refresh();
     }
 
     private void drawInfo(GUI gui, ArrayList<Option> infos) throws IOException {
-      for (Option info : infos) {
+        for (Option info : infos) {
             informationsViewer.draw(info, gui);
+            if (info.equals(getModel().getCurrentInfo())) {
+                informationsViewer.showSelect(info, selectedColor, gui);
+            }
         }
     }
 }

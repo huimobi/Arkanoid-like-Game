@@ -40,4 +40,9 @@ public abstract class Menu {
     public Option getCurrentOption() {
         return options.get(currentOption);
     }
+
+    public Option getCurrentInfo() {
+        int currentInfo = 4;
+        return infos.get(currentInfo);
+    }
 }

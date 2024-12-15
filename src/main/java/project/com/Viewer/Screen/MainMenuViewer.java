@@ -40,7 +40,7 @@ public class MainMenuViewer extends Viewer<MainMenu> {
             for (Option option: options){
                 optionViewer.draw(option, gui);
                 if(option.equals(getModel().getCurrentOption())){
-                    optionViewer.showSelect(option,selectedColor,gui);
+                    optionViewer.showSelect(option, selectedColor, gui);
                 }
             }
         }
