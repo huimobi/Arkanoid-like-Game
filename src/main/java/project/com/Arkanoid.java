@@ -69,4 +69,8 @@ public class Arkanoid {
 
         gui.close();
     }
+
+    public int getLevels(){
+        return 10;
+    }
 }
