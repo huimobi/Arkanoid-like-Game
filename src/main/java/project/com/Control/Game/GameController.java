@@ -11,11 +11,14 @@ import project.com.gui.GUI;
 
 import java.io.IOException;
 
+
+import static project.com.Model.HighScore.loadHighScore;
+import static project.com.Model.HighScore.setHighScore;
+
 public class GameController extends Controller<Level> {
     private final BallController ballController;
     private final PaddleController paddleController;
     private final PowerUpController powerUpController;
-
 
     public GameController(Level model, BallController ballController, PaddleController paddleController,PowerUpController powerUpController) {
         super(model);
@@ -54,11 +57,17 @@ public class GameController extends Controller<Level> {
                 arkanoid.setState(new GameState(newLevel, arkanoid.getImageLoader()));
             } else {
                 arkanoid.setState(new MainMenuState(new MainMenu(), arkanoid.getImageLoader()));
+                if (getModel().getScore()>loadHighScore()) {
+                    setHighScore(getModel().getScore());
+                }
             }
         }
 
         //Game Over
         if (getModel().getPaddle().getLives() == 0) {
+            if (getModel().getScore()>loadHighScore()) {
+                setHighScore(getModel().getScore());
+            }
             arkanoid.setState(new MainMenuState(new MainMenu(), arkanoid.getImageLoader()));
         }
     }

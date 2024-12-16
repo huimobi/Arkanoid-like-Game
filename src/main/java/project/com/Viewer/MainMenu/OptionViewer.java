@@ -13,8 +13,8 @@ public class OptionViewer {
         this.text= text;
     }
 
-    public void draw(Option model, GUI gui) throws IOException { //need a option model class
-        String optionText = switch (model.getType()) {
+    public void draw(Option model, GUI gui) throws IOException {
+        String optionText = switch (model.type()) {
             case START_GAME -> "Start";
             case INFO -> "Info";
             case EXIT -> "Exit";
@@ -22,15 +22,11 @@ public class OptionViewer {
             case LEFT, RIGHT, ENTER, ESC -> null;
         };
         this.optionText=optionText;
-        text.draw(optionText, model.getPosition(),gui);
+        text.draw(optionText, model.position(),gui);
 
     }
 
     public void showSelect(Option model,String color,GUI gui) throws IOException {
-        text.setForeground(gui,color,model.getPosition(),optionText);
-    }
-
-    public void unSelect(Option model,GUI gui) throws IOException {
-        text.setForegroundDefault(gui,model.getPosition(),optionText);
+        text.setForeground(gui,color,model.position(),optionText);
     }
 }

@@ -1,6 +1,5 @@
 package project.com.Viewer;
 
-import com.googlecode.lanterna.TextColor;
 import project.com.Model.Position;
 import project.com.gui.GUI;
 
@@ -8,8 +7,8 @@ import java.io.IOException;
 import java.util.*;
 
 public class ArkanoidTextViewer implements TextViewer{
-    private Map<WriteChar, ArrayList<Position>> textMap;
-    private Map<Character,WriteChar> charMap;
+    private final Map<WriteChar, ArrayList<Position>> textMap;
+    private final Map<Character,WriteChar> charMap;
 
     public ArkanoidTextViewer(){
         this.charMap=new HashMap<>();
@@ -31,7 +30,7 @@ public class ArkanoidTextViewer implements TextViewer{
         }
         else{  //if writeChar wasn't initialized gets initialized
             charMap.put(character,c);
-            textMap.put(c, new ArrayList<>(Arrays.asList(position)));
+            textMap.put(c, new ArrayList<>(Collections.singletonList(position)));
         }
         setForeground(gui,foregroundColor,position,c);
     }
@@ -54,7 +53,6 @@ public class ArkanoidTextViewer implements TextViewer{
 
 
     private void setForeground(GUI gui,String color,Position startPosition, WriteChar character){
-        ArrayList<Position> foreground=character.getForeground(startPosition);
         if(color.equals("WHITE_BRIGHT")){
             character.setForegroundDefault(gui,startPosition);}
         else{
@@ -70,7 +68,6 @@ public class ArkanoidTextViewer implements TextViewer{
         if(charMap.containsKey(c)){
             if(textMap.get(charMap.get(c)).contains(startPosition)){  //checks if exists
                 WriteChar character=charMap.get(c);
-                ArrayList<Position> foreground=character.getForeground(startPosition);
                 character.setForegroundDefault(gui,startPosition);
             }
         }

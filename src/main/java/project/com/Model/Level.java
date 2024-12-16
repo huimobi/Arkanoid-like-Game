@@ -19,8 +19,8 @@ public class Level {
     private long waitStartTime;
     private static final long SLEEP = 3000;
     private int score;
-    private int highestScore;
-    private ArrayList<PowerUp> powerUps;
+    private final int highestScore;
+    private final ArrayList<PowerUp> powerUps;
     private PowerUp.Bonus curPowerUp;
 
 
@@ -45,10 +45,6 @@ public class Level {
 
     public void setCurPowerUp(PowerUp.Bonus curPowerUp) {
         this.curPowerUp = curPowerUp;
-    }
-
-    public PowerUp.Bonus getCurPowerUp() {
-        return curPowerUp;
     }
 
     public int getWidth() {
@@ -108,9 +104,6 @@ public class Level {
         for (Brick brick : bricks) {
             if (brick.getCharacter() != '#') return false;
         }
-        if (score>loadHighScore()) {
-            setHighScore(score);
-        }
         return true;
     }
 
@@ -133,7 +126,7 @@ public class Level {
             if (nextMove.intersects(brick.getHitBox())) {
                 COLLISIONS collision = typeBrickCollision(brick.getHitBox(), nextMove);
                 hit(brick);
-                if(curPowerUp.equals(PowerUp.Bonus.breakAll) && brick.getCharacter()!='#') return COLLISIONS.NONE;
+                if(curPowerUp.equals(PowerUp.Bonus.breakAll) && brick.getCharacter()!='#') return COLLISIONS.NONE;  //migh be problematic
                 return collision;
             }
         }
@@ -220,24 +213,24 @@ public class Level {
 
     //top side
     public boolean collisionUP(Rectangle target, Rectangle nextMove) {
-        Line2D.Double rightSide = new Line2D.Double(
+        Line2D.Double upSide = new Line2D.Double(
                 target.x,
                 target.y,
                 target.x + target.width,
                 target.y
         );
-        return nextMove.intersectsLine(rightSide);
+        return nextMove.intersectsLine(upSide);
     }
 
     //ground side
     public boolean collisionDown(Rectangle target, Rectangle nextMove) {
-        Line2D.Double rightSide = new Line2D.Double(
+        Line2D.Double downSide = new Line2D.Double(
                 target.x,
                 target.y + target.height,
                 target.x + target.width,
                 target.y + target.height
         );
-        return nextMove.intersectsLine(rightSide);
+        return nextMove.intersectsLine(downSide);
     }
 
 
@@ -254,7 +247,7 @@ public class Level {
         if (brick.getDurability() == 0) {
             Random random = new Random();
             if (random.nextInt(100) + 1 <= 15) {
-                powerUps.add(new PowerUp(brick.getPosition(), this));
+                powerUps.add(new PowerUp(brick.getPosition()));
             }
             bricks.remove(brick);
             //different hits for different bricks

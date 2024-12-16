@@ -1,7 +1,5 @@
 package project.com.Model;
 
-import project.com.Arkanoid;
-
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,6 +23,7 @@ public class LevelCreator {
     public LevelCreator(int levelNumber) throws IOException {
         URL resource = getClass().getClassLoader().getResource("Levels/level"+ levelNumber+".txt");
 
+        assert resource != null;
         BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resource.getFile()), UTF_8);
         this.lines = readLines(bufferedReader);  //set all file lines in lines
         this.levelNumber=levelNumber;

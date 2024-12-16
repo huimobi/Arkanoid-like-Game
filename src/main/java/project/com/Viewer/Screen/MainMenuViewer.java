@@ -1,8 +1,6 @@
 package project.com.Viewer.Screen;
 
-import com.sun.tools.javac.Main;
 import project.com.Model.MainMenu;
-import project.com.Model.Menu;
 import project.com.Model.Option;
 import project.com.Model.Position;
 import project.com.Viewer.MainMenu.LogoViewer;

@@ -1,6 +1,5 @@
 package project.com.Viewer.Screen;
 
-import com.googlecode.lanterna.TextColor;
 import project.com.Model.*;
 import project.com.Viewer.Elements.*;
 import project.com.Viewer.Game.GameBackgroundViewer;
@@ -43,8 +42,8 @@ public class GameViewer extends Viewer<Level> {
         public void draw(GUI gui) throws IOException {
             gui.clear();
             gameBackgroundViewer.draw(gui);
-            drawElement(gui, getModel().getBall(),getViewerProvider().getBallViewer());
-            drawElement(gui, getModel().getPaddle(), getViewerProvider().getPaddleViewer());
+            drawElement(gui, getModel().getBall(),ballViewer);
+            drawElement(gui, getModel().getPaddle(),paddleViewer);
             livesViewer.draw(getModel().getPaddle(),gui);
             roundViewer.draw(getModel(),gui);
             scoreViewer.draw(getModel(),gui);

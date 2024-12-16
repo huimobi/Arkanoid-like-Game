@@ -10,12 +10,9 @@ import project.com.State.InfoMenuState;
 import project.com.State.MainMenuState;
 import project.com.gui.GUI;
 
-import java.awt.*;
 import java.io.IOException;
 
 import static project.com.Model.HighScore.loadHighScore;
-
-import static project.com.Model.Option.Type.*;
 
 public class OptionsController extends Controller<Menu> {
     public OptionsController(Menu Menu) {
@@ -27,7 +24,7 @@ public class OptionsController extends Controller<Menu> {
 
     @Override
     public void step(Arkanoid arkanoid, GUI.ACTION action, long frameCount) throws IOException {
-        switch (getModel().getCurrentOption().getType()){
+        switch (getModel().getCurrentOption().type()){
            case START_GAME:
                 if (action == GUI.ACTION.SELECT){
                     int highestScore=loadHighScore();

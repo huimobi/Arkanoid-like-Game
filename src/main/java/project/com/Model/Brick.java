@@ -30,13 +30,7 @@ public class Brick extends Element {
             case ('Y'):
                 this.durability = 2;
                 break;
-            case ('B'):
-                this.durability = 1;
-                break;
-            case ('G'):
-                this.durability = 1;
-                break;
-            case ('P'):
+            case ('B'), ('G'), ('P'):
                 this.durability = 1;
                 break;
         }
@@ -52,8 +46,6 @@ public class Brick extends Element {
     }
     private int setScore(){
         switch (character){
-            case ('#'):
-                this.score = 100;
             case ('Y'):
                 this.score = 50;
                 break;

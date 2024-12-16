@@ -1,12 +1,10 @@
 package project.com.Viewer;
 
-import project.com.Model.PowerUp;
 import project.com.Viewer.Elements.*;
 import project.com.Viewer.Game.GameBackgroundViewer;
 import project.com.Viewer.Game.HighScoreViewer;
 import project.com.Viewer.Game.RoundViewer;
 import project.com.Viewer.Info.*;
-import project.com.Viewer.MainMenu.*;
 import project.com.Viewer.Game.ScoreViewer;
 import project.com.Viewer.MainMenu.LogoViewer;
 import project.com.Viewer.MainMenu.MainMenuBackgroundViewer;
@@ -51,8 +49,6 @@ public class ViewerProvider {
         this.rightViewer = new RightViewer(imageLoader);
         this.escViewer = new ESCViewer(imageLoader);
         this.enterViewer = new EnterViewer(imageLoader);
-        this.livesViewer= new LivesViewer(imageLoader);
-        this.roundViewer= new RoundViewer(textViewer);
         this.scoreViewer=new ScoreViewer(textViewer);
         this.highScoreViewer=new HighScoreViewer(textViewer);
         this.powerUpViewer= new PowerUpViewer(imageLoader);

@@ -1,7 +1,6 @@
 package project.com.Viewer.Elements;
 
 
-import project.com.Model.Ball;
 import project.com.Model.PowerUp;
 import project.com.Viewer.ImageLoader;
 import project.com.Viewer.ImageReader;
