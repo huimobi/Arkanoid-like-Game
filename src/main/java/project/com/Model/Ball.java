@@ -15,7 +15,10 @@ public class Ball extends Movable {
 
     public void setPowerUpOff(){
         this.powerUp=false;
-        setVelocity(new Position(getVelocity().getX() *2, getVelocity().getY() *2));
+        if(isMovingDownLeft()) setAngle225();
+        else if(isMovingDownRight()) setAngle315();
+        else if(isMovingUpLeft()) setAngle135();
+        else setAngle45();
     }
 
     public void reflectHorizontal() {

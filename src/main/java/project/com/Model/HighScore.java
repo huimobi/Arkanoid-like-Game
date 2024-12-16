@@ -35,7 +35,7 @@ public class HighScore {
                 createHighScore();
             }
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
-            highScore = Integer.parseInt(reader.readLine());
+            if(reader.readLine()!=null) highScore = Integer.parseInt(reader.readLine());
             reader.close();
         }
         catch (Exception e) {

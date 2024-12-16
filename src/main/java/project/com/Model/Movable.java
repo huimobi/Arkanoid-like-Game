@@ -22,18 +22,18 @@ public abstract class Movable extends Element{
 
 
     public boolean isMovingUpLeft(){
-        return velocity.getX() < 0 & velocity.getY() < 0 & velocity.getY() != velocity.getX();
+        return velocity.getX() < 0 & velocity.getY() < 0;
     }
 
     public boolean isMovingDownLeft(){
-        return velocity.getX() < 0 & velocity.getY() > 0 & velocity.getY() != velocity.getX();
+        return velocity.getX() < 0 & velocity.getY() > 0;
     }
 
     public boolean isMovingUpRight(){
-        return velocity.getX() > 0 & velocity.getY() < 0 & velocity.getY() != velocity.getX();
+        return velocity.getX() > 0 & velocity.getY() < 0;
     }
 
     public boolean isMovingDownRight(){
-        return velocity.getX() > 0 & velocity.getY() > 0 & velocity.getY() != velocity.getX();
+        return velocity.getX() > 0 & velocity.getY() > 0 ;
     }
 }
