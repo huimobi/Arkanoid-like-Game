@@ -52,6 +52,8 @@ public class ViewerProvider {
         this.scoreViewer=new ScoreViewer(textViewer);
         this.highScoreViewer=new HighScoreViewer(textViewer);
         this.powerUpViewer= new PowerUpViewer(imageLoader);
+        this.livesViewer=new LivesViewer(imageLoader);
+        this.roundViewer=new RoundViewer(textViewer);
     }
 
     public BrickViewer getViewer() {
