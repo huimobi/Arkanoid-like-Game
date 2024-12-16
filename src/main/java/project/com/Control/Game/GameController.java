@@ -11,7 +11,7 @@ import project.com.gui.GUI;
 
 import java.io.IOException;
 
-import static project.com.Model.Brick.getScore;
+
 import static project.com.Model.HighScore.loadHighScore;
 import static project.com.Model.HighScore.setHighScore;
 
@@ -62,8 +62,8 @@ public class GameController extends Controller<Level> {
 
         //Game Over
         if (getModel().getPaddle().getLives() == 0) {
-            if (getScore()>loadHighScore()) {
-                setHighScore(getScore());
+            if (getModel().getScore()>loadHighScore()) {
+                setHighScore(getModel().getScore());
             }
             arkanoid.setState(new MainMenuState(new MainMenu(), arkanoid.getImageLoader()));
         }
