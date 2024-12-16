@@ -41,7 +41,7 @@ public class Arkanoid {
         this.gui = new LanternaGUI(screenCreator);
         this.imageLoader = new PNGLoader();
         this.state = new MainMenuState(new MainMenu(), imageLoader);
-        this.sound = new SoundTrack(new SoundLoader().loadSound(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getClassLoader().getResource("Sounds/Soundtrack.wav"))), AudioSystem.getClip()));
+        this.sound = new SoundTrack(new SoundLoader().loadSound(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getClassLoader().getResource("Sound/Soundtrack.wav"))), AudioSystem.getClip()));
 
         //this.state=new GameState(new LevelCreator(1).createLevel(new Paddle(new Position(60,130))),imageLoader);
     }
