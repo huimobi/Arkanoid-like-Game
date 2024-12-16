@@ -104,9 +104,6 @@ public class Level {
         for (Brick brick : bricks) {
             if (brick.getCharacter() != '#') return false;
         }
-        if (score>loadHighScore()) {
-            setHighScore(score);
-        }
         return true;
     }
 
@@ -129,7 +126,7 @@ public class Level {
             if (nextMove.intersects(brick.getHitBox())) {
                 COLLISIONS collision = typeBrickCollision(brick.getHitBox(), nextMove);
                 hit(brick);
-                if(curPowerUp.equals(PowerUp.Bonus.breakAll) && brick.getCharacter()!='#') return COLLISIONS.NONE;
+                if(curPowerUp.equals(PowerUp.Bonus.breakAll) && brick.getCharacter()!='#') return COLLISIONS.NONE;  //migh be problematic
                 return collision;
             }
         }
