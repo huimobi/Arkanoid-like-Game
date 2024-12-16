@@ -1,8 +1,5 @@
 package project.com.Model;
 
-import java.io.PipedOutputStream;
-import java.util.Vector;
-
 public abstract class Movable extends Element{
     private Position velocity;
 
@@ -25,30 +22,18 @@ public abstract class Movable extends Element{
 
 
     public boolean isMovingUpLeft(){
-        if(velocity.getX()<0 & velocity.getY()<0 &velocity.getY()!=velocity.getX()){
-            return true;
-        }
-        return false;
+        return velocity.getX() < 0 & velocity.getY() < 0 & velocity.getY() != velocity.getX();
     }
 
     public boolean isMovingDownLeft(){
-        if(velocity.getX()<0 & velocity.getY()>0 &velocity.getY()!=velocity.getX()){
-            return true;
-        }
-        return false;
+        return velocity.getX() < 0 & velocity.getY() > 0 & velocity.getY() != velocity.getX();
     }
 
     public boolean isMovingUpRight(){
-        if(velocity.getX()>0 & velocity.getY()<0 &velocity.getY()!=velocity.getX()){
-            return true;
-        }
-        return false;
+        return velocity.getX() > 0 & velocity.getY() < 0 & velocity.getY() != velocity.getX();
     }
 
     public boolean isMovingDownRight(){
-        if(velocity.getX()>0 & velocity.getY()>0 &velocity.getY()!=velocity.getX()){
-            return true;
-        }
-        return false;
+        return velocity.getX() > 0 & velocity.getY() > 0 & velocity.getY() != velocity.getX();
     }
 }

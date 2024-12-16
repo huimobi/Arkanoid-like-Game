@@ -30,7 +30,6 @@ public class Arkanoid {
         this.gui = new LanternaGUI(screenCreator);
         this.imageLoader = new PNGLoader();
         this.state = new MainMenuState(new MainMenu(), imageLoader);
-        //this.state=new GameState(new LevelCreator(1).createLevel(new Paddle(new Position(60,130))),imageLoader);
     }
 
 

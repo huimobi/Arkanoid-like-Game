@@ -9,7 +9,7 @@ import project.com.gui.GUI;
 import java.io.IOException;
 
 public class HighScoreViewer implements ElementViewer<Level> {
-    private TextViewer textViewer;
+    private final TextViewer textViewer;
     public HighScoreViewer(TextViewer textViewer) {
         this.textViewer=textViewer;
     }

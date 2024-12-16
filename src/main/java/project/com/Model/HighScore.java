@@ -6,7 +6,7 @@ public class HighScore {
     private static int highScore = 0;
 
     private static String saveDataPath;
-    private static String fileName = "HighScore.txt";
+    private static final String fileName = "HighScore.txt";
 
     public HighScore() {
         try {
@@ -35,7 +35,7 @@ public class HighScore {
                     createHighScore();
                 }
                 BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
-                highScore = Integer.parseInt(reader.readLine());
+                if(reader.readLine()!=null) highScore = Integer.parseInt(reader.readLine());
                 reader.close();
             }
             catch (Exception e) {

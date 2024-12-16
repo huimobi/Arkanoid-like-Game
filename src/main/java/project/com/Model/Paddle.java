@@ -1,9 +1,6 @@
 package project.com.Model;
 
 import java.awt.*;
-import java.awt.geom.Line2D;
-import java.nio.file.Path;
-import java.util.Vector;
 
 public class Paddle extends Movable{
     private boolean powerUp;

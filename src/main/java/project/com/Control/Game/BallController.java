@@ -34,20 +34,14 @@ public class BallController extends Controller<Level> {
             case PADDLELEFT:
                  ball.setAngleBigger135();
                  break;
-            case PADDLEMIDDLELEFT:
+            case PADDLEMIDDLELEFT, TOPLEFT:
                 ball.setAngle135();
                 break;
-            case PADDLEMIDDLERIGHT:
+            case PADDLEMIDDLERIGHT, TOPRIGHT:
                 ball.setAngle45();
                 break;
             case PADDLERIGHT:
                 ball.setAngleLess45();
-                break;
-            case TOPRIGHT:
-                ball.setAngle45();
-                break;
-            case TOPLEFT:
-                ball.setAngle135();
                 break;
             case BOTTOMLEFT:
                 ball.setAngle225();
@@ -57,7 +51,6 @@ public class BallController extends Controller<Level> {
                 break;
 
         }
-
 
 
         //control lives

@@ -1,24 +1,23 @@
 package project.com.Model;
 
-import java.awt.*;
-
 public class Ball extends Movable {
     private boolean powerUp;
 
     public Ball(Position position) {
         super(position, 5, 5, new Position(2, -2));
-        this.powerUp=true;
+        this.powerUp=false;
     }
 
     public void setPowerUpOn(){
-        setVelocity(new Position(getVelocity().getX() /2, getVelocity().getY() /2));
         this.powerUp= true;
+        setVelocity(new Position(getVelocity().getX() /2, getVelocity().getY() /2));
     }
 
     public void setPowerUpOff(){
-        if(powerUp) setVelocity(new Position(getVelocity().getX() *2, getVelocity().getY() *2));
         this.powerUp=false;
+        setVelocity(new Position(getVelocity().getX() *2, getVelocity().getY() *2));
     }
+
     public void reflectHorizontal() {
         setVelocity(new Position(-getVelocity().getX(), getVelocity().getY()));
     }
@@ -49,5 +48,7 @@ public class Ball extends Movable {
         setVelocity(new Position(3,-2));
     }
 
-
+    public boolean isPowerUp() {
+        return powerUp;
+    }
 }

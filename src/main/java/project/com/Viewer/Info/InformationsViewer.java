@@ -14,7 +14,7 @@ public class InformationsViewer {
         this.text = text;
     }
     public void draw(Option model, GUI gui) throws IOException {
-        String infoText = switch (model.getType()) {
+        String infoText = switch (model.type()) {
             case START_GAME, INFO, EXIT -> null;
             case LEFT -> " Moves the paddle to the left";
             case RIGHT -> " Moves the paddle to the right";
@@ -23,9 +23,9 @@ public class InformationsViewer {
             case TO_MAIN_MENU -> "Back";
         };
         this.infoText = infoText;
-        text.draw(infoText, model.getPosition(), gui);
+        text.draw(infoText, model.position(), gui);
     }
     public void showSelect(Option model,String color,GUI gui) throws IOException {
-        text.setForeground(gui,color,model.getPosition(),infoText);
+        text.setForeground(gui,color,model.position(),infoText);
     }
 }

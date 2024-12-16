@@ -4,7 +4,6 @@ import project.com.Control.Controller;
 import project.com.Control.Menu.MainMenuController;
 import project.com.Control.Menu.OptionsController;
 import project.com.Model.MainMenu;
-import project.com.Model.Menu;
 import project.com.Viewer.ImageLoader;
 import project.com.Viewer.Screen.MainMenuViewer;
 import project.com.Viewer.Screen.Viewer;

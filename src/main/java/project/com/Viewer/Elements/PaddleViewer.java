@@ -5,10 +5,7 @@ import project.com.Viewer.ImageLoader;
 import project.com.Viewer.ImageReader;
 import project.com.gui.GUI;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PaddleViewer implements ElementViewer<Paddle>{
     private final ImageReader defaultPaddle;
