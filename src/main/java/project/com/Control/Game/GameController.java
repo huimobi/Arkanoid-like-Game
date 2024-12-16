@@ -2,7 +2,7 @@ package project.com.Control.Game;
 
 import project.com.Arkanoid;
 import project.com.Control.Controller;
-import project.com.MainMenu;
+import project.com.Model.MainMenu;
 import project.com.Model.Level;
 import project.com.Model.LevelCreator;
 import project.com.State.GameState;

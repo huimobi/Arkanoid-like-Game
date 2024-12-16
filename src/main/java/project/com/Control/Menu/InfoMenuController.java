@@ -24,16 +24,24 @@ public class InfoMenuController extends Controller<InfoMenu> {
 
     @Override
     public void step(Arkanoid arkanoid, GUI.ACTION action, long frameCount) throws IOException, URISyntaxException, FontFormatException {
-        switch (getModel().getCurrentInfo().getType()) {
-            case TO_MAIN_MENU:
-                if (action == GUI.ACTION.SELECT) {
-                    arkanoid.setState(new MainMenuState(new MainMenu(), arkanoid.getImageLoader()));
-                }
-                break;
-        }
-        if(action == GUI.ACTION.QUIT){
-            arkanoid.setState(new MainMenuState(new MainMenu(), arkanoid.getImageLoader()));
-            return;
+        Option currentInfo = getModel().getCurrentInfo();
+        if (currentInfo == null || currentInfo.getType() == Option.Type.TO_MAIN_MENU) {
+
+            if (currentInfo == null) {
+                arkanoid.setState(new MainMenuState(new MainMenu(), arkanoid.getImageLoader()));
+                return;
+            }
+            switch (getModel().getCurrentInfo().getType()) {
+                case TO_MAIN_MENU:
+                    if (action == GUI.ACTION.SELECT) {
+                        arkanoid.setState(new MainMenuState(new MainMenu(), arkanoid.getImageLoader()));
+                    }
+                    break;
+            }
+            if (action == GUI.ACTION.QUIT) {
+                arkanoid.setState(new MainMenuState(new MainMenu(), arkanoid.getImageLoader()));
+                return;
+            }
         }
 
         optionsController.step(arkanoid, action, frameCount);

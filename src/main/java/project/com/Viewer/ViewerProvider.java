@@ -45,8 +45,6 @@ public class ViewerProvider {
         this.textViewer= new ArkanoidTextViewer();
         this.optionsViewer = new OptionViewer(textViewer);
         this.logoViewer = new LogoViewer(imageLoader);
-        this.livesViewer = new LivesViewer(imageLoader);
-        this.roundViewer = new RoundViewer(textViewer);
         this.informationsViewer = new InformationsViewer(textViewer);
         this.wordInfoViewer = new WordInfoViewer(imageLoader);
         this.leftViewer = new LeftViewer(imageLoader);
