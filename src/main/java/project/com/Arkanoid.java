@@ -32,6 +32,7 @@ public class Arkanoid {
     private final LanternaGUI gui;
     private final ImageLoader imageLoader;
     private State state;
+    private SoundTrack sound;
 
     //creates the screen that will be used through the game
     public Arkanoid() throws Exception {
@@ -40,6 +41,8 @@ public class Arkanoid {
         this.gui = new LanternaGUI(screenCreator);
         this.imageLoader = new PNGLoader();
         this.state = new MainMenuState(new MainMenu(), imageLoader);
+        this.sound = new SoundTrack(new SoundLoader().loadSound(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getClassLoader().getResource("Sounds/SoundTrack.wav"))), AudioSystem.getClip()));
+
         //this.state=new GameState(new LevelCreator(1).createLevel(new Paddle(new Position(60,130))),imageLoader);
     }
 
@@ -62,6 +65,7 @@ public class Arkanoid {
         int FPS = 30;
         long frameTime = 1000 /FPS;
 
+        sound.start();
         while (this.state != null) {
             long startTime = System.currentTimeMillis();
             state.step(this, gui, startTime);
