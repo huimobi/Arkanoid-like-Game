@@ -57,6 +57,9 @@ public class GameController extends Controller<Level> {
                 arkanoid.setState(new GameState(newLevel, arkanoid.getImageLoader()));
             } else {
                 arkanoid.setState(new MainMenuState(new MainMenu(), arkanoid.getImageLoader()));
+                if (getModel().getScore()>loadHighScore()) {
+                    setHighScore(getModel().getScore());
+                }
             }
         }
 
