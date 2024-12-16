@@ -6,6 +6,8 @@ import project.com.Model.Level;
 import project.com.Model.LevelCreator;
 import project.com.Model.Paddle;
 import project.com.Model.Position;
+import project.com.Sound.SoundLoader;
+import project.com.Sound.SoundTrack;
 import project.com.State.GameState;
 import project.com.State.MainMenuState;
 import project.com.State.State;
@@ -15,9 +17,13 @@ import project.com.gui.LanternaGUI;
 import project.com.gui.LanternaScreenCreator;
 import project.com.gui.ScreenCreator;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Objects;
 
 
 public class Arkanoid {
@@ -28,7 +34,7 @@ public class Arkanoid {
     private State state;
 
     //creates the screen that will be used through the game
-    public Arkanoid() throws IOException, URISyntaxException, FontFormatException, NullPointerException {
+    public Arkanoid() throws Exception {
 
         ScreenCreator screenCreator = new LanternaScreenCreator(new DefaultTerminalFactory(),new TerminalSize(WIDTH,HEIGHT));
         this.gui = new LanternaGUI(screenCreator);
@@ -44,7 +50,7 @@ public class Arkanoid {
 
 
     //starts the game
-    public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException, InterruptedException {
+    public static void main(String[] args) throws Exception {
         new Arkanoid().start();
     }
 
