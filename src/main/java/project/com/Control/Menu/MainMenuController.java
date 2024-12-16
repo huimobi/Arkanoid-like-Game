@@ -19,6 +19,9 @@ public class MainMenuController extends Controller<MainMenu> {
 
     @Override
     public void step(Arkanoid arkanoid, GUI.ACTION action, long frameCount) throws IOException, URISyntaxException, FontFormatException {
+        if (action == null) {
+            return;
+        }
         switch (action) {
             case UP:
                 this.getModel().moveUp();
