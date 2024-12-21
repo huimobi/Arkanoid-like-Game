@@ -3,7 +3,7 @@ package project.com.State;
 
 import project.com.Arkanoid;
 import project.com.Control.Controller;
-import project.com.Viewer.ImageLoader;
+import project.com.Viewer.Sprite.ImageLoader;
 import project.com.Viewer.Screen.Viewer;
 import project.com.Viewer.ViewerProvider;
 import project.com.gui.GUI;

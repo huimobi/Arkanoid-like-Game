@@ -3,6 +3,8 @@ package project.com.Control.Game;
 import project.com.Arkanoid;
 import project.com.Control.Controller;
 import project.com.Model.*;
+import project.com.Model.Elements.Ball;
+import project.com.Model.Levels.Level;
 import project.com.gui.GUI;
 
 import java.awt.*;

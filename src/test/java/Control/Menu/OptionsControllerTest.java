@@ -2,14 +2,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import project.com.Arkanoid;
 import project.com.Control.Menu.OptionsController;
-import project.com.Model.Menu;
-import project.com.Model.Option;
+import project.com.Model.Menus.Menu;
+import project.com.Model.Menus.Option;
 import project.com.Model.Position;
 import project.com.State.GameState;
 import project.com.State.InfoMenuState;
 import project.com.State.MainMenuState;
 import project.com.gui.GUI;
-import project.com.Viewer.ImageLoader;                              // Importar a classe ImageLoader
+import project.com.Viewer.Sprite.ImageLoader;                              // Importar a classe ImageLoader
 
 import java.awt.*;
 import java.io.IOException;

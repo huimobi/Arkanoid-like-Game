@@ -1,4 +1,4 @@
-package project.com.Viewer;
+package project.com.Viewer.Sprite;
 
 import java.io.IOException;
 import java.util.HashMap;

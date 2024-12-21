@@ -2,9 +2,9 @@ package project.com.Control.Menu;
 
 import project.com.Arkanoid;
 import project.com.Control.Controller;
-import project.com.Model.*;
-import project.com.State.GameState;
-import project.com.State.InfoMenuState;
+import project.com.Model.Menus.InfoMenu;
+import project.com.Model.Menus.MainMenu;
+import project.com.Model.Menus.Option;
 import project.com.State.MainMenuState;
 import project.com.gui.GUI;
 

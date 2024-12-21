@@ -1,4 +1,4 @@
-package project.com.Viewer;
+package project.com.Viewer.Text;
 
 import project.com.Model.Position;
 import project.com.gui.GUI;

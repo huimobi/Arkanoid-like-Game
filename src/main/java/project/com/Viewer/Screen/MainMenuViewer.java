@@ -1,7 +1,7 @@
 package project.com.Viewer.Screen;
 
-import project.com.Model.MainMenu;
-import project.com.Model.Option;
+import project.com.Model.Menus.MainMenu;
+import project.com.Model.Menus.Option;
 import project.com.Model.Position;
 import project.com.Viewer.MainMenu.LogoViewer;
 import project.com.Viewer.MainMenu.MainMenuBackgroundViewer;

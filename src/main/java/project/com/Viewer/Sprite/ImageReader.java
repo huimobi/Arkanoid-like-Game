@@ -1,4 +1,4 @@
-package project.com.Viewer;
+package project.com.Viewer.Sprite;
 
 import com.googlecode.lanterna.TextColor;
 import project.com.Model.Position;

@@ -1,8 +1,8 @@
 package project.com.Viewer.Screen;
 
 import project.com.Arkanoid;
-import project.com.Model.InfoMenu;
-import project.com.Model.Option;
+import project.com.Model.Menus.InfoMenu;
+import project.com.Model.Menus.Option;
 import project.com.Model.Position;
 import project.com.Viewer.Info.*;
 import project.com.Viewer.MainMenu.MainMenuBackgroundViewer;

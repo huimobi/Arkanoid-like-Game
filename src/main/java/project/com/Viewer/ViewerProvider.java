@@ -9,6 +9,9 @@ import project.com.Viewer.Game.ScoreViewer;
 import project.com.Viewer.MainMenu.LogoViewer;
 import project.com.Viewer.MainMenu.MainMenuBackgroundViewer;
 import project.com.Viewer.MainMenu.OptionViewer;
+import project.com.Viewer.Sprite.ImageLoader;
+import project.com.Viewer.Text.ArkanoidTextViewer;
+import project.com.Viewer.Text.TextViewer;
 
 import java.io.IOException;
 

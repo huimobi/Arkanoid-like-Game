@@ -1,6 +1,7 @@
-package project.com.Model;
+package project.com.Model.Menus;
 
 import project.com.Arkanoid;
+import project.com.Model.Position;
 
 import java.util.ArrayList;
 

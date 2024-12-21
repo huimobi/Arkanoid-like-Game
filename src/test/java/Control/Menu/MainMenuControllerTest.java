@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 import project.com.Arkanoid;
 import project.com.Control.Menu.MainMenuController;
 import project.com.Control.Menu.OptionsController;
-import project.com.Model.MainMenu;
+import project.com.Model.Menus.MainMenu;
 import project.com.gui.GUI;
 
 import java.awt.*;

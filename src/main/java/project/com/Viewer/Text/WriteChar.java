@@ -1,7 +1,9 @@
-package project.com.Viewer;
+package project.com.Viewer.Text;
 
 import com.googlecode.lanterna.TextColor;
 import project.com.Model.Position;
+import project.com.Viewer.Sprite.ImageReader;
+import project.com.Viewer.Sprite.PNGReader;
 import project.com.gui.GUI;
 
 import java.awt.*;

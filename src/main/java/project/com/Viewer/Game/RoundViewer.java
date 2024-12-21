@@ -1,10 +1,9 @@
 package project.com.Viewer.Game;
 
-import project.com.Arkanoid;
-import project.com.Model.Level;
+import project.com.Model.Levels.Level;
 import project.com.Model.Position;
 import project.com.Viewer.Elements.ElementViewer;
-import project.com.Viewer.TextViewer;
+import project.com.Viewer.Text.TextViewer;
 import project.com.gui.GUI;
 
 import java.io.IOException;

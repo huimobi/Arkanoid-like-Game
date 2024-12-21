@@ -1,4 +1,4 @@
-package project.com.Model;
+package project.com.Model.Menus;
 
 import java.util.ArrayList;
 

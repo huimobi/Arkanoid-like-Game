@@ -2,25 +2,18 @@ package project.com;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import project.com.Model.*;
-import project.com.Model.Level;
-import project.com.Model.LevelCreator;
-import project.com.Model.Paddle;
-import project.com.Model.Position;
+import project.com.Model.Menus.MainMenu;
 import project.com.Sound.SoundLoader;
 import project.com.Sound.SoundTrack;
-import project.com.State.GameState;
 import project.com.State.MainMenuState;
 import project.com.State.State;
-import project.com.Viewer.ImageLoader;
-import project.com.Viewer.PNGLoader;
+import project.com.Viewer.Sprite.ImageLoader;
+import project.com.Viewer.Sprite.PNGLoader;
 import project.com.gui.LanternaGUI;
 import project.com.gui.LanternaScreenCreator;
 import project.com.gui.ScreenCreator;
 
 import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;

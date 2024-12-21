@@ -1,7 +1,7 @@
 package project.com.Viewer.MainMenu;
 
-import project.com.Model.Option;
-import project.com.Viewer.TextViewer;
+import project.com.Model.Menus.Option;
+import project.com.Viewer.Text.TextViewer;
 import project.com.gui.GUI;
 
 import java.io.IOException;

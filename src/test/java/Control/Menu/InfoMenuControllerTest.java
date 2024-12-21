@@ -3,10 +3,11 @@ import org.junit.jupiter.api.Test;
 import project.com.Arkanoid;
 import project.com.Control.Menu.InfoMenuController;
 import project.com.Control.Menu.OptionsController;
-import project.com.Model.*;
+import project.com.Model.Menus.InfoMenu;
+import project.com.Model.Menus.Option;
 import project.com.State.MainMenuState;
-import project.com.Viewer.ImageLoader;
-import project.com.Viewer.ImageReader;
+import project.com.Viewer.Sprite.ImageLoader;
+import project.com.Viewer.Sprite.ImageReader;
 import project.com.gui.GUI;
 
 import java.awt.*;

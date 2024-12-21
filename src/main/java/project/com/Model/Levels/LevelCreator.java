@@ -1,4 +1,9 @@
-package project.com.Model;
+package project.com.Model.Levels;
+
+import project.com.Model.Elements.Ball;
+import project.com.Model.Elements.Brick;
+import project.com.Model.Elements.Paddle;
+import project.com.Model.Position;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -31,7 +36,7 @@ public class LevelCreator {
     }
 
     //initial object position
-    public Level createLevel(Paddle paddle,int score, int highScore) {
+    public Level createLevel(Paddle paddle, int score, int highScore) {
         Ball ball= new Ball(new Position(paddle.getPosition().getX() + 5*(paddle.getWidth()/8), paddle.getPosition().getY() - 5));
         Level level= new Level(gameArea,levelNumber,paddle,ball,createBricks(),score, highScore);   //highScore has to be revised
         level.setPaddle(new Position((gameArea.width-28)/2, 130));

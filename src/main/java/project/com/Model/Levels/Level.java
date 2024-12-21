@@ -1,13 +1,16 @@
-package project.com.Model;
+package project.com.Model.Levels;
 
+
+import project.com.Model.Elements.Ball;
+import project.com.Model.Elements.Brick;
+import project.com.Model.Elements.Paddle;
+import project.com.Model.Elements.PowerUp;
+import project.com.Model.Position;
 
 import java.awt.*;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.Random;
-
-import static project.com.Model.HighScore.loadHighScore;
-import static project.com.Model.HighScore.setHighScore;
 
 public class Level {
     private final Rectangle gameArea;

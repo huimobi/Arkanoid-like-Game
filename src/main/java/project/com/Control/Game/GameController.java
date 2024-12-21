@@ -2,9 +2,9 @@ package project.com.Control.Game;
 
 import project.com.Arkanoid;
 import project.com.Control.Controller;
-import project.com.Model.MainMenu;
-import project.com.Model.Level;
-import project.com.Model.LevelCreator;
+import project.com.Model.Menus.MainMenu;
+import project.com.Model.Levels.Level;
+import project.com.Model.Levels.LevelCreator;
 import project.com.State.GameState;
 import project.com.State.MainMenuState;
 import project.com.gui.GUI;
@@ -12,8 +12,8 @@ import project.com.gui.GUI;
 import java.io.IOException;
 
 
-import static project.com.Model.HighScore.loadHighScore;
-import static project.com.Model.HighScore.setHighScore;
+import static project.com.Model.Levels.HighScore.loadHighScore;
+import static project.com.Model.Levels.HighScore.setHighScore;
 
 public class GameController extends Controller<Level> {
     private final BallController ballController;

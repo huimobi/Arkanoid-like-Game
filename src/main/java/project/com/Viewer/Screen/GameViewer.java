@@ -1,6 +1,10 @@
 package project.com.Viewer.Screen;
 
 import project.com.Model.*;
+import project.com.Model.Elements.Brick;
+import project.com.Model.Elements.Element;
+import project.com.Model.Elements.PowerUp;
+import project.com.Model.Levels.Level;
 import project.com.Viewer.Elements.*;
 import project.com.Viewer.Game.GameBackgroundViewer;
 import project.com.Viewer.Game.HighScoreViewer;

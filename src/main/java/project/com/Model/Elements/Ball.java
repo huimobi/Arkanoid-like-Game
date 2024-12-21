@@ -1,4 +1,6 @@
-package project.com.Model;
+package project.com.Model.Elements;
+
+import project.com.Model.Position;
 
 public class Ball extends Movable {
     private boolean powerUp;

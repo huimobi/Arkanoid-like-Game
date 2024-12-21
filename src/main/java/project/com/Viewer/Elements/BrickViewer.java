@@ -1,8 +1,8 @@
 package project.com.Viewer.Elements;
 
-import project.com.Model.Brick;
-import project.com.Viewer.ImageLoader;
-import project.com.Viewer.ImageReader;
+import project.com.Model.Elements.Brick;
+import project.com.Viewer.Sprite.ImageLoader;
+import project.com.Viewer.Sprite.ImageReader;
 import project.com.gui.GUI;
 
 import java.io.IOException;

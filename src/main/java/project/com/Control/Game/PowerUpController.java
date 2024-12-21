@@ -2,8 +2,8 @@ package project.com.Control.Game;
 
 import project.com.Arkanoid;
 import project.com.Control.Controller;
-import project.com.Model.Level;
-import project.com.Model.PowerUp;
+import project.com.Model.Levels.Level;
+import project.com.Model.Elements.PowerUp;
 import project.com.gui.GUI;
 
 import java.awt.*;

@@ -1,6 +1,8 @@
-package project.com.Model;
+package project.com.Model.Menus;
 
-public record Option(Position position, project.com.Model.Option.Type type) {
+import project.com.Model.Position;
+
+public record Option(Position position, Option.Type type) {
 
     public Type getType() {
         return type;
