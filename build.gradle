@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id "info.solidsoft.pitest" version "1.15.0"
 }
 
 group = 'project-t01g05'
@@ -11,9 +12,9 @@ repositories {
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("org.mockito:mockito-core:5.5.0")
+    testImplementation "org.mockito:mockito-core:3.7.7"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.0"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
     implementation group: "com.googlecode.lanterna", name: "lanterna", version: "3.1.1"
 }
 java {
@@ -26,4 +27,6 @@ test {
     useJUnitPlatform()
 }
 
-mainClassName = 'project.com.Arkanoid'
+pitest {
+    junit5PluginVersion = '1.2.0'
+}
