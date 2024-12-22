@@ -6,57 +6,51 @@ public class HighScore {
     private static int highScore = 0;
 
     private static String saveDataPath;
-    private static String fileName = "HighScore.txt";
+    private static final String fileName = "HighScore.txt";
 
     public HighScore() {
         try {
-            saveDataPath = HighScore.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+            // Ensure the path is writable
+            saveDataPath = new File(".").getCanonicalPath(); // Save in the current working directory
         } catch (Exception e) {
-            e.printStackTrace();
+            saveDataPath = "";
         }
     }
 
     private static void createHighScore() {
         try {
             File file = new File(saveDataPath, fileName);
-            FileWriter output = new FileWriter(file);
-            BufferedWriter writer = new BufferedWriter(output);
-            writer.write(""+0);     //o argumento é uma string
-        }
-        catch(Exception e){
-            e.printStackTrace();
+            if (file.createNewFile()) { // Ensure the file is created
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                    writer.write("0"); // Write initial high score
+                }
+            }
+        } catch (Exception ignored) {
         }
     }
 
-    public static int loadHighScore(){
-        try{
-            File f = new File(saveDataPath, fileName);
-            if(!f.isFile()){
-                createHighScore();
+    public static int loadHighScore() {
+        try {
+            File file = new File(saveDataPath, fileName);
+            if (!file.isFile()) {
+                createHighScore(); // Create file if it doesn't exist
             }
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
-            highScore = Integer.parseInt(reader.readLine());
-            reader.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                highScore = Integer.parseInt(reader.readLine().trim());
+            }
+        } catch (Exception e) {
+            highScore = 0; // Fallback in case of error
         }
         return highScore;
     }
 
-
-    public static void setHighScore(int score){
-        FileWriter output = null;
-
-        try{
-            File f = new File(saveDataPath, fileName);
-            output = new FileWriter(f);
-            BufferedWriter writer = new BufferedWriter(output);
-            writer.write(""+score);
-            writer.close();
-        }
-        catch (Exception e){
-            e.printStackTrace();
+    public static void setHighScore(int score) {
+        try {
+            File file = new File(saveDataPath, fileName);
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                writer.write(String.valueOf(score)); // Write the new high score
+            }
+        } catch (Exception ignored) {
         }
     }
 }
