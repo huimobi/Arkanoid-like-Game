@@ -6,15 +6,14 @@ public class HighScore {
     private static int highScore = 0;
 
     private static String saveDataPath;
-    private static String fileName = "HighScore.txt";
+    private static final String fileName = "HighScore.txt";
 
     public HighScore() {
         try {
             // Ensure the path is writable
             saveDataPath = new File(".").getCanonicalPath(); // Save in the current working directory
         } catch (Exception e) {
-            e.printStackTrace();
-            saveDataPath = ""; // Fallback in case of error
+            saveDataPath = "";
         }
     }
 
@@ -26,8 +25,7 @@ public class HighScore {
                     writer.write("0"); // Write initial high score
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 
@@ -41,7 +39,6 @@ public class HighScore {
                 highScore = Integer.parseInt(reader.readLine().trim());
             }
         } catch (Exception e) {
-            e.printStackTrace();
             highScore = 0; // Fallback in case of error
         }
         return highScore;
@@ -53,8 +50,7 @@ public class HighScore {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 writer.write(String.valueOf(score)); // Write the new high score
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 }
