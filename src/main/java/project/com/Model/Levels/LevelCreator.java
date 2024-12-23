@@ -45,7 +45,7 @@ public class LevelCreator {
 
 
 //parses level txt
-    private List<String> readLines(BufferedReader bufferedReader) throws IOException {
+List<String> readLines(BufferedReader bufferedReader) throws IOException {
             List<String> lines = new ArrayList<>();
             for (String line; (line = bufferedReader.readLine()) != null; )
                 lines.add(line);
@@ -54,17 +54,17 @@ public class LevelCreator {
 
 
 //matches the coordinates with the char position
-    private ArrayList<Brick> createBricks() {
-            ArrayList<Brick> bricks = new ArrayList<>();
-            for (int y = 0; y < lines.size(); y++) {
-                String line = lines.get(y);
-                for (int x = 0; x < line.length(); x++) {
-                    if(!isSpaceChar(line.charAt(x))) {
-                        bricks.add(new Brick(new Position(gameArea.x+(x*15),gameArea.y+(y*8)),line.charAt(x))); //15 and 8 are the width and height of the brick
-                    }
+public ArrayList<Brick> createBricks() {
+        ArrayList<Brick> bricks = new ArrayList<>();
+        for (int y = 0; y < lines.size(); y++) {
+            String line = lines.get(y);
+            for (int x = 0; x < line.length(); x++) {
+                if(!isSpaceChar(line.charAt(x))) {
+                    bricks.add(new Brick(new Position(gameArea.x+(x*15),gameArea.y+(y*8)),line.charAt(x))); //15 and 8 are the width and height of the brick
                 }
             }
-            return bricks;
+        }
+        return bricks;
     }
 }
 

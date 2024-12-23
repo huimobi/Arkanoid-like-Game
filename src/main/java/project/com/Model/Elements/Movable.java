@@ -5,7 +5,7 @@ import project.com.Model.Position;
 public abstract class Movable extends Element{
     private Position velocity;
 
-    Movable(Position position,int width,int height,Position velocity){
+    public Movable(Position position,int width,int height,Position velocity){
         super(position,width,height);
         this.velocity=velocity;
     }
@@ -29,10 +29,6 @@ public abstract class Movable extends Element{
 
     public boolean isMovingDownLeft(){
         return velocity.getX() < 0 & velocity.getY() > 0;
-    }
-
-    public boolean isMovingUpRight(){
-        return velocity.getX() > 0 & velocity.getY() < 0;
     }
 
     public boolean isMovingDownRight(){

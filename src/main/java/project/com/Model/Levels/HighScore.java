@@ -53,4 +53,12 @@ public class HighScore {
         } catch (Exception ignored) {
         }
     }
+
+    public static void setSaveDataPath(String saveDataPath) {
+        HighScore.saveDataPath = saveDataPath;
+    }
+
+    public static String getSaveDataPath() {
+        return saveDataPath;
+    }
 }
