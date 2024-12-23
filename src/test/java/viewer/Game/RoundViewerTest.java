@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import project.com.Model.Levels.Level;
 import project.com.Model.Position;
-import project.com.Viewer.Game.HighScoreViewer;
 import project.com.Viewer.Game.RoundViewer;
 import project.com.Viewer.Text.TextViewer;
 import project.com.gui.GUI;
