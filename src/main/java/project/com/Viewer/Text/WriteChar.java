@@ -12,14 +12,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class WriteChar {
-    private final char c;
-    static int CHARHEIGHT = 7;
     static int CHARWIDTH = 7;
     private final ImageReader image;
     private final TextColor foregroundColor;
 
     public WriteChar(char c1) throws IOException {
-        this.c=Character.toUpperCase(c1);
+        char c = Character.toUpperCase(c1);
         this.image= new PNGReader("Characters/" + c +".png");
         this.foregroundColor=TextColor.ANSI.WHITE_BRIGHT;
     }
