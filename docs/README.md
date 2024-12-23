@@ -92,7 +92,7 @@ We intend to store and retrieve high scores from a file, and to do so we need to
 The game logic is decoupled from the specifics of data storage, allowing it to interact with the high scores through simple method calls.
 
 ### UML schema
-![](https://i.imgur.com/XyEwLM1.png)
+![](https://i.imgur.com/KbjHPH8.jpeg)
 
 ### Notes about Design
 Until this submission we focused on the viewer part in order to develop the mockups for the game. <br>
