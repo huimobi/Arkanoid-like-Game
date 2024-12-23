@@ -22,34 +22,31 @@ import static org.mockito.Mockito.*;
 
 public class GameViewerTest {
     private PaddleViewer paddleViewer;
-    private BrickViewer brickViewer;
     private BallViewer ballViewer;
     private LivesViewer livesViewer;
     private GameBackgroundViewer gameBackgroundViewer;
     private RoundViewer roundViewer;
     private ScoreViewer scoreViewer;
     private HighScoreViewer highScoreViewer;
-    private PowerUpViewer powerUpViewer;
     private ViewerProvider viewerProvider;
     private GUI gui;
     private Level level;
-    private TextViewer textViewer;
 
     @BeforeEach
     public void setup() {
         this.paddleViewer = mock(PaddleViewer.class);
-        this.brickViewer = mock(BrickViewer.class);
+        BrickViewer brickViewer = mock(BrickViewer.class);
         this.ballViewer = mock(BallViewer.class);
         this.livesViewer =mock(LivesViewer.class);
         this.gameBackgroundViewer =mock(GameBackgroundViewer.class);
         this.roundViewer= mock(RoundViewer.class);
         this.scoreViewer =mock(ScoreViewer.class);
         this.highScoreViewer =mock(HighScoreViewer.class);
-        this.powerUpViewer =mock(PowerUpViewer.class);
+        PowerUpViewer powerUpViewer = mock(PowerUpViewer.class);
         this.viewerProvider=mock(ViewerProvider.class);
         this.gui=mock(GUI.class);
         this.level= mock(Level.class);
-        this.textViewer=mock(TextViewer.class);
+        TextViewer textViewer = mock(TextViewer.class);
 
         when(viewerProvider.getBallViewer()).thenReturn(ballViewer);
         when(viewerProvider.getPaddleViewer()).thenReturn(paddleViewer);
