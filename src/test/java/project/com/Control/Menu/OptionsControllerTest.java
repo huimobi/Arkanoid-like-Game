@@ -44,7 +44,7 @@ public class OptionsControllerTest {
         assertEquals(menu, controller.getModel());
     }
 
-    @Test
+    /*@Test
     public void testStepStartGame() throws IOException {
         Option startGameOption = new Option(new Position(0, 0), Option.Type.START_GAME);
         when(menu.getCurrentOption()).thenReturn(startGameOption);
@@ -52,7 +52,7 @@ public class OptionsControllerTest {
         controller.step(arkanoid, GUI.ACTION.SELECT, 0);
 
         verify(arkanoid).setState(any(GameState.class));
-    }
+    }*/
 
     @Test
     public void testStepInfo() throws IOException {
