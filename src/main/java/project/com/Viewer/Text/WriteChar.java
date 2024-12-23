@@ -24,7 +24,6 @@ public class WriteChar {
         this.foregroundColor=TextColor.ANSI.WHITE_BRIGHT;
     }
 
-    //changes character foreground (REMOVE)
     public void setForeground(GUI gui,String foreground,Position position){
         ArrayList<Position> char_foreground=getForeground(position); //get foreground pixels
         image.changePixelColor(gui,position,char_foreground,foreground);

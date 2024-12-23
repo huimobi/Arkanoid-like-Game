@@ -23,6 +23,7 @@ public class ArkanoidTextViewer implements TextViewer{
         if (charMap.containsKey(character)) {   //if a char was used
                 if(textMap.get(charMap.get(character)).contains(position)){ //if the position is equivalent to a char already created
                     setForeground(gui,foregroundColor,position,charMap.get(character)); //change foreground color
+                    return;
 
                 } else{  //adds position to the map
                     textMap.get(charMap.get(character)).add(position);
