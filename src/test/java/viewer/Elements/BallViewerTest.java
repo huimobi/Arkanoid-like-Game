@@ -1,4 +1,4 @@
-package viewer;
+package viewer.Elements;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
