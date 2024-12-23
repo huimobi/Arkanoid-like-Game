@@ -32,14 +32,6 @@ public abstract class State<T> {
         return model;
     }
 
-    public Viewer<T> getViewer() {
-        return viewer;
-    }
-
-    public Controller<T> getController() {
-        return controller;
-    }
-
     public void step(Arkanoid arkanoid, GUI gui, long frameTime) throws IOException, URISyntaxException, FontFormatException {
         GUI.ACTION action = gui.getNextAction();
         controller.step(arkanoid, action, frameTime);
