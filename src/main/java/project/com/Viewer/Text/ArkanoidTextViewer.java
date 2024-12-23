@@ -23,6 +23,7 @@ public class ArkanoidTextViewer implements TextViewer{
         if (charMap.containsKey(character)) {   //if a char was used
                 if(textMap.get(charMap.get(character)).contains(position)){ //if the position is equivalent to a char already created
                     setForeground(gui,foregroundColor,position,charMap.get(character)); //change foreground color
+                    return;
 
                 } else{  //adds position to the map
                     textMap.get(charMap.get(character)).add(position);
@@ -43,10 +44,6 @@ public class ArkanoidTextViewer implements TextViewer{
         }
     }
 
-    public void draw(char character, Position position,GUI gui) throws IOException {
-        draw(character,position,"WHITE_BRIGHT",gui);
-    }
-
     public void draw(String string, Position position,GUI gui) throws IOException {
         draw(string,position,"WHITE_BRIGHT",gui);
     }
@@ -62,20 +59,5 @@ public class ArkanoidTextViewer implements TextViewer{
 
     public void setForeground(GUI gui,String color,Position startPosition,String text) throws IOException {
         draw(text,startPosition,color,gui);
-    }
-
-    public void setForegroundDefault(GUI gui,Position startPosition,char c){
-        if(charMap.containsKey(c)){
-            if(textMap.get(charMap.get(c)).contains(startPosition)){  //checks if exists
-                WriteChar character=charMap.get(c);
-                character.setForegroundDefault(gui,startPosition);
-            }
-        }
-    }
-
-    public void setForegroundDefault(GUI gui,Position startPosition,String string){
-        for(int i=0;i<string.length();i++){
-            setForegroundDefault(gui,new Position(startPosition.getX()+i*WriteChar.CHARWIDTH, startPosition.getY()),string.charAt(i));
-        }
     }
     }
