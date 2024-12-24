@@ -25,10 +25,10 @@ public class MainMenuControllerTest {
 
     @BeforeEach
     public void setUp() {
-        menu = mock(MainMenu.class);                                            // Mock do menu principal
-        optionsController = mock(OptionsController.class);                      // Mock do OptionsController
-        arkanoid = mock(Arkanoid.class);                                        // Mock do Arkanoid
-        controller = new MainMenuController(menu, optionsController);           // Instância do controlador
+        menu = mock(MainMenu.class);
+        optionsController = mock(OptionsController.class);
+        arkanoid = mock(Arkanoid.class);
+        controller = new MainMenuController(menu, optionsController);
     }
 
     @Test
@@ -40,33 +40,33 @@ public class MainMenuControllerTest {
     @Test
     public void testActionUp() throws IOException, URISyntaxException, FontFormatException {
         controller.step(arkanoid, GUI.ACTION.UP, 0);
-        verify(menu).moveUp();                                                  // Verifica se o método moveUp foi chamado
-        verifyNoInteractions(optionsController);                                // Verifica que não houve interação com o OptionsController
+        verify(menu).moveUp();
+        verifyNoInteractions(optionsController);
     }
 
     @Test
     public void testActionDown() throws IOException, URISyntaxException, FontFormatException {
         controller.step(arkanoid, GUI.ACTION.DOWN, 0);
-        verify(menu).moveDown();                                                // Verifica se o método moveDown foi chamado
-        verifyNoInteractions(optionsController);                                // Verifica que não houve interação com o OptionsController
+        verify(menu).moveDown();
+        verifyNoInteractions(optionsController);
     }
 
     @Test
     public void testActionQuit() throws IOException, URISyntaxException, FontFormatException {
         controller.step(arkanoid, GUI.ACTION.QUIT, 0);
-        verify(arkanoid).setState(null);                                        // Verifica se o estado do jogo foi setado para null
+        verify(arkanoid).setState(null);
     }
 
     @Test
     public void testActionDefault() throws IOException, URISyntaxException, FontFormatException {
         GUI.ACTION action = GUI.ACTION.SELECT;
         controller.step(arkanoid, action, 0);
-        verify(optionsController).step(arkanoid, action, 0);                    // Verifica se a ação foi delegada para o OptionsController
+        verify(optionsController).step(arkanoid, action, 0);
     }
 
     @Test
     public void testNoAction() throws IOException, URISyntaxException, FontFormatException {
         controller.step(arkanoid, null, 0);
-        verifyNoInteractions(menu, optionsController, arkanoid);                // Verifica que nenhum método foi chamado
+        verifyNoInteractions(menu, optionsController, arkanoid);
     }
 }

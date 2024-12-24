@@ -2,10 +2,11 @@ package project.com.Control.Game;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
 import project.com.Arkanoid;
 import project.com.Model.*;
+import project.com.Model.Elements.Paddle;
+import project.com.Model.Elements.PowerUp;
+import project.com.Model.Levels.Level;
 import project.com.gui.GUI;
 
 import java.awt.*;
@@ -29,57 +30,50 @@ class PowerUpControllerTest {
 
     @Test
     void step_ShouldActivatePowerUpOnPaddleCollision() {
-        // Arrange
         PowerUp powerUp = mock(PowerUp.class);
         Paddle mockPaddle = mock(Paddle.class);
-        ArrayList<PowerUp> powerUps = new ArrayList<>(); // Lista real
+        ArrayList<PowerUp> powerUps = new ArrayList<>();
         powerUps.add(powerUp);
         when(powerUp.getHitBox()).thenReturn(new Rectangle(50, 50, 10, 10));
         when(powerUp.getVelocity()).thenReturn(new Position(0, 1));
-        when(powerUp.getPowerUp()).thenReturn(PowerUp.Bonus.extraPaddle); // Configuração correta
-        when(mockPaddle.getHitBox()).thenReturn(new Rectangle(50, 51, 10, 10)); // Colisão
+        when(powerUp.getPowerUp()).thenReturn(PowerUp.Bonus.extraPaddle);
+        when(mockPaddle.getHitBox()).thenReturn(new Rectangle(50, 51, 10, 10));
 
         when(mockLevel.getPowerUps()).thenReturn(powerUps);
         when(mockLevel.getPaddle()).thenReturn(mockPaddle);
 
-        // Act
         powerUpController.step(mockArkanoid, GUI.ACTION.NONE, 1);
 
-        // Assert
-        assertFalse(powerUps.contains(powerUp)); // O power-up foi removido
+        assertFalse(powerUps.contains(powerUp));
         verify(mockLevel).setPowerUpsOff();
         verify(mockLevel).setCurPowerUp(PowerUp.Bonus.extraPaddle);
     }
     @Test
     void step_ShouldApplyExtraPaddlePowerUp() {
-        // Arrange
         PowerUp powerUp = mock(PowerUp.class);
         Paddle mockPaddle = mock(Paddle.class);
-        List<PowerUp> powerUps = new ArrayList<>(); // Lista real
+        List<PowerUp> powerUps = new ArrayList<>();
         powerUps.add(powerUp);
 
         when(powerUp.getHitBox()).thenReturn(new Rectangle(50, 50, 10, 10));
         when(powerUp.getVelocity()).thenReturn(new Position(0, 1));
         when(powerUp.getPowerUp()).thenReturn(PowerUp.Bonus.extraPaddle);
-        when(mockPaddle.getHitBox()).thenReturn(new Rectangle(50, 51, 10, 10)); // Colisão
+        when(mockPaddle.getHitBox()).thenReturn(new Rectangle(50, 51, 10, 10));
 
         when(mockLevel.getPowerUps()).thenReturn((ArrayList<PowerUp>) powerUps);
         when(mockLevel.getPaddle()).thenReturn(mockPaddle);
 
-        // Act
         powerUpController.step(mockArkanoid, GUI.ACTION.NONE, 1);
 
-        // Assert
-        assertFalse(powerUps.contains(powerUp)); // O power-up foi removido
-        verify(mockPaddle).increaseLives(); // Vida adicional aplicada
+        assertFalse(powerUps.contains(powerUp));
+        verify(mockPaddle).increaseLives();
     }
 
     @Test
     void step_ShouldApplyPaddleSizeUpPowerUp() {
-        // Arrange
         PowerUp powerUp = mock(PowerUp.class);
         Paddle mockPaddle = mock(Paddle.class);
-        List<PowerUp> powerUps = new ArrayList<>(); // Use uma lista real
+        List<PowerUp> powerUps = new ArrayList<>();
         powerUps.add(powerUp);
 
         when(powerUp.getHitBox()).thenReturn(new Rectangle(50, 50, 10, 10));
@@ -90,11 +84,9 @@ class PowerUpControllerTest {
         when(mockLevel.getPowerUps()).thenReturn((ArrayList<PowerUp>) powerUps);
         when(mockLevel.getPaddle()).thenReturn(mockPaddle);
 
-        // Act
         powerUpController.step(mockArkanoid, GUI.ACTION.NONE, 1);
 
-        // Assert
-        assertFalse(powerUps.contains(powerUp)); // O power-up foi removido
-        verify(mockPaddle).setPowerUpOn(); // Paddle aumentado
+        assertFalse(powerUps.contains(powerUp));
+        verify(mockPaddle).setPowerUpOn();
     }
 }

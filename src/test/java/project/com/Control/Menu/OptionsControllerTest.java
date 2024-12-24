@@ -24,15 +24,14 @@ public class OptionsControllerTest {
     private Menu menu;
     private OptionsController controller;
     private Arkanoid arkanoid;
-    private ImageLoader imageLoader;                                // Declaração da variável imageLoader
+    private ImageLoader imageLoader;
 
     @BeforeEach
     public void setUp() {
-        menu = mock(Menu.class);                                    // Mock do menu para facilitar os testes
-        arkanoid = mock(Arkanoid.class);                            // Mock do jogo para verificar interações
-        imageLoader = mock(ImageLoader.class);                      // Mock da ImageLoader
+        menu = mock(Menu.class);
+        arkanoid = mock(Arkanoid.class);
+        imageLoader = mock(ImageLoader.class);
 
-        // Configura o mock do Arkanoid para retornar o ImageLoader mockado
         when(arkanoid.getImageLoader()).thenReturn(imageLoader);
 
         controller = new OptionsController(menu);
@@ -43,16 +42,6 @@ public class OptionsControllerTest {
         assertNotNull(controller);
         assertEquals(menu, controller.getModel());
     }
-
-    /*@Test
-    public void testStepStartGame() throws IOException {
-        Option startGameOption = new Option(new Position(0, 0), Option.Type.START_GAME);
-        when(menu.getCurrentOption()).thenReturn(startGameOption);
-
-        controller.step(arkanoid, GUI.ACTION.SELECT, 0);
-
-        verify(arkanoid).setState(any(GameState.class));
-    }*/
 
     @Test
     public void testStepInfo() throws IOException {
