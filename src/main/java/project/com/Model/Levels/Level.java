@@ -137,7 +137,7 @@ public class Level {
     }
 
 
-    private COLLISIONS areaGameCollision(Rectangle nextMove){
+    COLLISIONS areaGameCollision(Rectangle nextMove){
         if (collisionLeft(gameArea, nextMove)){
             return COLLISIONS.LEFT;
         }
@@ -151,7 +151,7 @@ public class Level {
     }
 
 
-    private COLLISIONS typeBrickCollision (Rectangle brick, Rectangle nextMove){
+    COLLISIONS typeBrickCollision(Rectangle brick, Rectangle nextMove){
             Rectangle collision = brick.intersection(nextMove);
             if (collision.width > collision.height) {
                 if (collisionDown(brick, nextMove)) {
@@ -184,7 +184,7 @@ public class Level {
             return COLLISIONS.NONE;
         }
 
-    private COLLISIONS paddleCollision(Rectangle nextMove){
+    COLLISIONS paddleCollision(Rectangle nextMove){
         if(nextMove.intersects(paddle.farLeft())) return COLLISIONS.PADDLELEFT;
         if(nextMove.intersects(paddle.farRight())) return COLLISIONS.PADDLERIGHT;
         if(nextMove.intersects(paddle.middleLeft())) return COLLISIONS.PADDLEMIDDLELEFT;
@@ -254,7 +254,7 @@ public class Level {
             }
             bricks.remove(brick);
             //different hits for different bricks
-                score+=brick.getScore();
+            score+=brick.getScore();
         }
     }
 

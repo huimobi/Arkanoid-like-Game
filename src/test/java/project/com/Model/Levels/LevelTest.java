@@ -20,6 +20,7 @@ class LevelTest {
     private Paddle paddle;
     private Ball ball;
     private ArrayList<Brick> bricks;
+    private Brick brick;
 
     @BeforeEach
     void setUp() {
@@ -27,12 +28,11 @@ class LevelTest {
         paddle = mock(Paddle.class);
         ball = mock(Ball.class);
         bricks = new ArrayList<>();
+        brick=mock(Brick.class);
 
-        // Mock the ball velocity
         Position mockVelocity = new Position(3, -3);
         when(ball.getVelocity()).thenReturn(mockVelocity);
 
-        // Add some mock bricks
         Brick mockBrick1 = mock(Brick.class);
         Brick mockBrick2 = mock(Brick.class);
         when(mockBrick1.getCharacter()).thenReturn('A');
@@ -41,11 +41,18 @@ class LevelTest {
         when(mockBrick2.getPosition()).thenReturn(new Position(200, 100));
         when(mockBrick1.getHitBox()).thenReturn(new Rectangle(100, 100, 50, 20));
         when(mockBrick2.getHitBox()).thenReturn(new Rectangle(200, 100, 50, 20));
-
         bricks.add(mockBrick1);
         bricks.add(mockBrick2);
 
         level = new Level(gameArea, 1, paddle, ball, bricks, 0, 1000);
+
+        when(paddle.farLeft()).thenReturn(new Rectangle(0,0,10,6));
+        when(paddle.middleLeft()).thenReturn(new Rectangle(10,0,10,6));
+        when(paddle.middleRight()).thenReturn(new Rectangle(20,0,10,6));
+        when(paddle.farRight()).thenReturn(new Rectangle(30,0,10,6));
+
+        when(paddle.getHitBox()).thenReturn(new Rectangle(0,0,40,6));
+
     }
 
     @Test
@@ -194,5 +201,98 @@ class LevelTest {
     private Level createDefaultLevelWithPaddleAndBall(Paddle paddle, Ball ball) {
         return new Level(new Rectangle(0, 0, 800, 600), 1, paddle, ball, new ArrayList<>(), 0, 1000);
     }
+
+
+
+        @Test
+        public void testCollides_WithOutsideLevelCollision() {
+            Rectangle nextMove = new Rectangle(-10, 10, 20, 20);
+
+            COLLISIONS result = level.collides(nextMove);
+
+            assertEquals(COLLISIONS.LEFT, result);
+        }
+
+        @Test
+        public void testCollides_WithPaddleCollision() {
+            Rectangle nextMove = new Rectangle(0, 10, 2, 2);
+
+            COLLISIONS result = level.collides(nextMove);
+
+            assertEquals(COLLISIONS.NONE, result);
+        }
+
+        @Test
+        public void testCollides_WithBrickCollision() {
+            Rectangle nextMove = new Rectangle(100, 100, 20, 20);
+            Rectangle brickHitBox = new Rectangle(100, 101, 50, 20);
+
+            bricks.add(brick);
+            when(brick.getHitBox()).thenReturn(brickHitBox);
+            when(brick.getCharacter()).thenReturn('B');
+            when(brick.getDurability()).thenReturn(1);
+            when(brick.getScore()).thenReturn(100);
+
+            COLLISIONS result = level.collides(nextMove);
+
+            assertEquals(COLLISIONS.BOTTOMLEFT,result);
+        }
+
+        @Test
+        public void testAreaGameCollision_LeftSide() {
+            Rectangle nextMove = new Rectangle(-10, 100, 20, 20);
+
+            COLLISIONS result = level.areaGameCollision(nextMove);
+
+            assertEquals(COLLISIONS.LEFT, result);
+        }
+
+        @Test
+        public void testAreaGameCollision_RightSide() {
+            Rectangle nextMove = new Rectangle(780, 100, 20, 20);
+
+            COLLISIONS result = level.areaGameCollision(nextMove);
+
+            assertEquals(COLLISIONS.RIGHT, result);
+        }
+
+        @Test
+        public void testTypeBrickCollision_CornerCollision() {
+            Rectangle brick = new Rectangle(20, 20, 20, 20);
+            Rectangle nextMove = new Rectangle(35, 35, 6, 6);
+
+            COLLISIONS result = level.typeBrickCollision(brick, nextMove);
+
+            assertEquals(COLLISIONS.BOTTOMRIGHT, result);
+        }
+
+        @Test
+        public void testPaddleCollision_MiddleLeft() {
+            Rectangle nextMove = new Rectangle(10, 0, 2, 2);
+
+            COLLISIONS result = level.paddleCollision(nextMove);
+
+            assertEquals(COLLISIONS.PADDLEMIDDLELEFT, result);
+        }
+
+        @Test
+        public void testCollisionRight_WithTarget() {
+            Rectangle target = new Rectangle(100, 100, 50, 50);
+            Rectangle nextMove = new Rectangle(140, 120, 20, 20);
+
+            boolean result = level.collisionRight(target, nextMove);
+
+            assertTrue(result, "Collision on the right side of the target expected.");
+        }
+
+        @Test
+        public void testCollisionDown_WithTarget() {
+            Rectangle target = new Rectangle(100, 100, 50, 50);
+            Rectangle nextMove = new Rectangle(110, 140, 20, 20);
+
+            boolean result = level.collisionDown(target, nextMove);
+
+            assertTrue(result, "Collision on the bottom side of the target expected.");
+        }
 
 }
