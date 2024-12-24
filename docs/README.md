@@ -100,9 +100,9 @@ We tried to understand how strong could Lanterna GUI be. We came to the conclusi
 An example of a change we can apply, is taking the "processkey()" and "draw()" methods out of the MainMenu.java class. The new classes MainMenuController and MainMenuViewer would check the user input and interchange between menu options and place all the Main Menu visual elements, respectively.
 
 ## Screenshots
-![](https://i.imgur.com/ekAYUPW.png)
+![](https://i.imgur.com/6T7bR58.png)
 Main menu
-![](https://i.imgur.com/GVFOo90.png)
+![](https://i.imgur.com/2WRMSfp.png)
 Playfield screen
 
 ## Credits
