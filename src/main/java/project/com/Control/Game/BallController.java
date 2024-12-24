@@ -14,26 +14,40 @@ public class BallController extends Controller<Level> {
     public BallController(Level level) {
         super(level);
         this.ball=level.getBall();
+        if (this.ball == null) {
+            throw new IllegalStateException("Ball não foi inicializada.");
+        }
     }
 
 
     @Override
     public void step(Arkanoid arkanoid, GUI.ACTION action,long frameTime) {
-        Rectangle ballHitBox=ball.getHitBox();
-        Position velocity=ball.getVelocity();
+        Rectangle ballHitBox = ball.getHitBox();
+
+        if (ballHitBox == null) {
+            throw new IllegalStateException("ballHitBox não foi inicializado.");
+        }
+
+        Position velocity = ball.getVelocity();
+
+        if (velocity == null) {
+            throw new IllegalStateException("A velocidade não foi inicializada.");
+        }
 
         Rectangle nextMove = new Rectangle(ballHitBox.x + velocity.getX(), ballHitBox.y + velocity.getY(), ballHitBox.width, ballHitBox.height);
 
-        switch (getModel().collides(nextMove)){
-            case UP: case DOWN:
+        switch (getModel().collides(nextMove)) {
+            case UP:
+            case DOWN:
                 ball.reflectVertical();
                 break;
-            case LEFT: case RIGHT:
-                 ball.reflectHorizontal();
-                 break;
+            case LEFT:
+            case RIGHT:
+                ball.reflectHorizontal();
+                break;
             case PADDLELEFT:
-                 ball.setAngleBigger135();
-                 break;
+                ball.setAngleBigger135();
+                break;
             case PADDLEMIDDLELEFT, TOPLEFT:
                 ball.setAngle135();
                 break;
@@ -49,7 +63,6 @@ public class BallController extends Controller<Level> {
             case BOTTOMRIGHT:
                 ball.setAngle315();
                 break;
-
         }
 
 
