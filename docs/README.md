@@ -105,6 +105,23 @@ Main menu
 ![](https://i.imgur.com/2WRMSfp.png)
 Playfield screen
 
+## Testing
+![](https://i.imgur.com/UuPtijG.png)
+Tests Img. 1
+
+![](https://i.imgur.com/T5T37CJ.png)
+Tests Img. 2
+
+![](https://i.imgur.com/lFtNn7k.png)
+Tests Img. 3
+
+![](https://i.imgur.com/bfdEtzw.png)
+Tests Img. 4
+
+![](https://i.imgur.com/CztnLup.png)
+Mutation Tests
+
+
 ## Credits
 Some of the ideas implemented in this project, such as the UML design, the PNG Loader class and the Map designer features were based on the following project:<br>
 **https://github.com/Process-ing/feup-ldts**<br>
