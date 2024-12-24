@@ -1,4 +1,5 @@
 # T01G05: Arkanoid
+![](https://i.imgur.com/DKqvrnQ.png)<br>
 Arkanoid is an arcade game from the 1980s, in which the player controls a Space Vessel called the Vaus, that sends a ball upwards in order to collide with the bricks above and destroy them.
 This project consists in the development of a game similar to the original Arkanoid in Java and was developed by **Ana Sousa** (up202306419), **João Marques** (up202307389) and **Pedro Coelho** (up202306714) for LDTS 2024/25.
 ## Table of Contents
@@ -94,10 +95,21 @@ The game logic is decoupled from the specifics of data storage, allowing it to i
 ### UML schema
 ![](https://i.imgur.com/KbjHPH8.jpeg)
 
-### Notes about Design
-Until this submission we focused on the viewer part in order to develop the mockups for the game. <br>
-We tried to understand how strong could Lanterna GUI be. We came to the conclusion that it has a lot of potencial, since it can read PNGs pixel by pixel which allows to draw funnier and better-looking elements on the Screen. By now, our code is way far from the main pattern we want to follow (Model-View-Controller) as it's all implemented in the same classe. 
-An example of a change we can apply, is taking the "processkey()" and "draw()" methods out of the MainMenu.java class. The new classes MainMenuController and MainMenuViewer would check the user input and interchange between menu options and place all the Main Menu visual elements, respectively.
+## Code Smells and Refactoring suggestions
+**Code Smell 1 - Switch Statements** <br>
+Non-exhaustive switch statements may lead to unhandled cases, causing unintended behavior or bugs, as missing cases are not properly managed with a default clause or explicit handling of all enum values.<br>
+**Code Smell 2 - Using ArrayLists instead of Lists** <br>
+Using concrete implementations like ArrayList instead of the List interface reduces flexibility and makes the code harder to maintain, as it restricts switching to other list implementations in the future.<br>
+**Code Smell 3 - Assigning Values to Static Variable** <br>
+Assigning values to static variables within methods can create unintended dependencies between different instances, potentially leading to difficult-to-debug issues, especially if they are modified unexpectedly from multiple places.<br>
+**Code Smell 4 - Caught Exceptions should not be ignored** <br>
+Catching exceptions without handling them or logging the error can lead to silent failures, making it difficult to diagnose problems or understand why an operation did not succeed.<br>
+**Code Smell 5 - Objects with the same name of the Class**<br>
+Naming objects the same as their class, such as a variable `ImageLoader` of type `ImageLoader`, can create confusion about whether the reference is an instance or a static class, making the code less readable and harder to maintain.<br>
+**Code Smell 6 - lossy conversion from double to int (in the Rectangle fields)** <br>
+Converting from double to int without proper rounding or validation can lead to the loss of precision, which may cause inaccurate values in critical calculations or graphical operations.<br>
+**Code Smell 7 - missing @Override** <br>
+Omitting the @Override annotation when overriding methods can lead to errors, as it prevents the compiler from detecting method signature mismatches, potentially causing unexpected behavior or bugs.<br>
 
 ## Screenshots
 ![](https://i.imgur.com/6T7bR58.png)
