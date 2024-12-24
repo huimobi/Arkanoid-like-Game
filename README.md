@@ -6,5 +6,5 @@ Arkanoid is an arcade game from the 1980s, in which the player controls a Space 
 **Pedro Coelho** (up202306714)<br>
 for the Software Design and Testing Laboratory (LDTS) class, LEIC 2024/25.
 ## Images
-![](https://i.imgur.com/ekAYUPW.png)
-![](https://i.imgur.com/GVFOo90.png)
+![](https://i.imgur.com/6T7bR58.png)
+![](https://i.imgur.com/2WRMSfp.png)
