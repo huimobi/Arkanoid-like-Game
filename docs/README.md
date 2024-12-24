@@ -6,32 +6,31 @@ This project consists in the development of a game similar to the original Arkan
 1. [Introduction](#introduction)
 2. [List of Features](#list-of-features)
 3. [Controls](#controls)<br>
-   -[Desired Game Controls](#desired-game-controls)<br>
-   -[Implemented Main Menu Controls](#implemented-main-menu-controls)<br>
-   -[Notes about Design](#notes-about-design)<br>
 4. [Design Patterns](#design-patterns)<br>
    - [Model-View-Controller](#model-view-controller)<br>
    - [Game Loop Pattern](#game-loop-pattern)<br>
    - [State Pattern](#state-pattern)<br>
    - [Data Access Object](#data-access-object)<br>
+   - [Abstract Factory Pattern](#abstract-factory-pattern)
+   - [Flyweight Pattern](#flyweight-pattern)
    - [UML schema](#uml-schema)<br>
-   - [Notes about Design](#notes-about-design)<br>
-4. [Screenshots](#screenshots)
-5. [Credits](#credits)
+5. [Code Smells and Refactoring suggestions](#code-smells-and-refactoring-suggestions)
+6. [Screenshots](#screenshots)
+7. [Testing](#testing)
+8. [Credits](#credits)
 
 ## Introduction
 The Vaus (a paddle in practice) has an horizontal movement and is the only controllable feature available to the player. The Vaus spawns at the centre of the movable line and can be set at any other position for three seconds, before lauching the ball. As it hits a surface (be it the lateral and upper limits or a brick) it deflects in various angles. The aim is to clear the block of bricks while not letting the ball cross the lower limits of the playfield.
-The bricks might be disposed in diverse ways, according to the level (we intend to implement 5). There are different brick colors, having each one of them different points associated. Some bricks drop a power-up, affecting either the Vaus (in the size) or the ball (in the speed or the number, for instance).
+The bricks might be disposed in diverse ways, according to the level (we've implemented 10). There are different brick colors, having each one of them different points associated. Some bricks drop a power-up, affecting either the Vaus (in the size) or the ball (in the speed, for instance).
 
 ## List of Features
 ### Implemented
-**Main Menu** - Displays four options (play, settings, info, exit), to be acceded through the up and down arrowkey. The proper implementation of all the options, besides play and exit are yet to be done.
+**Main Menu** - Displays four options (play, info, exit), to be acceded through the up and down arrowkey. The proper implementation of all the options, besides play and exit are yet to be done.
 
 **PNG Image Loader** - We used a class that loads PNG images into the game and can represent them pixel by pixel on the screen, using the Lanterna GUI. This is used for all the elements shown on terminal such as the background, paddle, bricks, walls, textures and the ball.
 
 **Font Loader and Write classes** - Classes that cooperate with the PNG image loader class to create our own font for the game characters and print them on the Lanterna GUI given an initial top corner left position.
 
-### To be implemented
 **Paddle movement** - The player can control the horizontal movement through the left and right arrowkey. The movement is constrained by the edge of the playfield.
 
 **Ball mechanics** - The ball is launched from the paddle at the start and has a trajectory that follows from the collisions with bricks, paddle and walls. Its speed is adjustable to the gameplay progression.
@@ -42,14 +41,13 @@ The bricks might be disposed in diverse ways, according to the level (we intend 
 
 **Highscore** - The score achieved by each player is compared to the current highscore, updating it when needed.
 
-**Round count** - Indicates the level being played (to be done up to 5). It appears on the right lower screen.
+**Round count** - Indicates the level being played (to be done up to 10). It appears on the right lower screen.
 
 **Lives system** - The player starts the game with 3 lives, which he loses by letting a ball fall below the paddle. There is a life bar at the top right game screen.
 
 **Map designer** - Class to design the map of each level through written text files with specific characters, allowing to generate bricks and to make the layout edition simpler.
 
 ## Controls
-### Desired Game Controls
 `>`: Moves the paddle to the right.
 
 `<`: Moves the paddle to the left.
@@ -58,12 +56,9 @@ The bricks might be disposed in diverse ways, according to the level (we intend 
 
 `ENTER`: Press ENTER to select the desired options in the menu.
 
-### Implemented Main Menu Controls
 `^`: Go to previews option.
 
 `v`: Go to next option.
-
-`ENTER`: Press ENTER to select the desired option.
 
 ## Design Patterns
 ### Model-View-Controller
@@ -91,6 +86,18 @@ New states can be added without major changes to the existing game logic.
 We intend to store and retrieve high scores from a file, and to do so we need to implement the DAO Pattern, which abstracts the process. Providing methods to manage the persistance of high scores, the game logic only needs to call these methods.<br>
 **Consequences:**
 The game logic is decoupled from the specifics of data storage, allowing it to interact with the high scores through simple method calls.
+
+### Abstract Factory Pattern
+We want to create groups of related game objects (like power-ups) without tying the code to specific classes. To achieve this, we use the Abstract Factory Pattern, which allows the creation of these objects through factory interfaces without specifying their concrete types.<br>
+**Consequences:**
+Encapsulates object creation, ensuring that related objects are consistent with each other.<br>
+Makes it easy to add new families of objects, improving scalability and maintainability.<br>
+
+### Flyweight Pattern
+We want to manage a large number of similar objects in the game, like bricks in a level or textures, without consuming excessive memory. The Flyweight Pattern allows us to share common data among these objects, reducing memory usage while maintaining unique attributes where needed.<br>
+**Consequences:**
+Reduces memory consumption by sharing intrinsic properties among multiple objects.<br>
+Maintains a clean separation between shared (intrinsic) and unique (extrinsic) properties, enabling efficient and manageable resource usage.<br>
 
 ### UML schema
 ![](https://i.imgur.com/KbjHPH8.jpeg)
