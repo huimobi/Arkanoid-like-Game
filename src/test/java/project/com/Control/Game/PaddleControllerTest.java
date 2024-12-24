@@ -14,15 +14,18 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 class PaddleControllerTest {
     private Paddle paddle;
     private Level level;
     private PaddleController paddleController;
+    private Arkanoid arkanoid;
 
     @BeforeEach
     void setUp() {
         paddle = new Paddle(new Position(50, 100));
+        arkanoid = mock(Arkanoid.class);
 
         Ball ball = new Ball(new Position(100, 100));
         ArrayList<Brick> bricks = new ArrayList<>();
@@ -33,27 +36,27 @@ class PaddleControllerTest {
 
     @Test
     void testMoveLeft() throws Exception {
-        paddleController.step(new Arkanoid(), GUI.ACTION.LEFT, 0);
+        paddleController.step(arkanoid, GUI.ACTION.LEFT, 0);
         assertEquals(40, paddle.getHitBox().x);
     }
 
     @Test
     void testMoveRight() throws Exception {
-        paddleController.step(new Arkanoid(), GUI.ACTION.RIGHT, 0);
+        paddleController.step(arkanoid, GUI.ACTION.RIGHT, 0);
         assertEquals(60, paddle.getHitBox().x);
     }
 
     @Test
     void testMoveLeftOutsideLevel() throws Exception {
         paddle.setPosition(new Position(0, 100));
-        paddleController.step(new Arkanoid(), GUI.ACTION.LEFT, 0);
+        paddleController.step(arkanoid, GUI.ACTION.LEFT, 0);
         assertEquals(0, paddle.getHitBox().x);
     }
 
     @Test
     void testMoveRightOutsideLevel() throws Exception {
         paddle.setPosition(new Position(700, 100));
-        paddleController.step(new Arkanoid(), GUI.ACTION.RIGHT, 0);
+        paddleController.step(arkanoid, GUI.ACTION.RIGHT, 0);
         assertEquals(710, paddle.getHitBox().x);
     }
 

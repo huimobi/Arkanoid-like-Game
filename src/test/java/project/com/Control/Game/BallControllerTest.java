@@ -26,8 +26,6 @@ public class BallControllerTest {
     private Arkanoid mockArkanoid;
     private GUI mockGUI;
 
-
-
     @BeforeEach
     void setUp() {
         mockLevel = mock(Level.class);
